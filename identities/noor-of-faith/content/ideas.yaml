@@ -5,7 +5,7 @@ ideas:
     \ sounds. Overlay text shares how each step cleanses both body and soul, ending\
     \ with 'you're not just washing \u2014 you're starting fresh.'"
   template: video_short
-  status: drafted
+  status: published
   created: '2026-03-12T18:36:54.976187'
   tags:
   - wudu
@@ -37,7 +37,7 @@ ideas:
     \ teacher, engineer. Text: 'the Quran's first word wasn't 'submit' \u2014 it was\
     \ 'read.' education is our tradition.'"
   template: video_short
-  status: backlog
+  status: published
   created: '2026-03-12T18:36:54.976215'
   tags:
   - muslimwomen
@@ -92,3 +92,76 @@ ideas:
   - transformation
   content_types:
   - story
+- id: daa19242
+  title: Water's Journey
+  concept: Follow a drop of water through wudu - from tap to skin to spiritual cleansing.
+    Close-up shots of water flowing over hands with voiceover about how Allah made
+    water the source of all life and purification.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T18:57:31.147778'
+  tags:
+  - wudu
+  - purification
+  - reflection
+  content_types:
+  - video
+  - thumbnail
+- id: 77c896cc
+  title: 99 Names in Nature
+  concept: Al-Khaliq (The Creator) written in Arabic calligraphy overlaid on time-lapse
+    of sunrise. Caption explores how every dawn is a new creation, a daily miracle
+    we often sleep through.
+  template: image_post
+  status: published
+  created: '2026-03-12T18:57:31.147848'
+  tags:
+  - beautifulnames
+  - nature
+  - fajr
+  content_types:
+  - image
+  - post
+- id: 516b8a65
+  title: "The Prophet's \uFDFA Smile"
+  concept: "the Prophet \uFDFA smiled so much that the sahaba said his face was like\
+    \ the full moon. imagine being known for your smile. what a sunnah to follow in\
+    \ a world that forgets joy is worship too."
+  template: tweet
+  status: backlog
+  created: '2026-03-12T18:57:31.147877'
+  tags:
+  - sunnah
+  - prophet
+  - joy
+  content_types:
+  - tweet
+- id: 70942f22
+  title: Grandma's Quran Pages
+  concept: Soft-focus video of worn Quran pages being turned gently. Each page tells
+    a story - tea stains from late night reading, pressed flowers marking favorite
+    ayaat, margins filled with du'as in shaky handwriting.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T18:57:31.147897'
+  tags:
+  - quran
+  - family
+  - legacy
+  content_types:
+  - video
+  - thumbnail
+- id: 36d3ab98
+  title: Fajr Thoughts Thread
+  concept: A thread starting with 'sitting after fajr and thinking about how Allah
+    says 'Remember Me and I will remember you' (2:152)' - exploring what it means
+    to be remembered by the Creator of everything.
+  template: thread
+  status: backlog
+  created: '2026-03-12T18:57:31.147915'
+  tags:
+  - fajr
+  - dhikr
+  - reflection
+  content_types:
+  - thread

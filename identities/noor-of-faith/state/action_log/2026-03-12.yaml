@@ -45,3 +45,263 @@ entries:
     draft_dir: /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/content/drafts/c8dcd999
   result: Drafted script for 'The Art of Wudu'
   error: null
+- timestamp: '2026-03-12T18:40:40.373574'
+  action: generate_face
+  platform: imagen
+  details:
+    expression: neutral
+    prompt: 'A young Muslimah woman in her late 20s wearing a beautiful hijab, warm
+      brown eyes, gentle and sincere smile, soft natural lighting, elegant modest
+      fashion, earth-toned clothing, serene and peaceful expression, warm skin tone,
+      no heavy makeup, natural beauty, background with soft bokeh of golden hour light,
+      high quality portrait photography, inviting and approachable, style: warm photography,
+      soft natural lighting, avoid: blurry, low quality, distorted face, extra limbs,
+      revealing clothing, heavy makeup, cartoon, anime, text overlay, watermark, harsh
+      lighting, aggressive expression, dark or gloomy atmosphere'
+    output_path: /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/face/generated/neutral_20260312_184040_61b0d8.png
+  result: Generated face image at /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/face/generated/neutral_20260312_184040_61b0d8.png
+  error: null
+- timestamp: '2026-03-12T18:44:52.691541'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 45-second short-form video. Title: \"The Art of Wudu\". Opens with:\
+      \ \"water isn't just cleansing your hands...\" Narration/script: \"water isn't\
+      \ just cleansing your hands... it's washing away what weighs on your heart.\
+      \ bismillah. right hand first, then left. between the fingers where worries\
+      \ hide. three times, like the Prophet \uFDFA taught us. mouth and nose \u2014\
+      \ cleansing what we've said, what we've breathed in. face next \u2014 covering\
+      \ every expression that carried today's stress. arms to the elbows, right then\
+      \ left. wiping over the head, a gentle reset. behind the ears, the nape of the\
+      \ neck. finally, the feet \u2014 grounding you for prayer. you're not just washing.\
+      \ you're returning. pure as the moment you were born. ready to stand before\
+      \ Allah. this is wudu \u2014 where water meets soul.\" Visual progression: Scene\
+      \ 1: Close-up: Water flowing gently from a copper pitcher. Scene 2: Hands under\
+      \ running water, fingers interlacing slowly. Scene 3: Water droplets in slow\
+      \ motion as hands cup water. Scene 4: Gentle washing of face, peaceful expression.\
+      \ Scene 5: Arms being washed methodically to elbows. Scene 6: Wet hands passing\
+      \ over hair. Scene 7: Water flowing over feet in a marble basin. Scene 8: Final\
+      \ shot: Clean hands raised in dua position with soft light. Visual tone: gentle,\
+      \ sincere, warm, reflective, uplifting. The video should feel like content from\
+      \ a peaceful-muslimah-educator creator. Modern editing, dynamic pacing, visually\
+      \ engaging throughout. NOT a static title card \u2014 the video must have continuous\
+      \ visual content, scene changes, and movement that follows the narration. Format:\
+      \ video short style video. Cinematic quality, smooth transitions between scenes,\
+      \ varied camera angles and compositions. Every second should have meaningful\
+      \ visual content."
+    duration_seconds: 45
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/video_9c36a7dce8c0.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/video_9c36a7dce8c0.mp4
+  error: null
+- timestamp: '2026-03-12T18:45:11.285445'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: The Art of Wudu
+    style: bold
+    prompt: 'A young Muslimah woman in her late 20s wearing a beautiful hijab, warm
+      brown eyes, gentle and sincere smile, soft natural lighting, elegant modest
+      fashion, earth-toned clothing, serene and peaceful expression, warm skin tone,
+      no heavy makeup, natural beauty, background with soft bokeh of golden hour light,
+      high quality portrait photography, inviting and approachable. YouTube thumbnail
+      style, bold dramatic composition, vibrant saturated colors, high contrast, cinematic
+      lighting, attention-grabbing, professional, 4K quality. Visual concept for:
+      The Art of Wudu. Art style: warm photography, soft natural lighting. Avoid:
+      blurry, low quality, distorted face, extra limbs, revealing clothing, heavy
+      makeup, cartoon, anime, text overlay, watermark, harsh lighting, aggressive
+      expression, dark or gloomy atmosphere'
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/thumb_d124371ea19e.png
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/thumb_d124371ea19e.png
+  error: null
+- timestamp: '2026-03-12T18:45:11.301572'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: c8dcd999
+    title: The Art of Wudu
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'The Art of Wudu'
+  error: null
+- timestamp: '2026-03-12T18:45:40.692553'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: c8dcd999
+    title: The Art of Wudu
+  result: Published content for 'The Art of Wudu'
+  error: null
+- timestamp: '2026-03-12T18:48:45.351442'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/content/drafts/8fa71a2e
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T18:48:45.374184'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: 8fa71a2e
+    title: Breaking Stereotypes
+    template: video_short
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/content/drafts/8fa71a2e
+  result: Drafted script for 'Breaking Stereotypes'
+  error: null
+- timestamp: '2026-03-12T18:50:30.748364'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 30-second short-form video. Title: \"Breaking Stereotypes\". Opens\
+      \ with: \"the first word revealed in the Quran wasn't 'pray' or 'submit'\" Narration/script:\
+      \ \"the first word revealed in the Quran wasn't 'pray' or 'submit' \u2014 it\
+      \ was 'iqra.' read. subhanAllah, our faith began with a command to seek knowledge.\
+      \ so when you see a Muslim woman in a lab coat, behind a camera, teaching your\
+      \ children, building your cities \u2014 know that she's following a 1400-year-old\
+      \ tradition. we're not breaking free from Islam. we're living it. knowledge\
+      \ isn't just permitted for us \u2014 it's worship.\" Visual progression: Scene\
+      \ 1: Close-up of Arabic calligraphy 'iqra' being written. Scene 2: Muslim woman\
+      \ doctor examining patient with hijab and stethoscope. Scene 3: Muslimah artist\
+      \ painting in her studio, paint-splattered hijab. Scene 4: Muslim woman teaching\
+      \ at a whiteboard, students engaged. Scene 5: Female engineer in hijab reviewing\
+      \ blueprints at construction site. Scene 6: Montage speeds up: scientist with\
+      \ microscope, photographer, architect, pilot. Scene 7: End card: diverse group\
+      \ of professional Muslim women together. Visual tone: gentle, sincere, warm,\
+      \ reflective, uplifting. The video should feel like content from a peaceful-muslimah-educator\
+      \ creator. Modern editing, dynamic pacing, visually engaging throughout. NOT\
+      \ a static title card \u2014 the video must have continuous visual content,\
+      \ scene changes, and movement that follows the narration. Format: video short\
+      \ style video. Cinematic quality, smooth transitions between scenes, varied\
+      \ camera angles and compositions. Every second should have meaningful visual\
+      \ content."
+    duration_seconds: 30
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/video_d38d000db276.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/video_d38d000db276.mp4
+  error: null
+- timestamp: '2026-03-12T18:50:40.200540'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: Breaking Stereotypes
+    style: bold
+    prompt: 'A young Muslimah woman in her late 20s wearing a beautiful hijab, warm
+      brown eyes, gentle and sincere smile, soft natural lighting, elegant modest
+      fashion, earth-toned clothing, serene and peaceful expression, warm skin tone,
+      no heavy makeup, natural beauty, background with soft bokeh of golden hour light,
+      high quality portrait photography, inviting and approachable. YouTube thumbnail
+      style, bold dramatic composition, vibrant saturated colors, high contrast, cinematic
+      lighting, attention-grabbing, professional, 4K quality. Visual concept for:
+      Breaking Stereotypes. Art style: warm photography, soft natural lighting. Avoid:
+      blurry, low quality, distorted face, extra limbs, revealing clothing, heavy
+      makeup, cartoon, anime, text overlay, watermark, harsh lighting, aggressive
+      expression, dark or gloomy atmosphere'
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/thumb_8630fd8293c1.png
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/thumb_8630fd8293c1.png
+  error: null
+- timestamp: '2026-03-12T18:50:40.220904'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: 8fa71a2e
+    title: Breaking Stereotypes
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'Breaking Stereotypes'
+  error: null
+- timestamp: '2026-03-12T18:57:06.102321'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: 8fa71a2e
+    title: Breaking Stereotypes
+  result: Published content for 'Breaking Stereotypes'
+  error: null
+- timestamp: '2026-03-12T18:57:31.168204'
+  action: generate_ideas
+  platform: claude
+  details:
+    count: 5
+    focus: null
+    generated: 5
+    model: claude-opus-4-20250514
+  result: Generated 5 content ideas
+  error: null
+- timestamp: '2026-03-12T18:58:19.506345'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/content/drafts/77c896cc
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T18:58:19.538057'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: 77c896cc
+    title: 99 Names in Nature
+    template: image_post
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/noor-of-faith/content/drafts/77c896cc
+  result: Drafted script for '99 Names in Nature'
+  error: null
+- timestamp: '2026-03-12T18:58:59.593148'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Arabic calligraphy of 'Al-Khaliq' fading in over dark pre-dawn sky
+    size: 1080x1080
+    aspect_ratio: '1:1'
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/image_3502a77031e4.png
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/image_3502a77031e4.png
+  error: null
+- timestamp: '2026-03-12T18:59:14.453094'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Arabic calligraphy of 'Al-Khaliq' fading in over dark pre-dawn sky
+    size: 1080x1080
+    aspect_ratio: '1:1'
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/image_e2e00d587ff8.png
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/image_e2e00d587ff8.png
+  error: null
+- timestamp: '2026-03-12T18:59:15.639455'
+  action: compose_image_post
+  platform: pillow
+  details:
+    image_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/image_e2e00d587ff8.png
+    caption_length: 309
+    output_path: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/post_1ba0f73f38f8.png
+  result: /Users/arsalan/Workspace/supercooked/output/noor-of-faith/post_1ba0f73f38f8.png
+  error: null
+- timestamp: '2026-03-12T18:59:15.657107'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: 77c896cc
+    title: 99 Names in Nature
+    content_types:
+    - image
+    - post
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for '99 Names in Nature'
+  error: null
+- timestamp: '2026-03-12T19:16:37.173400'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: 77c896cc
+    title: 99 Names in Nature
+  result: Published content for '99 Names in Nature'
+  error: null

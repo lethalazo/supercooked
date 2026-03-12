@@ -69,7 +69,7 @@ ideas:
     Red circles, slow-mo replays, theoretical interpretations. Making it deeper than
     any literature class ever could.
   template: video_short
-  status: backlog
+  status: generated
   created: '2026-03-12T19:21:00.431916'
   tags:
   - fancam
@@ -127,3 +127,84 @@ ideas:
   - image
   - post
   - selfie
+- id: febf2589
+  title: RANKING IDOLS WHO'D SURVIVE THE PURGE
+  concept: Unhinged tier list ranking which idols would make it through the purge
+    based on their energy, survival skills, and general vibe. S-tier gets the bunker
+    invite, F-tier is offering themselves as tribute. Screenshots of their most intimidating
+    moments as evidence.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T19:29:27.420298'
+  tags:
+  - hot_take
+  - ranking
+  - viral
+  - unhinged
+  content_types:
+  - video
+  - thumbnail
+- id: 81a432fb
+  title: my bias posted this and now i need therapy
+  concept: Dramatic reaction thread to the most basic idol selfie, complete with zoomed
+    in details, color analysis, and why this specific angle means they're in their
+    villain era. 15+ tweets minimum because we're PROCESSING.
+  template: thread
+  status: backlog
+  created: '2026-03-12T19:29:27.420364'
+  tags:
+  - reaction
+  - parasocial
+  - drama
+  - stan_culture
+  content_types:
+  - thread
+  - tweet
+- id: b1615ae4
+  title: 'POV: You''re My Credit Card During Comeback Season'
+  concept: Aesthetic photo dump of all the albums, photocards, and merch hauls arranged
+    like a crime scene. Each slide reveals more financial damage. Caption about how
+    rent is just a social construct anyway.
+  template: carousel
+  status: published
+  created: '2026-03-12T19:29:27.420387'
+  tags:
+  - haul
+  - aesthetic
+  - relatable
+  - flex
+  content_types:
+  - image
+  - post
+- id: 606bcfc4
+  title: IDOLS CAUGHT IN 4K BEING MESSY
+  concept: Compilation of idols' messiest moments - side eyes, shade throws, and petty
+    reactions caught on camera. Slow-mo replays, dramatic zoom-ins, and detective-level
+    analysis of each micro-expression. We love a problematic queen.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T19:29:27.420408'
+  tags:
+  - tea
+  - drama
+  - compilation
+  - messy
+  content_types:
+  - video
+  - thumbnail
+- id: c1c188e2
+  title: just spent my therapy money on this photocard
+  concept: Selfie with the most expensive photocard purchase, mascara slightly smudged
+    from crying over both the price and how beautiful they look. Filter cranked to
+    idol-level smooth because if we're going broke, we're doing it pretty.
+  template: image_post
+  status: backlog
+  created: '2026-03-12T19:29:27.420430'
+  tags:
+  - selfie
+  - photocard
+  - relatable
+  - chaotic
+  content_types:
+  - selfie
+  - post
