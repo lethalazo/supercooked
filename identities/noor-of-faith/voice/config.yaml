@@ -1,0 +1,7 @@
+# Noor — Voice Config
+provider: elevenlabs
+voice_id: ""
+model: eleven_multilingual_v2
+stability: 0.65
+similarity_boost: 0.8
+style: 0.3

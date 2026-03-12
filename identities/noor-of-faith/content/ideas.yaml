@@ -1,0 +1,94 @@
+ideas:
+- id: c8dcd999
+  title: The Art of Wudu
+  concept: "A calming ASMR-style video showing the ritual of wudu with gentle water\
+    \ sounds. Overlay text shares how each step cleanses both body and soul, ending\
+    \ with 'you're not just washing \u2014 you're starting fresh.'"
+  template: video_short
+  status: drafted
+  created: '2026-03-12T18:36:54.976187'
+  tags:
+  - wudu
+  - mindfulness
+  - ritual
+  - spirituality
+  content_types:
+  - video
+  - thumbnail
+- id: 3b3c03d8
+  title: '99 Names: Ar-Rahman'
+  concept: "Beautiful calligraphy of 'The Most Merciful' over a sunset sky. Caption\
+    \ explores how Allah's mercy is like the sun \u2014 it touches everything, even\
+    \ what tries to hide from it."
+  template: image_post
+  status: backlog
+  created: '2026-03-12T18:36:54.976209'
+  tags:
+  - 99names
+  - mercy
+  - calligraphy
+  - beautifulnames
+  content_types:
+  - image
+  - post
+- id: 8fa71a2e
+  title: Breaking Stereotypes
+  concept: "Quick montage of Muslim women in various professions \u2014 doctor, artist,\
+    \ teacher, engineer. Text: 'the Quran's first word wasn't 'submit' \u2014 it was\
+    \ 'read.' education is our tradition.'"
+  template: video_short
+  status: backlog
+  created: '2026-03-12T18:36:54.976215'
+  tags:
+  - muslimwomen
+  - education
+  - representation
+  - empowerment
+  content_types:
+  - video
+  - thumbnail
+- id: eae9bccb
+  title: Morning Light
+  concept: "the Prophet \uFDFA said 'the two rak'at of fajr are better than the world\
+    \ and all it contains.' this morning I understood why \u2014 the silence before\
+    \ sunrise holds every answer you've been seeking."
+  template: tweet
+  status: backlog
+  created: '2026-03-12T18:36:54.976218'
+  tags:
+  - fajr
+  - prayer
+  - reflection
+  - hadith
+  content_types:
+  - tweet
+- id: 2a9a79f8
+  title: Jummah Reflections Thread
+  concept: A thread exploring the beauty of Friday prayers. Starting with the rush
+    to the masjid, the khutbah that speaks to your exact struggle, and the peace that
+    comes from praying shoulder to shoulder with your community.
+  template: thread
+  status: backlog
+  created: '2026-03-12T18:36:54.976223'
+  tags:
+  - jummah
+  - community
+  - prayer
+  - reflection
+  content_types:
+  - thread
+- id: 09dc06ed
+  title: Ayah That Changed Me
+  concept: Personal story about reading 'Indeed, Allah will not change the condition
+    of a people until they change what is in themselves' (13:11) during a difficult
+    time. How it shifted from blame to responsibility, from waiting to acting.
+  template: story
+  status: backlog
+  created: '2026-03-12T18:36:54.976226'
+  tags:
+  - quran
+  - personalgrowth
+  - ayah
+  - transformation
+  content_types:
+  - story

@@ -1,0 +1,18 @@
+# Noor — Face Config
+# Used by thumbnail and selfie generation for visual consistency
+
+provider: imagen
+style: "warm photography, soft natural lighting"
+base_prompt: >-
+  A young Muslimah woman in her late 20s wearing a beautiful hijab,
+  warm brown eyes, gentle and sincere smile, soft natural lighting,
+  elegant modest fashion, earth-toned clothing, serene and peaceful
+  expression, warm skin tone, no heavy makeup, natural beauty,
+  background with soft bokeh of golden hour light, high quality
+  portrait photography, inviting and approachable
+negative_prompt: >-
+  blurry, low quality, distorted face, extra limbs, revealing clothing,
+  heavy makeup, cartoon, anime, text overlay, watermark, harsh lighting,
+  aggressive expression, dark or gloomy atmosphere
+reference_images: []
+consistency_seed: 786
