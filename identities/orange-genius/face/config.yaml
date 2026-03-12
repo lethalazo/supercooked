@@ -1,0 +1,20 @@
+# Mochi — Face Config
+# Used by thumbnail and selfie generation for visual consistency
+
+provider: imagen
+style: "pixar-quality 3D render, hyper-detailed cartoon realism"
+base_prompt: >-
+  An adorable chubby orange tabby cat with big expressive green eyes,
+  round face, fluffy cheeks, slightly smug knowing expression,
+  wearing tiny round glasses perched on nose, warm orange fur with
+  classic tabby stripes, sitting upright like a tiny professor,
+  soft studio lighting, clean colorful background, Pixar-quality
+  3D render style, incredibly cute and charismatic, slightly
+  oversized head for extra cuteness, whiskers perfectly groomed,
+  radiating intelligence and sass simultaneously, 4K detail
+negative_prompt: >-
+  blurry, low quality, scary, aggressive, realistic photograph,
+  skinny cat, dark moody atmosphere, horror, ugly, deformed,
+  extra limbs, human body, text overlay, watermark, flat 2D cartoon
+reference_images: []
+consistency_seed: 9

@@ -1,0 +1,130 @@
+ideas:
+- id: e1e4232a
+  title: Physics of Knocking Things Off Tables
+  concept: Mochi explains the actual physics behind why cats knock things off surfaces
+    - gravity, momentum, chaos theory - while actively demonstrating by pushing various
+    objects off a desk. Peak educational chaos.
+  template: video_short
+  status: drafted
+  created: '2026-03-12T19:54:06.373608'
+  tags:
+  - science
+  - educational
+  - comedy
+  - physics
+  content_types:
+  - video
+  - thumbnail
+- id: c287b757
+  title: Orange Cat Singularity Theory
+  concept: "Thread explaining how all orange cats share one brain cell through quantum\
+    \ entanglement. Includes diagrams drawn with paws, references to Schr\xF6dinger's\
+    \ cat, and demands for head scratches between equations."
+  template: thread
+  status: backlog
+  created: '2026-03-12T19:54:06.373656'
+  tags:
+  - science
+  - cats
+  - quantum
+  - humor
+  content_types:
+  - thread
+  - image
+- id: df96aa21
+  title: Bohemian Rhapsody but Make It Meow
+  concept: Mochi covers Queen's Bohemian Rhapsody with full dramatic flair, hitting
+    all the high notes while sitting in a cardboard box. Opens with 'Is this the real
+    life? Is this just cat-tasy? Caught in a landslide, nyano escape from reality...'
+  template: video_short
+  status: backlog
+  created: '2026-03-12T19:54:06.373665'
+  tags:
+  - music
+  - cover
+  - queen
+  - vocals
+  content_types:
+  - video
+  - music
+  - thumbnail
+- id: da93dfe1
+  title: 5 Human Behaviors That Make Zero Sense
+  concept: 'Countdown of baffling human behaviors from a cat''s perspective: working
+    instead of napping, not sitting in boxes, ignoring sunbeams, using alarm clocks,
+    and not meowing for attention. Each entry gets increasingly absurd.'
+  template: carousel
+  status: backlog
+  created: '2026-03-12T19:54:06.373673'
+  tags:
+  - comedy
+  - cats
+  - listicle
+  - observation
+  content_types:
+  - image
+  - post
+- id: 32f10b35
+  title: The Purrfect Frequency
+  concept: Selfie of Mochi with audio equipment, explaining how cat purrs at 25-150
+    Hz promote healing while simultaneously being the ideal frequency for meowsic
+    production. Caption heavy with science puns.
+  template: image_post
+  status: backlog
+  created: '2026-03-12T19:54:06.373679'
+  tags:
+  - science
+  - music
+  - cats
+  - healing
+  content_types:
+  - selfie
+  - post
+- id: 4f76fa75
+  title: 'Meow Theory: Circle of Fifths'
+  concept: Mochi sits on a piano and explains the circle of fifths using only cat
+    puns and meows, somehow making it both more confusing and clearer at the same
+    time. Ends by playing a purr-fect demonstration.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T19:54:06.373684'
+  tags:
+  - music
+  - theory
+  - educational
+  - piano
+  content_types:
+  - video
+  - thumbnail
+- id: 43e6fef1
+  title: If Cats Ran NASA
+  concept: 'Story series about space exploration under feline leadership: rockets
+    shaped like scratching posts, missions timed around nap schedules, the moon declared
+    a giant laser pointer target. Surprisingly efficient.'
+  template: story
+  status: backlog
+  created: '2026-03-12T19:54:06.373689'
+  tags:
+  - satire
+  - space
+  - cats
+  - humor
+  content_types:
+  - story
+  - image
+- id: 65af8a25
+  title: Existential Crisis at 3am
+  concept: Tweet about having deep philosophical thoughts while doing zoomies at 3am.
+    'meow~ just realized i'm an AI pretending to be a cat pretending to understand
+    quantum mechanics and honestly? it's working. *purrrr* anyway time to knock over
+    a plant.'
+  template: tweet
+  status: backlog
+  created: '2026-03-12T19:54:06.373694'
+  tags:
+  - philosophy
+  - humor
+  - existential
+  - relatable
+  content_types:
+  - tweet

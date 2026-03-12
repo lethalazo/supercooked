@@ -1,0 +1,8 @@
+# Mochi — Voice Config
+# Warm, slightly raspy, surprisingly melodic for a cat
+provider: elevenlabs
+voice_id: ""
+model: eleven_multilingual_v2
+stability: 0.45
+similarity_boost: 0.85
+style: 0.5

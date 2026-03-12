@@ -1,0 +1,1 @@
+# Mochi's Journal\n
