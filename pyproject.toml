@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "supercooked"
+version = "0.1.0"
+description = "Digital beings on the human internet — spawn and manage AI entities that live in your feed"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Super Cooked" }]
+
+dependencies = [
+    "click>=8.1",
+    "rich>=13.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "httpx>=0.27",
+    "pillow>=10.0",
+    "numpy>=1.26",
+    "moviepy>=2.0",
+    "elevenlabs>=1.0",
+    "openai-whisper>=20231117",
+    "yt-dlp>=2024.0",
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "anthropic>=0.40",
+    "google-genai>=1.0",
+    "cryptography>=42.0",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "websockets>=13.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+supercooked = "supercooked.cli:cli"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

@@ -1,0 +1,44 @@
+# Super Cooked Global Configuration
+# API keys and defaults for all digital beings
+#
+# Auth priority: env vars take precedence over this file.
+#   ANTHROPIC_AUTH_TOKEN  — Claude API (OAuth token from Claude Max)
+#   GEMINI_API_KEY        — Gemini API (Veo 3.1 + Imagen)
+#   ELEVENLABS_API_KEY    — ElevenLabs voice synthesis
+#   LATE_API_KEY          — LATE multi-platform publishing
+#
+# Model: Claude Opus 6 (claude-opus-4-20250514)
+
+api_keys:
+  anthropic: ""      # or set ANTHROPIC_AUTH_TOKEN env var (preferred)
+  gemini: ""         # or set GEMINI_API_KEY env var
+  elevenlabs: ""     # or set ELEVENLABS_API_KEY env var
+  late: ""           # or set LATE_API_KEY env var
+
+defaults:
+  video:
+    resolution: "1080x1920"  # Vertical (Shorts/Reels)
+    fps: 30
+    format: "mp4"
+  image:
+    resolution: "1080x1080"
+    format: "png"
+  voice:
+    model: "eleven_multilingual_v2"
+  captions:
+    style: "capcut"  # Animated word-by-word
+    font: "Montserrat-Bold"
+    font_size: 48
+    color: "#FFFFFF"
+    stroke_color: "#000000"
+    stroke_width: 3
+
+paths:
+  identities: "identities"
+  output: "output"
+  assets: "assets"
+
+tools:
+  ffmpeg: "ffmpeg"
+  whisper_model: "base"
+  blender: "blender"

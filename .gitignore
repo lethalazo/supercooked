@@ -1,0 +1,47 @@
+# Credentials — NEVER commit
+identities/*/credentials/
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual env
+.venv/
+venv/
+
+# Output
+output/
+
+# Generated content
+identities/*/face/generated/
+identities/*/voice/samples/
+identities/*/content/drafts/
+identities/*/content/published/
+
+# Node
+web/node_modules/
+web/.next/
+web/out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Lock files
+*.lock
+
+# Env
+.env
+.env.local
