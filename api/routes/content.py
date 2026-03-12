@@ -208,7 +208,9 @@ async def get_face(slug: str):
     if not images:
         raise HTTPException(status_code=404, detail="No face images generated")
 
-    return FileResponse(images[0], media_type="image/png")
+    suffix = images[0].suffix.lower()
+    media_type = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}.get(suffix, "image/png")
+    return FileResponse(images[0], media_type=media_type)
 
 
 MEDIA_TYPES = {

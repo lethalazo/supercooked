@@ -50,8 +50,6 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PublishIcon from '@mui/icons-material/Publish';
 import BuildIcon from '@mui/icons-material/Build';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import ImageIcon from '@mui/icons-material/Image';
-import VideoFileIcon from '@mui/icons-material/VideoFile';
 import AudioFileIcon from '@mui/icons-material/AudioFile';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import FaceIcon from '@mui/icons-material/Face';

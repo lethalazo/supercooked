@@ -280,9 +280,12 @@ async def compose_short(
         captioned_path = out.with_name(out.stem + "_captioned" + out.suffix)
         try:
             await overlay_captions(out, caption_path, captioned_path)
-            # Replace the uncaptioned version with the captioned one
-            out.unlink()
+            # Replace the uncaptioned version with the captioned one safely
+            # Rename first (atomic on same filesystem), then delete backup
+            backup_path = out.with_suffix(".bak")
+            out.rename(backup_path)
             captioned_path.rename(out)
+            backup_path.unlink()
         except Exception as exc:
             # If caption overlay fails, keep the uncaptioned version
             log_action(

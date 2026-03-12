@@ -86,8 +86,20 @@ async def generate_video(
         )
         raise RuntimeError(f"Veo 3.1 video generation request failed: {exc}") from exc
 
-    # Poll until the operation completes
+    # Poll until the operation completes (max 30 minutes)
+    max_polls = 180  # 180 * 10s = 30 minutes
+    poll_count = 0
     while not operation.done:
+        poll_count += 1
+        if poll_count > max_polls:
+            log_action(
+                slug,
+                action="generate_video",
+                platform="gemini",
+                details={"prompt": prompt},
+                error="Video generation timed out after 30 minutes",
+            )
+            raise RuntimeError("Veo 3.1 video generation timed out after 30 minutes")
         await asyncio.sleep(10)
         try:
             operation = await asyncio.to_thread(

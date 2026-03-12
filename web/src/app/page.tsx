@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';

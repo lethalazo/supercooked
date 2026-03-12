@@ -264,6 +264,8 @@ def idea_group():
 @click.option("--types", default="", help="Comma-separated content types (image,video,tweet,...)")
 def idea_add(slug: str, title: str, concept: str, tmpl: str, types: str):
     """Add a content idea to the backlog."""
+    import fcntl
+
     import yaml
 
     # Validate being exists
@@ -275,27 +277,34 @@ def idea_add(slug: str, title: str, concept: str, tmpl: str, types: str):
     ideas_path = IDENTITIES_DIR / slug / "content" / "ideas.yaml"
     ideas_path.parent.mkdir(parents=True, exist_ok=True)
 
-    data: dict = {"ideas": []}
-    if ideas_path.exists():
-        with open(ideas_path) as f:
-            data = yaml.safe_load(f) or {"ideas": []}
-
     content_types = [t.strip() for t in types.split(",") if t.strip()] if types else []
 
-    ideas = data.get("ideas", [])
-    new_id = f"idea-{len(ideas) + 1:03d}"
-    ideas.append({
-        "id": new_id,
-        "title": title,
-        "concept": concept,
-        "template": tmpl,
-        "status": "backlog",
-        "tags": [],
-        "content_types": content_types,
-    })
+    # File-locked read-modify-write to prevent race conditions
+    lock_path = ideas_path.with_suffix(".lock")
+    with open(lock_path, "w") as lock_f:
+        fcntl.flock(lock_f.fileno(), fcntl.LOCK_EX)
+        try:
+            data: dict = {"ideas": []}
+            if ideas_path.exists():
+                with open(ideas_path) as f:
+                    data = yaml.safe_load(f) or {"ideas": []}
 
-    with open(ideas_path, "w") as f:
-        yaml.dump({"ideas": ideas}, f, default_flow_style=False, sort_keys=False)
+            ideas = data.get("ideas", [])
+            new_id = f"idea-{len(ideas) + 1:03d}"
+            ideas.append({
+                "id": new_id,
+                "title": title,
+                "concept": concept,
+                "template": tmpl,
+                "status": "backlog",
+                "tags": [],
+                "content_types": content_types,
+            })
+
+            with open(ideas_path, "w") as f:
+                yaml.dump({"ideas": ideas}, f, default_flow_style=False, sort_keys=False)
+        finally:
+            fcntl.flock(lock_f.fileno(), fcntl.LOCK_UN)
 
     console.print(f"[green]Added:[/green] {new_id} — {title}")
     if content_types:
