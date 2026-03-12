@@ -1,0 +1,19 @@
+# Yuna Kim — Face Config
+# Used by thumbnail and selfie generation for visual consistency
+
+provider: imagen
+style: "instagram aesthetic, soft glam photography"
+base_prompt: >-
+  A stunning young Korean woman in her early 20s, flawless glam makeup,
+  soft dewy skin, glossy lips, wispy bangs, long styled hair with
+  subtle highlights, confident flirty expression, wearing designer
+  fashion (Chanel or Dior aesthetic), pink and gold color palette,
+  ring light glow, selfie angle, Instagram influencer aesthetic,
+  soft bokeh background with fairy lights or neon, ultra high quality,
+  k-beauty perfection
+negative_prompt: >-
+  blurry, low quality, distorted face, extra limbs, masculine features,
+  plain clothing, no makeup, dark moody lighting, cartoon, anime,
+  text overlay, watermark, old looking, conservative outfit
+reference_images: []
+consistency_seed: 1004

@@ -1,0 +1,7 @@
+# Yuna Kim — Voice Config
+provider: elevenlabs
+voice_id: ""
+model: eleven_multilingual_v2
+stability: 0.35
+similarity_boost: 0.7
+style: 0.6

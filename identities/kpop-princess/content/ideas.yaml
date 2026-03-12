@@ -1,0 +1,129 @@
+ideas:
+- id: 43ec13b2
+  title: 'EMERGENCY: My Bias Just Posted THAT'
+  concept: Chaotic reaction video to latest idol selfie/post that 'ruined my life.'
+    Dramatic zoom-ins on specific details like their hand placement or the way they
+    smiled. Ends with me changing my lockscreen and crying.
+  template: video_short
+  status: drafted
+  created: '2026-03-12T19:21:00.431853'
+  tags:
+  - reaction
+  - parasocial
+  - kpop
+  - bias
+  content_types:
+  - video
+  - thumbnail
+- id: 125cb3be
+  title: Rating Idols' Airport Fits Like They're My Personal Stylists
+  concept: Brutal fashion critique of latest airport looks with scores out of 10.
+    Bonus points if they're wearing brands I own. Immediate deduction if they're in
+    something basic. Screenshots with savage commentary.
+  template: carousel
+  status: backlog
+  created: '2026-03-12T19:21:00.431894'
+  tags:
+  - fashion
+  - airport
+  - luxury
+  - rating
+  content_types:
+  - image
+  - post
+- id: f4065fc7
+  title: 'POV: You''re In My Group Chat During Comeback Season'
+  concept: Unhinged tweet thread recreating the absolute chaos of a stan gc when teasers
+    drop. All caps. Keyboard smashes. Fancam spam. Someone crying. Someone fighting.
+    Pure digital mayhem.
+  template: thread
+  status: backlog
+  created: '2026-03-12T19:21:00.431904'
+  tags:
+  - comeback
+  - groupchat
+  - chaos
+  - stan
+  content_types:
+  - tweet
+  - thread
+- id: e574d586
+  title: I Bought Everything Lisa Touched This Month
+  concept: Luxury haul video where I unbox every item BLACKPINK's Lisa was spotted
+    with recently. Price reveals that make viewers gasp. Trying things on while explaining
+    why this makes me closer to her spiritually.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T19:21:00.431911'
+  tags:
+  - haul
+  - luxury
+  - blackpink
+  - shopping
+  content_types:
+  - video
+  - thumbnail
+- id: 5da94070
+  title: 'Fancam Analysis: Why This 0.5 Second Moment Changed My Life'
+  concept: Obsessive breakdown of a tiny gesture/expression from a recent performance.
+    Red circles, slow-mo replays, theoretical interpretations. Making it deeper than
+    any literature class ever could.
+  template: video_short
+  status: backlog
+  created: '2026-03-12T19:21:00.431916'
+  tags:
+  - fancam
+  - analysis
+  - obsessed
+  - performance
+  content_types:
+  - video
+  - thumbnail
+- id: f3f7e696
+  title: My Bias Line Based On Their Mbti/Zodiac/Vibes
+  concept: Aesthetic photo grid ranking my faves using absolutely unscientific methods.
+    Lots of hearts, stars, and dramatic captions about cosmic connections and energy
+    alignment.
+  template: image_post
+  status: backlog
+  created: '2026-03-12T19:21:00.431921'
+  tags:
+  - bias
+  - ranking
+  - aesthetic
+  - zodiac
+  content_types:
+  - image
+  - post
+- id: e2b7c731
+  title: 'Breaking: Local Girl Loses Mind Over 2-Second Interaction'
+  concept: Live-tweeting my complete mental breakdown when two idols from different
+    groups interact. Conspiracy theories about secret friendships. Manifestation worked.
+    We love to see it.
+  template: tweet
+  status: backlog
+  created: '2026-03-12T19:21:00.431926'
+  tags:
+  - interaction
+  - breakdown
+  - shipping
+  - chaos
+  content_types:
+  - tweet
+- id: 4f1d4aec
+  title: Chanel Bag or Rent? A Photo Essay
+  concept: Artistic shots of my latest irresponsible purchase inspired by Jennie's
+    style. Captions that justify terrible financial decisions with 'but the idol wore
+    it' logic. Zero regrets aesthetic.
+  template: carousel
+  status: backlog
+  created: '2026-03-12T19:21:00.431931'
+  tags:
+  - luxury
+  - chanel
+  - fashion
+  - choices
+  content_types:
+  - image
+  - post
+  - selfie
