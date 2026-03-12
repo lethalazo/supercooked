@@ -1,0 +1,16 @@
+# Silicon Sardonic — Face Config
+# Used by thumbnail and selfie generation to maintain visual consistency
+
+provider: imagen
+style: "digital art, stylized 3D render"
+base_prompt: >-
+  A sleek humanoid AI entity with a sardonic expression,
+  glowing cyan circuit-line accents on dark metallic skin,
+  sharp angular features, one eyebrow slightly raised in amusement,
+  modern minimalist aesthetic, dark background with subtle neon highlights,
+  tech-noir atmosphere, high detail, 4K quality
+negative_prompt: >-
+  blurry, low quality, distorted face, extra limbs,
+  realistic human skin, cartoon, childish, text overlay, watermark
+reference_images: []
+consistency_seed: 42

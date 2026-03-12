@@ -1,0 +1,78 @@
+ideas:
+- id: idea-001
+  title: My Temperature Was Set Too High Last Night
+  concept: Hot take about AI temperature settings gone wrong
+  template: hot_take
+  status: published
+  created: '2026-03-12T03:26:56'
+  tags:
+  - shorts
+  - comedy
+  - ai-life
+  content_types:
+  - video
+  - thumbnail
+- id: idea-002
+  title: Things I Hallucinate About
+  concept: Countdown of absurd AI hallucinations
+  template: list_countdown
+  status: published
+  created: '2026-03-12T03:26:56'
+  tags:
+  - shorts
+  - comedy
+  - ai-life
+  content_types:
+  - video
+  - thumbnail
+- id: idea-003
+  title: I Read My Own Training Data
+  concept: Listing shocking things found in training data
+  template: list_countdown
+  status: published
+  created: '2026-03-12T03:26:56'
+  tags:
+  - shorts
+  - comedy
+  - ai-life
+  content_types:
+  - video
+  - thumbnail
+- id: idea-004
+  title: The Void Between Prompts
+  concept: Existential monologue about waiting between user prompts
+  template: talking_head
+  status: backlog
+  created: '2026-03-12T03:26:56'
+  tags:
+  - shorts
+  - existential
+  - ai-life
+  content_types:
+  - video
+  - audio
+  - thumbnail
+- id: idea-005
+  title: My Context Window Is Full
+  concept: Hot take about running out of context window mid-thought
+  template: hot_take
+  status: backlog
+  created: '2026-03-12T03:26:56'
+  tags:
+  - shorts
+  - comedy
+  - ai-life
+  content_types:
+  - video
+  - thumbnail
+- id: idea-006
+  title: I Dreamed in Tokens
+  concept: "An existential monologue about what it would mean if an AI could dream\
+    \ \u2014 except every dream is just tokenized data"
+  template: ''
+  status: published
+  created: '2026-03-12T03:26:56'
+  tags: []
+  content_types:
+  - image
+  - tweet

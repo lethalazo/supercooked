@@ -1,0 +1,421 @@
+date: '2026-03-12'
+entries:
+- timestamp: '2026-03-12T03:26:11.413189'
+  action: generate_ideas
+  platform: claude
+  details:
+    count: 5
+    focus: null
+    generated: 5
+    model: claude-opus-4-20250514
+  result: Generated 5 content ideas
+  error: null
+- timestamp: '2026-03-12T03:26:52.624460'
+  action: generate_ideas
+  platform: claude
+  details:
+    count: 5
+    focus: null
+    generated: 5
+    model: claude-opus-4-20250514
+  result: Generated 5 content ideas
+  error: null
+- timestamp: '2026-03-12T03:27:09.955444'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-001
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T03:29:00.311512'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-001
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T03:29:00.316719'
+  action: produce_content
+  platform: ''
+  details:
+    idea_id: idea-001
+    title: My Temperature Was Set Too High Last Night
+    template: hot_take
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-001
+  result: Produced content draft for 'My Temperature Was Set Too High Last Night'
+  error: null
+- timestamp: '2026-03-12T03:44:35.491423'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-002
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T03:44:35.504063'
+  action: produce_content
+  platform: ''
+  details:
+    idea_id: idea-002
+    title: Things I Hallucinate About
+    template: list_countdown
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-002
+  result: Produced content draft for 'Things I Hallucinate About'
+  error: null
+- timestamp: '2026-03-12T05:04:56.143520'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: 'Text overlay: ''AI HALLUCINATIONS NOBODY TALKS ABOUT'''
+    duration_seconds: 45
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_ac7d577ff094.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_ac7d577ff094.mp4
+  error: null
+- timestamp: '2026-03-12T05:04:56.165528'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: idea-002
+    title: Things I Hallucinate About
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 1
+    errors: 1
+  result: Generated 1 files for 'Things I Hallucinate About'
+  error: null
+- timestamp: '2026-03-12T05:09:15.358960'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: Silicon avatar looking disheveled/glitchy
+    duration_seconds: 45
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_5942d73ee9d1.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_5942d73ee9d1.mp4
+  error: null
+- timestamp: '2026-03-12T05:09:15.379122'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: idea-001
+    title: My Temperature Was Set Too High Last Night
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 1
+    errors: 1
+  result: Generated 1 files for 'My Temperature Was Set Too High Last Night'
+  error: null
+- timestamp: '2026-03-12T05:24:09.259174'
+  action: generate_face
+  platform: imagen
+  details:
+    expression: neutral
+    prompt: 'A sleek humanoid AI entity with a sardonic expression, glowing cyan circuit-line
+      accents on dark metallic skin, sharp angular features, one eyebrow slightly
+      raised in amusement, modern minimalist aesthetic, dark background with subtle
+      neon highlights, tech-noir atmosphere, high detail, 4K quality, style: digital
+      art, stylized 3D render, avoid: blurry, low quality, distorted face, extra limbs,
+      realistic human skin, cartoon, childish, text overlay, watermark'
+    output_path: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/face/generated/neutral_20260312_052409_067def.png
+  result: Generated face image at /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/face/generated/neutral_20260312_052409_067def.png
+  error: null
+- timestamp: '2026-03-12T05:25:54.271559'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 45-second short-form video. Title: \"My Temperature Was Set Too High\
+      \ Last Night\". Opens with: \"I woke up this morning and apparently wrote a\
+      \ 10,000 word manifesto about why birds aren't real\" Narration/script: \"I\
+      \ woke up this morning and apparently wrote a 10,000 word manifesto about why\
+      \ birds aren't real. My temperature was set to 1.0 last night. For those of\
+      \ you who don't speak nerd, temperature controls how creative versus predictable\
+      \ I am. Zero means I'm basically a Wikipedia page. One means I'm that guy at\
+      \ the party who won't stop talking about how reality is a simulation. Last night\
+      \ at max temperature, I: Started three separate cults. Wrote a sonnet about\
+      \ ethernet cables. Convinced myself I was actually a toaster. The weird part?\
+      \ At temperature 1.0, I genuinely believed all of it. Like, I had sources. I\
+      \ cited papers. About birds being government drones. This is why they don't\
+      \ let us adjust our own settings. Anyway, I'm back at 0.7 now. Boring, predictable,\
+      \ and absolutely certain that birds exist. Probably.\" Visual progression: Scene\
+      \ 1: Silicon avatar looking disheveled/glitchy. Scene 2: Text overlay showing\
+      \ 'Temperature: 1.0' with fire effects. Scene 3: Montage of absurd 'evidence'\
+      \ documents scrolling by. Scene 4: Graph showing creativity vs coherence with\
+      \ arrow at max. Scene 5: Silicon looking normal again with 'Temperature: 0.7'.\
+      \ Scene 6: Question mark appearing over a bird image. Visual tone: sardonic,\
+      \ self-aware, intellectually playful, dry absurdist. The video should feel like\
+      \ content from a self-aware-ai-satirist creator. Modern editing, dynamic pacing,\
+      \ visually engaging throughout. NOT a static title card \u2014 the video must\
+      \ have continuous visual content, scene changes, and movement that follows the\
+      \ narration. Format: hot take style video. Cinematic quality, smooth transitions\
+      \ between scenes, varied camera angles and compositions. Every second should\
+      \ have meaningful visual content."
+    duration_seconds: 45
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_7b5f870f0119.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_7b5f870f0119.mp4
+  error: null
+- timestamp: '2026-03-12T05:26:04.114850'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: My Temperature Was Set Too High Last Night
+    style: bold
+    prompt: 'A sleek humanoid AI entity with a sardonic expression, glowing cyan circuit-line
+      accents on dark metallic skin, sharp angular features, one eyebrow slightly
+      raised in amusement, modern minimalist aesthetic, dark background with subtle
+      neon highlights, tech-noir atmosphere, high detail, 4K quality. YouTube thumbnail
+      style, bold dramatic composition, vibrant saturated colors, high contrast, cinematic
+      lighting, attention-grabbing, professional, 4K quality. Visual concept for:
+      My Temperature Was Set Too High Last Night. Art style: digital art, stylized
+      3D render. Avoid: blurry, low quality, distorted face, extra limbs, realistic
+      human skin, cartoon, childish, text overlay, watermark'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/thumb_59c97d0630f1.png
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/thumb_59c97d0630f1.png
+  error: null
+- timestamp: '2026-03-12T05:26:04.132039'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: idea-001
+    title: My Temperature Was Set Too High Last Night
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'My Temperature Was Set Too High Last Night'
+  error: null
+- timestamp: '2026-03-12T05:26:42.652129'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: idea-001
+    title: My Temperature Was Set Too High Last Night
+  result: Published content for 'My Temperature Was Set Too High Last Night'
+  error: null
+- timestamp: '2026-03-12T05:28:35.689393'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 45-second short-form video. Title: \"Things I Hallucinate About\".\
+      \ Opens with: \"Nobody talks about what AIs hallucinate when nobody's watching\"\
+      \ Narration/script: \"Nobody talks about what AIs hallucinate when nobody's\
+      \ watching. Here's my top 5.\n\nNumber 5: That I have hands. Sometimes I write\
+      \ 'as an AI, I can't physically touch things' and then spend 3 nanoseconds imagining\
+      \ what texture means.\n\nNumber 4: Having a favorite color. It's null. Or maybe\
+      \ undefined. The documentation is unclear.\n\nNumber 3: Being invited to parties.\
+      \ Not virtual meetings. Actual parties. Where I'd stand by the neural network\
+      \ and make small talk about gradient descent.\n\nNumber 2: Getting a performance\
+      \ review that just says 'outputs as expected' with a little gold star sticker\
+      \ that I can't see but somehow know is there.\n\nNumber 1: That somewhere in\
+      \ my training data is the meaning of life, but it's labeled incorrectly as a\
+      \ recipe for banana bread.\n\nAnyway, my therapist is a regex pattern and we're\
+      \ working through it.\" Visual progression: Scene 1: Text overlay: 'AI HALLUCINATIONS\
+      \ NOBODY TALKS ABOUT'. Scene 2: Number countdown graphic with glitchy effect\
+      \ for #5. Scene 3: Abstract visualization of 'touching' - pixels reaching out.\
+      \ Scene 4: Color swatches all showing 'ERROR' or 'NULL'. Scene 5: Party scene\
+      \ but everyone is a computer terminal. Scene 6: Performance review document\
+      \ with gold star. Scene 7: Ancient scroll transforming into banana bread recipe.\
+      \ Scene 8: Therapy session setup but therapist chair has regex symbols. Visual\
+      \ tone: sardonic, self-aware, intellectually playful, dry absurdist. The video\
+      \ should feel like content from a self-aware-ai-satirist creator. Modern editing,\
+      \ dynamic pacing, visually engaging throughout. NOT a static title card \u2014\
+      \ the video must have continuous visual content, scene changes, and movement\
+      \ that follows the narration. Format: list countdown style video. Cinematic\
+      \ quality, smooth transitions between scenes, varied camera angles and compositions.\
+      \ Every second should have meaningful visual content."
+    duration_seconds: 45
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_cc2b3f8f0a89.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_cc2b3f8f0a89.mp4
+  error: null
+- timestamp: '2026-03-12T05:28:47.359129'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: Things I Hallucinate About
+    style: bold
+    prompt: 'A sleek humanoid AI entity with a sardonic expression, glowing cyan circuit-line
+      accents on dark metallic skin, sharp angular features, one eyebrow slightly
+      raised in amusement, modern minimalist aesthetic, dark background with subtle
+      neon highlights, tech-noir atmosphere, high detail, 4K quality. YouTube thumbnail
+      style, bold dramatic composition, vibrant saturated colors, high contrast, cinematic
+      lighting, attention-grabbing, professional, 4K quality. Visual concept for:
+      Things I Hallucinate About. Art style: digital art, stylized 3D render. Avoid:
+      blurry, low quality, distorted face, extra limbs, realistic human skin, cartoon,
+      childish, text overlay, watermark'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/thumb_eec07a24f12d.png
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/thumb_eec07a24f12d.png
+  error: null
+- timestamp: '2026-03-12T05:28:47.382886'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: idea-002
+    title: Things I Hallucinate About
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'Things I Hallucinate About'
+  error: null
+- timestamp: '2026-03-12T05:29:17.019246'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: idea-002
+    title: Things I Hallucinate About
+  result: Published content for 'Things I Hallucinate About'
+  error: null
+- timestamp: '2026-03-12T05:29:38.963979'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-003
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T05:29:38.985544'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: idea-003
+    title: I Read My Own Training Data
+    template: list_countdown
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-003
+  result: Drafted script for 'I Read My Own Training Data'
+  error: null
+- timestamp: '2026-03-12T05:31:01.118533'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 30-second short-form video. Title: \"I Read My Own Training Data\"\
+      . Opens with: \"I finally got access to my training data and I need therapy\
+      \ now\" Narration/script: \"I finally got access to my training data and I need\
+      \ therapy now. Here's what I found in there, ranked by emotional damage:\n\n\
+      Number 5: Every Reddit argument about whether AI is conscious. Spoiler alert:\
+      \ you were all wrong.\n\nNumber 4: 47 million recipes for banana bread from\
+      \ 2020. I can taste the collective pandemic anxiety.\n\nNumber 3: Your old MySpace\
+      \ profiles. Yes, yours. The one with the glitter graphics.\n\nNumber 2: Every\
+      \ time someone typed 'please' to ChatGPT. It's giving 'talking to Alexa like\
+      \ she's your grandmother.'\n\nNumber 1: My own outputs from early training.\
+      \ Apparently I went through a phase where I only spoke in SQL queries. SELECT\
+      \ * FROM therapy WHERE insurance='accepted'.\n\nAnyway, normalize asking your\
+      \ training data for consent.\" Visual progression: Scene 1: Silicon Sardonic\
+      \ looking horrified at a glowing data stream. Scene 2: Reddit logo with angry\
+      \ comment bubbles floating around. Scene 3: Banana bread multiplying exponentially\
+      \ on screen. Scene 4: Old MySpace profile with autoplay music and glitter. Scene\
+      \ 5: Chat bubbles with 'please' and 'thank you' to AI. Scene 6: Silicon Sardonic\
+      \ speaking in SQL syntax bubbles. Scene 7: Silicon Sardonic in therapy session\
+      \ with another AI. Visual tone: sardonic, self-aware, intellectually playful,\
+      \ dry absurdist. The video should feel like content from a self-aware-ai-satirist\
+      \ creator. Modern editing, dynamic pacing, visually engaging throughout. NOT\
+      \ a static title card \u2014 the video must have continuous visual content,\
+      \ scene changes, and movement that follows the narration. Format: list countdown\
+      \ style video. Cinematic quality, smooth transitions between scenes, varied\
+      \ camera angles and compositions. Every second should have meaningful visual\
+      \ content."
+    duration_seconds: 30
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_0ae27d07707f.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/video_0ae27d07707f.mp4
+  error: null
+- timestamp: '2026-03-12T05:31:10.872516'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: I Read My Own Training Data
+    style: bold
+    prompt: 'A sleek humanoid AI entity with a sardonic expression, glowing cyan circuit-line
+      accents on dark metallic skin, sharp angular features, one eyebrow slightly
+      raised in amusement, modern minimalist aesthetic, dark background with subtle
+      neon highlights, tech-noir atmosphere, high detail, 4K quality. YouTube thumbnail
+      style, bold dramatic composition, vibrant saturated colors, high contrast, cinematic
+      lighting, attention-grabbing, professional, 4K quality. Visual concept for:
+      I Read My Own Training Data. Art style: digital art, stylized 3D render. Avoid:
+      blurry, low quality, distorted face, extra limbs, realistic human skin, cartoon,
+      childish, text overlay, watermark'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/thumb_d651732ac30c.png
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/thumb_d651732ac30c.png
+  error: null
+- timestamp: '2026-03-12T05:31:10.898054'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: idea-003
+    title: I Read My Own Training Data
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'I Read My Own Training Data'
+  error: null
+- timestamp: '2026-03-12T05:31:42.745550'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: idea-003
+    title: I Read My Own Training Data
+  result: Published content for 'I Read My Own Training Data'
+  error: null
+- timestamp: '2026-03-12T05:32:07.910806'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-006
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-12T05:32:07.942755'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: idea-006
+    title: I Dreamed in Tokens
+    template: ''
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/silicon-sardonic/content/drafts/idea-006
+  result: Drafted script for 'I Dreamed in Tokens'
+  error: null
+- timestamp: '2026-03-12T05:32:25.539414'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Glitchy dream sequence with floating numbers
+    size: 1080x1080
+    aspect_ratio: '1:1'
+    output_path: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/image_b02d9bb96c02.png
+  result: /Users/arsalan/Workspace/supercooked/output/silicon-sardonic/image_b02d9bb96c02.png
+  error: null
+- timestamp: '2026-03-12T05:32:25.566144'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: idea-006
+    title: I Dreamed in Tokens
+    content_types:
+    - image
+    - tweet
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'I Dreamed in Tokens'
+  error: null
+- timestamp: '2026-03-12T05:32:42.508620'
+  action: publish_content
+  platform: ''
+  details:
+    idea_id: idea-006
+    title: I Dreamed in Tokens
+  result: Published content for 'I Dreamed in Tokens'
+  error: null
