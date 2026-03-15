@@ -98,37 +98,38 @@ def _compose_with_moviepy(
     video_clip.close()
 
 
-def _compose_image_with_pillow(
-    image_path: Path,
-    caption_text: str,
-    output_path: Path,
-) -> None:
-    """Synchronous image composition with text overlay using Pillow."""
-    from PIL import Image, ImageDraw, ImageFont
+def _load_font(font_size: int):
+    """Load the best available font at the given size."""
+    from PIL import ImageFont
 
-    img = Image.open(str(image_path)).convert("RGBA")
-    draw = ImageDraw.Draw(img)
+    # Project bundled font
+    bundled = Path(__file__).parent.parent.parent / "assets" / "fonts" / "Montserrat-Bold.ttf"
+    if bundled.exists():
+        return ImageFont.truetype(str(bundled), font_size)
 
-    width, height = img.size
-
-    # Try to load a nice font, fall back to default
-    font_size = max(24, width // 20)
-    try:
-        font = ImageFont.truetype("Montserrat-Bold.ttf", font_size)
-    except (OSError, IOError):
+    # System fonts
+    for path in [
+        "Montserrat-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    ]:
         try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+            return ImageFont.truetype(path, font_size)
         except (OSError, IOError):
-            font = ImageFont.load_default()
+            continue
 
-    # Wrap text
-    max_chars_per_line = max(1, width // (font_size // 2))
-    words = caption_text.split()
+    return ImageFont.load_default()
+
+
+def _wrap_text_by_metrics(draw, text: str, font, max_width: int) -> list[str]:
+    """Wrap text using actual font metrics instead of character-count heuristic."""
+    words = text.split()
     lines = []
     current_line = ""
     for word in words:
         test_line = f"{current_line} {word}".strip()
-        if len(test_line) <= max_chars_per_line:
+        bbox = draw.textbbox((0, 0), test_line, font=font)
+        if bbox[2] - bbox[0] <= max_width:
             current_line = test_line
         else:
             if current_line:
@@ -136,20 +137,45 @@ def _compose_image_with_pillow(
             current_line = word
     if current_line:
         lines.append(current_line)
+    return lines
+
+
+def _compose_image_with_pillow(
+    image_path: Path,
+    caption_text: str,
+    output_path: Path,
+) -> None:
+    """Synchronous image composition with text overlay using Pillow."""
+    from PIL import Image, ImageDraw
+
+    img = Image.open(str(image_path)).convert("RGBA")
+    draw = ImageDraw.Draw(img)
+
+    width, height = img.size
+
+    # Larger, more readable font size
+    font_size = max(48, width // 12)
+    font = _load_font(font_size)
+
+    # Wrap text using actual font metrics
+    padding = 40
+    lines = _wrap_text_by_metrics(draw, caption_text, font, width - padding * 2)
 
     # Calculate text position (bottom area with padding)
-    line_height = font_size + 8
+    line_height = int(font_size * 1.3)
     total_text_height = len(lines) * line_height
-    y_start = height - total_text_height - max(40, height // 15)
+    y_start = height - total_text_height - max(60, height // 10)
 
-    # Draw semi-transparent background behind text
+    # Draw gradient fade overlay (transparent to dark) instead of flat bar
     bg_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     bg_draw = ImageDraw.Draw(bg_overlay)
-    padding = 20
-    bg_draw.rectangle(
-        [0, y_start - padding, width, y_start + total_text_height + padding],
-        fill=(0, 0, 0, 140),
-    )
+    gradient_start = y_start - 80
+    gradient_end = height
+    gradient_height = gradient_end - gradient_start
+    for y in range(max(0, gradient_start), gradient_end):
+        progress = (y - gradient_start) / gradient_height
+        alpha = int(180 * progress)
+        bg_draw.rectangle([0, y, width, y + 1], fill=(0, 0, 0, alpha))
     img = Image.alpha_composite(img, bg_overlay)
     draw = ImageDraw.Draw(img)
 
@@ -169,6 +195,63 @@ def _compose_image_with_pillow(
         draw.text((x, y), line, font=font, fill=(255, 255, 255, 255))
 
     # Save as RGB (drop alpha for final output)
+    img.convert("RGB").save(str(output_path), quality=95)
+
+
+def _compose_story_with_pillow(
+    image_path: Path,
+    caption_text: str,
+    output_path: Path,
+) -> None:
+    """Compose a vertical 1080x1920 story image with centered text and dramatic gradient."""
+    from PIL import Image, ImageDraw
+
+    img = Image.open(str(image_path)).convert("RGBA")
+    # Resize/crop to 1080x1920 if needed
+    img = img.resize((1080, 1920), Image.LANCZOS)
+
+    width, height = img.size
+
+    # Large, dramatic font for stories
+    font_size = max(64, width // 8)
+    font = _load_font(font_size)
+
+    draw = ImageDraw.Draw(img)
+    padding = 60
+    lines = _wrap_text_by_metrics(draw, caption_text, font, width - padding * 2)
+
+    line_height = int(font_size * 1.3)
+    total_text_height = len(lines) * line_height
+
+    # Center text vertically in lower third
+    y_start = height - total_text_height - height // 6
+
+    # Dramatic gradient overlay covering bottom half
+    bg_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    bg_draw = ImageDraw.Draw(bg_overlay)
+    gradient_start = height // 2
+    gradient_height = height - gradient_start
+    for y in range(gradient_start, height):
+        progress = (y - gradient_start) / gradient_height
+        alpha = int(200 * progress)
+        bg_draw.rectangle([0, y, width, y + 1], fill=(0, 0, 0, alpha))
+    img = Image.alpha_composite(img, bg_overlay)
+    draw = ImageDraw.Draw(img)
+
+    # Draw text centered
+    for i, line in enumerate(lines):
+        bbox = draw.textbbox((0, 0), line, font=font)
+        text_width = bbox[2] - bbox[0]
+        x = (width - text_width) // 2
+        y = y_start + i * line_height
+
+        # Thick stroke for readability
+        for dx in range(-3, 4):
+            for dy in range(-3, 4):
+                if dx != 0 or dy != 0:
+                    draw.text((x + dx, y + dy), line, font=font, fill=(0, 0, 0, 255))
+        draw.text((x, y), line, font=font, fill=(255, 255, 255, 255))
+
     img.convert("RGB").save(str(output_path), quality=95)
 
 
@@ -386,6 +469,72 @@ async def compose_image_post(
     log_action(
         slug,
         action="compose_image_post",
+        platform="pillow",
+        details={
+            "image_path": str(image_path),
+            "caption_length": len(caption_text),
+            "output_path": str(out),
+        },
+        result=str(out),
+    )
+
+    return out
+
+
+async def compose_story_image(
+    slug: str,
+    image_path: Path | str,
+    caption_text: str,
+    output_path: Path | str | None = None,
+) -> Path:
+    """Compose a story image with dramatic text overlay (vertical 1080x1920).
+
+    Parameters
+    ----------
+    slug:
+        Identity slug.
+    image_path:
+        Path to the base image.
+    caption_text:
+        Text to overlay on the story image.
+    output_path:
+        Optional explicit output path.
+
+    Returns
+    -------
+    Path to the composed story image.
+    """
+    image_path = Path(image_path)
+    if not image_path.exists():
+        raise FileNotFoundError(f"Image file not found: {image_path}")
+
+    if output_path is not None:
+        out = Path(output_path)
+        out.parent.mkdir(parents=True, exist_ok=True)
+    else:
+        file_id = uuid.uuid4().hex[:12]
+        out = _output_dir(slug) / f"story_{file_id}.png"
+
+    try:
+        await asyncio.to_thread(
+            _compose_story_with_pillow,
+            image_path,
+            caption_text,
+            out,
+        )
+    except Exception as exc:
+        log_action(
+            slug,
+            action="compose_story_image",
+            platform="pillow",
+            details={"image": str(image_path)},
+            error=str(exc),
+        )
+        raise RuntimeError(f"Story image composition failed: {exc}") from exc
+
+    log_action(
+        slug,
+        action="compose_story_image",
         platform="pillow",
         details={
             "image_path": str(image_path),
