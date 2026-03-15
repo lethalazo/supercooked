@@ -1,8 +1,9 @@
-"""Image generation via Imagen on the Gemini API (google-genai SDK).
+"""Image generation via Nano Banana 2 on the Gemini API (google-genai SDK).
 
-Wraps google.genai to generate images from text prompts using Imagen 4.
-Also provides character-consistent image generation using face config.
-No fallback — if the Gemini API is unreachable or the key is missing, we raise.
+Wraps google.genai to generate images from text prompts using Nano Banana 2
+(Gemini 3.1 Flash Image). Also provides character-consistent image generation
+using face config. No fallback — if the Gemini API is unreachable or the key
+is missing, we raise.
 """
 
 from __future__ import annotations
@@ -19,7 +20,7 @@ from supercooked.config import IDENTITIES_DIR, OUTPUT_DIR, get_api_key
 from supercooked.identity.action_log import log_action
 from supercooked.identity.schemas import FaceConfig
 
-IMAGEN_MODEL = "imagen-4.0-generate-001"
+NANO_BANANA_MODEL = "gemini-3.1-flash-image-preview"
 
 
 def _output_dir(slug: str) -> Path:
@@ -43,7 +44,7 @@ def _load_face_config(slug: str) -> FaceConfig:
 
 
 def _parse_aspect_ratio(size: str) -> str:
-    """Convert a WxH size string to an Imagen aspect ratio string.
+    """Convert a WxH size string to an aspect ratio string.
 
     Examples
     --------
@@ -72,12 +73,24 @@ def _parse_aspect_ratio(size: str) -> str:
     return "16:9"
 
 
+def _extract_and_save_image(response, out_path: Path) -> None:
+    """Extract image from Nano Banana generate_content response and save."""
+    for part in response.candidates[0].content.parts:
+        if part.inline_data is not None:
+            image = part.as_image()
+            image.save(str(out_path))
+            return
+    raise RuntimeError("No image data found in response parts.")
+
+
 async def generate_image(
     slug: str,
     prompt: str,
     size: str = "1080x1080",
+    style: str | None = None,
+    negative_prompt: str | None = None,
 ) -> Path:
-    """Generate an image with Imagen via the Gemini API.
+    """Generate an image with Nano Banana 2 via the Gemini API.
 
     Parameters
     ----------
@@ -87,7 +100,12 @@ async def generate_image(
         Creative text prompt describing the desired image.
     size:
         Target resolution as "WxH" (e.g. "1080x1080", "1080x1920").
-        Mapped to the closest Imagen aspect ratio.
+        Mapped to the closest aspect ratio.
+    style:
+        Optional style descriptor appended to prompt (e.g. "photorealistic",
+        "digital illustration").
+    negative_prompt:
+        Optional things to avoid — appended as "Avoid: ..." to prompt.
 
     Returns
     -------
@@ -98,60 +116,57 @@ async def generate_image(
     RuntimeError
         If the Gemini API key is missing or the generation fails.
     """
+    # Build composite prompt with optional style and negative prompt
+    parts = [prompt]
+    if style:
+        parts.append(f"Style: {style}")
+    if negative_prompt:
+        parts.append(f"Avoid: {negative_prompt}")
+    prompt = ". ".join(parts)
+
     api_key = get_api_key("gemini")
     client = genai.Client(api_key=api_key)
 
     aspect_ratio = _parse_aspect_ratio(size)
 
-    image_config = types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio=aspect_ratio,
+    config = types.GenerateContentConfig(
+        response_modalities=["IMAGE"],
+        image_config=types.ImageConfig(
+            aspect_ratio=aspect_ratio,
+        ),
     )
 
     try:
         response = await asyncio.to_thread(
-            client.models.generate_images,
-            model=IMAGEN_MODEL,
-            prompt=prompt,
-            config=image_config,
+            client.models.generate_content,
+            model=NANO_BANANA_MODEL,
+            contents=[prompt],
+            config=config,
         )
     except Exception as exc:
         log_action(
             slug,
             action="generate_image",
             platform="gemini",
-            details={"prompt": prompt, "size": size},
+            details={"prompt": prompt, "size": size, "model": NANO_BANANA_MODEL},
             error=str(exc),
         )
-        raise RuntimeError(f"Imagen image generation failed: {exc}") from exc
-
-    if not response.generated_images:
-        log_action(
-            slug,
-            action="generate_image",
-            platform="gemini",
-            details={"prompt": prompt, "size": size},
-            error="No images returned by Imagen",
-        )
-        raise RuntimeError("Imagen returned no generated images.")
-
-    generated = response.generated_images[0]
+        raise RuntimeError(f"Nano Banana 2 image generation failed: {exc}") from exc
 
     file_id = uuid.uuid4().hex[:12]
     out_path = _output_dir(slug) / f"image_{file_id}.png"
 
     try:
-        # generated.image is a PIL-compatible object with a save method
-        await asyncio.to_thread(generated.image.save, str(out_path))
+        await asyncio.to_thread(_extract_and_save_image, response, out_path)
     except Exception as exc:
         log_action(
             slug,
             action="generate_image",
             platform="gemini",
             details={"prompt": prompt, "size": size},
-            error=f"Save failed: {exc}",
+            error=f"Extract/save failed: {exc}",
         )
-        raise RuntimeError(f"Failed to save Imagen image: {exc}") from exc
+        raise RuntimeError(f"Failed to save generated image: {exc}") from exc
 
     log_action(
         slug,
@@ -161,6 +176,7 @@ async def generate_image(
             "prompt": prompt,
             "size": size,
             "aspect_ratio": aspect_ratio,
+            "model": NANO_BANANA_MODEL,
             "output_path": str(out_path),
         },
         result=str(out_path),
@@ -210,17 +226,19 @@ async def generate_character_image(
     api_key = get_api_key("gemini")
     client = genai.Client(api_key=api_key)
 
-    image_config = types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="1:1",
+    config = types.GenerateContentConfig(
+        response_modalities=["IMAGE"],
+        image_config=types.ImageConfig(
+            aspect_ratio="1:1",
+        ),
     )
 
     try:
         response = await asyncio.to_thread(
-            client.models.generate_images,
-            model=IMAGEN_MODEL,
-            prompt=composite_prompt,
-            config=image_config,
+            client.models.generate_content,
+            model=NANO_BANANA_MODEL,
+            contents=[composite_prompt],
+            config=config,
         )
     except Exception as exc:
         log_action(
@@ -232,31 +250,19 @@ async def generate_character_image(
         )
         raise RuntimeError(f"Character image generation failed: {exc}") from exc
 
-    if not response.generated_images:
-        log_action(
-            slug,
-            action="generate_character_image",
-            platform="gemini",
-            details={"scene": scene_description},
-            error="No images returned",
-        )
-        raise RuntimeError("Imagen returned no character images.")
-
-    generated = response.generated_images[0]
-
     file_id = uuid.uuid4().hex[:12]
     out_dir = _output_dir(slug)
     out_path = out_dir / f"character_{file_id}.png"
 
     try:
-        await asyncio.to_thread(generated.image.save, str(out_path))
+        await asyncio.to_thread(_extract_and_save_image, response, out_path)
     except Exception as exc:
         log_action(
             slug,
             action="generate_character_image",
             platform="gemini",
             details={"scene": scene_description},
-            error=f"Save failed: {exc}",
+            error=f"Extract/save failed: {exc}",
         )
         raise RuntimeError(f"Failed to save character image: {exc}") from exc
 
@@ -265,7 +271,8 @@ async def generate_character_image(
     generated_dir.mkdir(parents=True, exist_ok=True)
     gen_copy_path = generated_dir / f"character_{file_id}.png"
     try:
-        await asyncio.to_thread(generated.image.save, str(gen_copy_path))
+        import shutil
+        await asyncio.to_thread(shutil.copy2, str(out_path), str(gen_copy_path))
     except Exception:
         pass  # Non-critical — output copy is the authoritative one
 
@@ -276,9 +283,43 @@ async def generate_character_image(
         details={
             "scene": scene_description,
             "composite_prompt": composite_prompt,
+            "model": NANO_BANANA_MODEL,
             "output_path": str(out_path),
         },
         result=str(out_path),
     )
 
     return out_path
+
+
+async def generate_images(
+    slug: str,
+    prompts: list[str],
+    size: str = "1080x1080",
+    style: str | None = None,
+    negative_prompt: str | None = None,
+) -> list[Path]:
+    """Generate multiple images concurrently.
+
+    Parameters
+    ----------
+    slug:
+        Identity slug.
+    prompts:
+        List of prompts — one image generated per prompt.
+    size:
+        Target resolution for all images.
+    style:
+        Optional style descriptor for all images.
+    negative_prompt:
+        Optional negative prompt for all images.
+
+    Returns
+    -------
+    List of Paths to saved .png files.
+    """
+    tasks = [
+        generate_image(slug, p, size=size, style=style, negative_prompt=negative_prompt)
+        for p in prompts
+    ]
+    return list(await asyncio.gather(*tasks))

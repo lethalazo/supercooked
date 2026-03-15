@@ -1,6 +1,6 @@
-"""Thumbnail generation via Imagen on the Gemini API.
+"""Thumbnail generation via Nano Banana 2 on the Gemini API.
 
-Generates eye-catching thumbnails for video content using Imagen.
+Generates eye-catching thumbnails for video content using Nano Banana 2.
 Combines identity face config with title text styling for platform-ready
 thumbnails. No fallback — raises on any failure.
 """
@@ -19,7 +19,7 @@ from supercooked.config import IDENTITIES_DIR, OUTPUT_DIR, get_api_key
 from supercooked.identity.action_log import log_action
 from supercooked.identity.schemas import FaceConfig
 
-IMAGEN_MODEL = "imagen-4.0-generate-001"
+NANO_BANANA_MODEL = "gemini-3.1-flash-image-preview"
 
 
 def _output_dir(slug: str) -> Path:
@@ -73,14 +73,27 @@ _STYLE_PROMPTS = {
 }
 
 
+_TEMPLATE_STYLE_MAP: dict[str, str] = {
+    "hot_take": "bold",
+    "list_countdown": "bold",
+    "talking_head": "vlog",
+    "reaction": "gaming",
+    "story": "minimal",
+    "thread": "educational",
+    "photo_post": "minimal",
+}
+
+
 def _build_thumbnail_prompt(
     face: FaceConfig,
     title: str,
     style: str,
+    visual_cues: list[str] | None = None,
+    concept: str | None = None,
 ) -> str:
     """Build a thumbnail prompt combining character, title, and style.
 
-    The title is embedded as a conceptual guide — Imagen generates the
+    The title is embedded as a conceptual guide — the model generates the
     visual concept, not literal text rendering (text is overlaid separately
     via compose if needed).
     """
@@ -97,6 +110,12 @@ def _build_thumbnail_prompt(
     # Title as conceptual guide
     parts.append(f"Visual concept for: {title}")
 
+    # Add richer context from concept and visual cues
+    if concept:
+        parts.append(f"Content concept: {concept}")
+    if visual_cues:
+        parts.append(f"Key visuals: {', '.join(visual_cues[:3])}")
+
     # Face style override
     if face.style and face.style != "photorealistic":
         parts.append(f"Art style: {face.style}")
@@ -108,10 +127,24 @@ def _build_thumbnail_prompt(
     return ". ".join(parts)
 
 
+def _extract_and_save_image(response, out_path: Path) -> None:
+    """Extract image from Nano Banana generate_content response and save."""
+    for part in response.candidates[0].content.parts:
+        if part.inline_data is not None:
+            image = part.as_image()
+            image.save(str(out_path))
+            return
+    raise RuntimeError("No image data found in response parts.")
+
+
 async def generate_thumbnail(
     slug: str,
     title: str,
     style: str = "bold",
+    concept_prompt: str | None = None,
+    template: str | None = None,
+    visual_cues: list[str] | None = None,
+    concept: str | None = None,
 ) -> Path:
     """Generate a thumbnail image for video content.
 
@@ -123,6 +156,15 @@ async def generate_thumbnail(
         The video/content title — used as a conceptual guide for the image.
     style:
         Thumbnail style — "bold", "minimal", "gaming", "vlog", or "educational".
+    concept_prompt:
+        When provided, used directly as the thumbnail prompt instead of
+        building one from face config + title + style.
+    template:
+        Content template name — used to auto-select style if style is "bold".
+    visual_cues:
+        Optional visual cue descriptions for richer fallback prompts.
+    concept:
+        Optional content concept for richer fallback prompts.
 
     Returns
     -------
@@ -136,28 +178,44 @@ async def generate_thumbnail(
     api_key = get_api_key("gemini")
     face = _load_face_config(slug)
 
-    if style not in _STYLE_PROMPTS:
-        available = ", ".join(sorted(_STYLE_PROMPTS.keys()))
-        raise RuntimeError(
-            f"Unknown thumbnail style '{style}'. Available styles: {available}"
-        )
+    # Auto-select style from template if not explicitly set
+    if template and style == "bold":
+        style = _TEMPLATE_STYLE_MAP.get(template, "bold")
 
-    prompt = _build_thumbnail_prompt(face, title, style)
+    if style not in _STYLE_PROMPTS:
+        style = "bold"
+
+    # Use concept_prompt directly if provided, otherwise build from components
+    if concept_prompt:
+        # Still prepend face config for character consistency
+        parts = []
+        if face.base_prompt:
+            parts.append(face.base_prompt)
+        parts.append(concept_prompt)
+        if face.negative_prompt:
+            parts.append(f"Avoid: {face.negative_prompt}")
+        prompt = ". ".join(parts)
+    else:
+        prompt = _build_thumbnail_prompt(
+            face, title, style, visual_cues=visual_cues, concept=concept
+        )
 
     client = genai.Client(api_key=api_key)
 
     # Thumbnails are landscape 16:9 for YouTube/platform compatibility
-    image_config = types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="16:9",
+    config = types.GenerateContentConfig(
+        response_modalities=["IMAGE"],
+        image_config=types.ImageConfig(
+            aspect_ratio="16:9",
+        ),
     )
 
     try:
         response = await asyncio.to_thread(
-            client.models.generate_images,
-            model=IMAGEN_MODEL,
-            prompt=prompt,
-            config=image_config,
+            client.models.generate_content,
+            model=NANO_BANANA_MODEL,
+            contents=[prompt],
+            config=config,
         )
     except Exception as exc:
         log_action(
@@ -169,30 +227,18 @@ async def generate_thumbnail(
         )
         raise RuntimeError(f"Thumbnail generation failed: {exc}") from exc
 
-    if not response.generated_images:
-        log_action(
-            slug,
-            action="generate_thumbnail",
-            platform="gemini",
-            details={"title": title, "style": style},
-            error="No images returned by Imagen",
-        )
-        raise RuntimeError("Imagen returned no thumbnail images.")
-
-    generated = response.generated_images[0]
-
     file_id = uuid.uuid4().hex[:12]
     out_path = _output_dir(slug) / f"thumb_{file_id}.png"
 
     try:
-        await asyncio.to_thread(generated.image.save, str(out_path))
+        await asyncio.to_thread(_extract_and_save_image, response, out_path)
     except Exception as exc:
         log_action(
             slug,
             action="generate_thumbnail",
             platform="gemini",
             details={"title": title, "style": style},
-            error=f"Save failed: {exc}",
+            error=f"Extract/save failed: {exc}",
         )
         raise RuntimeError(f"Failed to save thumbnail image: {exc}") from exc
 
@@ -204,6 +250,7 @@ async def generate_thumbnail(
             "title": title,
             "style": style,
             "prompt": prompt,
+            "model": NANO_BANANA_MODEL,
             "output_path": str(out_path),
         },
         result=str(out_path),

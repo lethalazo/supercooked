@@ -78,7 +78,7 @@ class Identity(BaseModel):
 
 
 class FaceConfig(BaseModel):
-    provider: str = "imagen"
+    provider: str = "nano_banana"
     style: str = "photorealistic"
     base_prompt: str = ""
     negative_prompt: str = ""

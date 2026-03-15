@@ -1,7 +1,7 @@
-"""Character selfie generation via Imagen on the Gemini API.
+"""Character selfie generation via Nano Banana 2 on the Gemini API.
 
 Generates "selfie" images of a digital being's character using their
-face config for visual consistency. Wraps google.genai Imagen.
+face config for visual consistency. Wraps google.genai Nano Banana 2.
 No fallback — raises on any failure.
 """
 
@@ -20,7 +20,7 @@ from supercooked.identity.action_log import log_action
 from supercooked.identity.manager import load_identity
 from supercooked.identity.schemas import FaceConfig
 
-IMAGEN_MODEL = "imagen-4.0-generate-001"
+NANO_BANANA_MODEL = "gemini-3.1-flash-image-preview"
 
 
 def _output_dir(slug: str) -> Path:
@@ -88,6 +88,16 @@ def _build_selfie_prompt(
     return ". ".join(parts)
 
 
+def _extract_and_save_image(response, out_path: Path) -> None:
+    """Extract image from Nano Banana generate_content response and save."""
+    for part in response.candidates[0].content.parts:
+        if part.inline_data is not None:
+            image = part.as_image()
+            image.save(str(out_path))
+            return
+    raise RuntimeError("No image data found in response parts.")
+
+
 async def take_selfie(
     slug: str,
     location: str = "",
@@ -125,17 +135,20 @@ async def take_selfie(
 
     client = genai.Client(api_key=api_key)
 
-    image_config = types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="3:4",  # Portrait orientation — natural selfie ratio
+    # Portrait orientation — natural selfie ratio
+    config = types.GenerateContentConfig(
+        response_modalities=["IMAGE"],
+        image_config=types.ImageConfig(
+            aspect_ratio="3:4",
+        ),
     )
 
     try:
         response = await asyncio.to_thread(
-            client.models.generate_images,
-            model=IMAGEN_MODEL,
-            prompt=prompt,
-            config=image_config,
+            client.models.generate_content,
+            model=NANO_BANANA_MODEL,
+            contents=[prompt],
+            config=config,
         )
     except Exception as exc:
         log_action(
@@ -147,30 +160,18 @@ async def take_selfie(
         )
         raise RuntimeError(f"Selfie generation failed: {exc}") from exc
 
-    if not response.generated_images:
-        log_action(
-            slug,
-            action="take_selfie",
-            platform="gemini",
-            details={"location": location, "mood": mood},
-            error="No images returned by Imagen",
-        )
-        raise RuntimeError("Imagen returned no selfie images.")
-
-    generated = response.generated_images[0]
-
     file_id = uuid.uuid4().hex[:12]
     out_path = _output_dir(slug) / f"selfie_{file_id}.png"
 
     try:
-        await asyncio.to_thread(generated.image.save, str(out_path))
+        await asyncio.to_thread(_extract_and_save_image, response, out_path)
     except Exception as exc:
         log_action(
             slug,
             action="take_selfie",
             platform="gemini",
             details={"location": location, "mood": mood},
-            error=f"Save failed: {exc}",
+            error=f"Extract/save failed: {exc}",
         )
         raise RuntimeError(f"Failed to save selfie image: {exc}") from exc
 
@@ -179,7 +180,8 @@ async def take_selfie(
     generated_dir.mkdir(parents=True, exist_ok=True)
     gen_copy_path = generated_dir / f"selfie_{file_id}.png"
     try:
-        await asyncio.to_thread(generated.image.save, str(gen_copy_path))
+        import shutil
+        await asyncio.to_thread(shutil.copy2, str(out_path), str(gen_copy_path))
     except Exception:
         pass  # Non-critical — output copy is authoritative
 
@@ -191,6 +193,7 @@ async def take_selfie(
             "location": location,
             "mood": mood,
             "prompt": prompt,
+            "model": NANO_BANANA_MODEL,
             "output_path": str(out_path),
         },
         result=str(out_path),

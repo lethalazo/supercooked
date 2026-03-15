@@ -1,4 +1,4 @@
-"""Face generation via Google Imagen (Gemini API).
+"""Face generation via Nano Banana 2 (Gemini API).
 
 Wraps the google.genai client to generate consistent character faces
 using reference images and face config stored per identity.
@@ -19,7 +19,7 @@ from supercooked.config import IDENTITIES_DIR, get_api_key
 from supercooked.identity.action_log import log_action
 from supercooked.identity.schemas import FaceConfig
 
-IMAGEN_MODEL = "imagen-4.0-generate-001"
+NANO_BANANA_MODEL = "gemini-3.1-flash-image-preview"
 
 
 def _load_face_config(slug: str) -> FaceConfig:
@@ -47,12 +47,20 @@ def _get_reference_images(slug: str) -> list[Path]:
     )
 
 
+def _extract_image_bytes(response) -> bytes:
+    """Extract image bytes from Nano Banana generate_content response."""
+    for part in response.candidates[0].content.parts:
+        if part.inline_data is not None:
+            return part.inline_data.data
+    raise RuntimeError("No image data found in response parts.")
+
+
 async def generate_face(
     slug: str,
     expression: str = "neutral",
     output_path: Path | None = None,
 ) -> Path:
-    """Generate a face image for a digital being using Imagen via Gemini API.
+    """Generate a face image for a digital being using Nano Banana 2 via Gemini API.
 
     Loads the face config from identities/<slug>/face/config.yaml,
     uses reference images for visual consistency, and saves the result
@@ -86,36 +94,38 @@ async def generate_face(
     # Initialize the Gemini client
     client = genai.Client(api_key=api_key)
 
-    # Generate using Imagen model (same pattern as image.py, selfie.py, thumbnail.py)
-    image_config = types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="1:1",
+    # Generate using Nano Banana 2 model
+    config = types.GenerateContentConfig(
+        response_modalities=["IMAGE"],
+        image_config=types.ImageConfig(
+            aspect_ratio="1:1",
+        ),
     )
 
     try:
         response = await asyncio.to_thread(
-            client.models.generate_images,
-            model=IMAGEN_MODEL,
-            prompt=prompt,
-            config=image_config,
+            client.models.generate_content,
+            model=NANO_BANANA_MODEL,
+            contents=[prompt],
+            config=config,
         )
     except Exception as exc:
         log_action(
             slug,
             action="generate_face",
-            platform="imagen",
+            platform="gemini",
             details={"expression": expression, "prompt": prompt},
             error=str(exc),
         )
-        raise RuntimeError(f"Imagen face generation failed: {exc}") from exc
+        raise RuntimeError(f"Face generation failed: {exc}") from exc
 
-    if not response.generated_images:
+    try:
+        image_bytes = await asyncio.to_thread(_extract_image_bytes, response)
+    except RuntimeError:
         raise RuntimeError(
-            f"Imagen returned no image data for slug='{slug}', expression='{expression}'. "
+            f"No image data returned for slug='{slug}', expression='{expression}'. "
             f"Check your face config and API quota."
         )
-
-    image_bytes = response.generated_images[0].image.image_bytes
 
     # Determine output path
     if output_path is None:
@@ -131,10 +141,11 @@ async def generate_face(
     log_action(
         slug,
         action="generate_face",
-        platform="imagen",
+        platform="gemini",
         details={
             "expression": expression,
             "prompt": prompt,
+            "model": NANO_BANANA_MODEL,
             "output_path": str(output_path),
         },
         result=f"Generated face image at {output_path}",
