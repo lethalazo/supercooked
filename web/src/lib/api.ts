@@ -70,11 +70,14 @@ export interface ContentItem {
   type?: string;
   concept?: string;
   caption?: string;
+  hook?: string;
   status?: string;
   created?: string;
   published_at?: string;
   platform?: string;
   slug?: string;
+  files?: Array<{ type: string; file: string; path?: string }>;
+  media_files?: Array<{ name: string; type: string; size: number }>;
   being?: {
     slug: string;
     name: string;

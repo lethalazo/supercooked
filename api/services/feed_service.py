@@ -69,6 +69,20 @@ class FeedService:
                         data = yaml.safe_load(f) or {}
                     data["id"] = d.name
                     data["slug"] = slug
+                    # Scan for media files (same pattern as ContentService)
+                    media_files = []
+                    for f_path in sorted(d.iterdir()):
+                        if f_path.is_file() and f_path.suffix in (
+                            ".png", ".jpg", ".jpeg", ".mp4", ".mp3",
+                            ".wav", ".txt", ".srt",
+                        ):
+                            media_files.append({
+                                "name": f_path.name,
+                                "type": f_path.suffix.lstrip("."),
+                                "size": f_path.stat().st_size,
+                            })
+                    if media_files:
+                        data["media_files"] = media_files
                     items.append(data)
 
         return items

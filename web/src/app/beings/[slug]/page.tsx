@@ -75,6 +75,7 @@ import {
 import AddIdeaForm from '@/components/AddIdeaForm';
 import ActivityLog from '@/components/ActivityLog';
 import ChatWindow from '@/components/ChatWindow';
+import TextFileViewer from '@/components/TextFileViewer';
 
 const platformLabels: Record<string, string> = {
   youtube_shorts: 'YouTube Shorts',
@@ -780,6 +781,16 @@ export default function BeingManagementPage() {
                                       </Box>
                                     );
                                   }
+                                  if (file.type === 'txt') {
+                                    return (
+                                      <Box key={file.name}>
+                                        <TextFileViewer
+                                          url={url}
+                                          filename={file.name}
+                                        />
+                                      </Box>
+                                    );
+                                  }
                                   return (
                                     <Chip
                                       key={file.name}
@@ -1025,9 +1036,57 @@ export default function BeingManagementPage() {
                 Generated Files ({previewScript.files.length})
               </Typography>
               <Stack spacing={2}>
-                {previewScript.files.map((file: any, idx: number) => {
-                  const url = getFileUrl(slug, previewIdea, file.file);
-                  if (['image', 'post', 'selfie', 'story', 'thumbnail'].includes(file.type)) {
+                {/* Carousel slides — horizontal scrollable gallery */}
+                {(() => {
+                  const carouselFiles = previewScript.files.filter((f: any) => f.type === 'carousel');
+                  if (carouselFiles.length > 0) {
+                    return (
+                      <Box key="carousel" sx={{ mb: 2 }}>
+                        <Typography variant="caption" color="text.secondary" fontWeight={600} sx={{ display: 'block', mb: 1 }}>
+                          Carousel ({carouselFiles.length} slides)
+                        </Typography>
+                        <Box sx={{ display: 'flex', gap: 1.5, overflowX: 'auto', pb: 1 }}>
+                          {carouselFiles.map((file: any, idx: number) => {
+                            const cUrl = getFileUrl(slug, previewIdea!, file.file);
+                            return (
+                              <Box key={idx} sx={{ flexShrink: 0 }}>
+                                <img src={cUrl} alt={file.file} style={{ height: 250, borderRadius: 8 }} />
+                                <Typography variant="caption" color="text.disabled" sx={{ display: 'block', mt: 0.5 }}>
+                                  {file.file}
+                                </Typography>
+                              </Box>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+                    );
+                  }
+                  return null;
+                })()}
+                {previewScript.files.filter((f: any) => f.type !== 'carousel').map((file: any, idx: number) => {
+                  const url = getFileUrl(slug, previewIdea!, file.file);
+                  if (file.type === 'story') {
+                    return (
+                      <Box key={idx} sx={{ position: 'relative', display: 'inline-block' }}>
+                        <img src={url} alt={file.file} style={{ maxWidth: '100%', maxHeight: 500, borderRadius: 8 }} />
+                        {previewScript.hook && (
+                          <Box sx={{
+                            position: 'absolute', bottom: 0, left: 0, right: 0,
+                            background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                            borderRadius: '0 0 8px 8px', p: 2, pt: 6,
+                          }}>
+                            <Typography variant="body1" sx={{ color: 'white', fontWeight: 600, textAlign: 'center' }}>
+                              {previewScript.hook}
+                            </Typography>
+                          </Box>
+                        )}
+                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5 }}>
+                          {file.file} ({file.type})
+                        </Typography>
+                      </Box>
+                    );
+                  }
+                  if (['image', 'post', 'selfie', 'thumbnail'].includes(file.type)) {
                     return (
                       <Box key={idx}>
                         <img src={url} alt={file.file} style={{ maxWidth: '100%', borderRadius: 8 }} />
@@ -1057,6 +1116,13 @@ export default function BeingManagementPage() {
                           <source src={url} type={file.file.endsWith('.wav') ? 'audio/wav' : 'audio/mpeg'} />
                         </audio>
                         <Typography variant="caption" color="text.secondary">{file.file}</Typography>
+                      </Box>
+                    );
+                  }
+                  if (['tweet', 'thread'].includes(file.type) || file.file.endsWith('.txt')) {
+                    return (
+                      <Box key={idx}>
+                        <TextFileViewer url={url} filename={file.file} />
                       </Box>
                     );
                   }
@@ -1091,7 +1157,7 @@ export default function BeingManagementPage() {
               </Typography>
               <Stack spacing={1.5}>
                 {previewScript.media_files.map((file: any) => {
-                  const url = getFileUrl(slug, previewIdea, file.name);
+                  const url = getFileUrl(slug, previewIdea!, file.name);
                   if (['png', 'jpg', 'jpeg'].includes(file.type)) {
                     return (
                       <Box key={file.name}>
@@ -1124,6 +1190,13 @@ export default function BeingManagementPage() {
                         <Typography variant="caption" color="text.secondary">
                           {file.name} ({Math.round(file.size / 1024)}KB)
                         </Typography>
+                      </Box>
+                    );
+                  }
+                  if (file.type === 'txt') {
+                    return (
+                      <Box key={file.name}>
+                        <TextFileViewer url={url} filename={file.name} />
                       </Box>
                     );
                   }

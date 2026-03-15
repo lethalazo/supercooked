@@ -6,11 +6,12 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
+
 import Avatar from '@mui/material/Avatar';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ArticleIcon from '@mui/icons-material/Article';
-import { ContentItem } from '@/lib/api';
+import { ContentItem, getFileUrl } from '@/lib/api';
+import TextFileViewer from '@/components/TextFileViewer';
 
 function formatTimestamp(ts?: string): string {
   if (!ts) return '';
@@ -136,6 +137,43 @@ export default function ContentFeed({ items, showBeing = false }: ContentFeedPro
                 >
                   {item.caption || item.concept}
                 </Typography>
+              )}
+
+              {/* Media rendering */}
+              {item.slug && item.id && item.media_files && item.media_files.length > 0 && (
+                <Box sx={{ mt: 2 }}>
+                  {item.media_files.map((file) => {
+                    const url = getFileUrl(item.slug!, item.id!, file.name);
+                    if (['png', 'jpg', 'jpeg'].includes(file.type)) {
+                      return (
+                        <Box key={file.name} sx={{ mb: 1 }}>
+                          <img
+                            src={url}
+                            alt={file.name}
+                            style={{ maxWidth: '100%', maxHeight: 300, borderRadius: 8, display: 'block' }}
+                          />
+                        </Box>
+                      );
+                    }
+                    if (file.type === 'mp4') {
+                      return (
+                        <Box key={file.name} sx={{ mb: 1 }}>
+                          <video controls style={{ maxWidth: '100%', maxHeight: 300, borderRadius: 8 }}>
+                            <source src={url} type="video/mp4" />
+                          </video>
+                        </Box>
+                      );
+                    }
+                    if (file.type === 'txt') {
+                      return (
+                        <Box key={file.name} sx={{ mb: 1 }}>
+                          <TextFileViewer url={url} filename={file.name} />
+                        </Box>
+                      );
+                    }
+                    return null;
+                  })}
+                </Box>
               )}
 
               {timestamp && (
