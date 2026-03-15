@@ -17,6 +17,7 @@ from typing import Any
 import yaml
 
 from supercooked.config import CLAUDE_MODEL, IDENTITIES_DIR, get_anthropic_client
+from supercooked.create.prompt_gen import MediaPrompts, generate_media_prompts
 from supercooked.identity.action_log import log_action
 from supercooked.identity.manager import get_voice_md, load_identity
 from supercooked.identity.schemas import ContentIdea, IdeaStatus, IdeasFile
@@ -313,16 +314,32 @@ async def generate_content(
             "Add content_types to the idea before generating."
         )
 
+    # Generate optimized media prompts via Claude (or use cached)
+    cached_prompts = script_data.get("media_prompts")
+    if cached_prompts:
+        media_prompts = MediaPrompts(**cached_prompts)
+    else:
+        media_prompts = await generate_media_prompts(
+            slug, idea, script_data, content_types
+        )
+        # Cache prompts in script.yaml so regeneration doesn't re-call Claude
+        script_data["media_prompts"] = media_prompts.model_dump()
+        with open(script_path, "w") as f:
+            yaml.dump(script_data, f, default_flow_style=False, sort_keys=False)
+
     generated_files: list[dict[str, str]] = []
     errors: list[dict[str, str]] = []
 
     for ctype in content_types:
         try:
             file_info = await _generate_for_type(
-                ctype, slug, idea, script_data, draft_dir
+                ctype, slug, idea, script_data, draft_dir, media_prompts
             )
             if file_info:
-                generated_files.append(file_info)
+                if isinstance(file_info, list):
+                    generated_files.extend(file_info)
+                else:
+                    generated_files.append(file_info)
         except Exception as e:
             logger.error("Failed to generate %s for %s: %s", ctype, idea_id, e)
             errors.append({"content_type": ctype, "error": str(e)})
@@ -377,82 +394,14 @@ async def generate_content(
     }
 
 
-def _build_video_prompt(
-    slug: str,
-    idea: ContentIdea,
-    script_data: dict[str, Any],
-) -> str:
-    """Build a rich, detailed video prompt from script, visual cues, and persona.
-
-    Instead of a single visual cue, this constructs a full cinematic prompt
-    that tells Veo the complete narrative, visual style, pacing, and tone
-    so the generated video has substance — not just a title card.
-    """
-    identity = load_identity(slug)
-    persona = identity.persona
-
-    hook = script_data.get("hook", "")
-    script = script_data.get("script", idea.concept)
-    visual_cues = script_data.get("visual_cues", [])
-    duration = script_data.get("duration_estimate_seconds", 30)
-
-    # Build the scene breakdown from visual cues
-    scenes = ""
-    if visual_cues:
-        scenes = " ".join(
-            f"Scene {i+1}: {cue}." for i, cue in enumerate(visual_cues)
-        )
-
-    # Map persona traits to visual style direction
-    tone = persona.tone if persona.tone else "engaging, modern"
-    archetype = persona.archetype if persona.archetype else ""
-
-    prompt_parts = [
-        f"A {duration}-second short-form video.",
-        f"Title: \"{idea.title}\".",
-    ]
-
-    if hook:
-        prompt_parts.append(f"Opens with: \"{hook}\"")
-
-    prompt_parts.append(f"Narration/script: \"{script}\"")
-
-    if scenes:
-        prompt_parts.append(f"Visual progression: {scenes}")
-    elif visual_cues:
-        prompt_parts.append(f"Visuals: {visual_cues[0]}")
-
-    # Style direction from persona
-    prompt_parts.append(
-        f"Visual tone: {tone}. "
-        f"The video should feel like content from a {archetype} creator. "
-        f"Modern editing, dynamic pacing, visually engaging throughout. "
-        f"NOT a static title card — the video must have continuous visual content, "
-        f"scene changes, and movement that follows the narration."
-    )
-
-    if idea.template:
-        template_style = idea.template.replace("_", " ")
-        prompt_parts.append(
-            f"Format: {template_style} style video."
-        )
-
-    prompt_parts.append(
-        "Cinematic quality, smooth transitions between scenes, "
-        "varied camera angles and compositions. "
-        "Every second should have meaningful visual content."
-    )
-
-    return " ".join(prompt_parts)
-
-
 async def _generate_for_type(
     content_type: str,
     slug: str,
     idea: ContentIdea,
     script_data: dict[str, Any],
     draft_dir: Path,
-) -> dict[str, str] | None:
+    media_prompts: MediaPrompts | None = None,
+) -> dict[str, str] | list[dict[str, str]] | None:
     """Generate a single content type and return file info."""
     visual_cues = script_data.get("visual_cues", [])
     visual_prompt = visual_cues[0] if visual_cues else idea.concept
@@ -461,22 +410,41 @@ async def _generate_for_type(
     captions_text = script_data.get("captions_text", script_text)
     duration = script_data.get("duration_estimate_seconds", 30)
 
+    # Load face config for negative_prompt / style
+    face_negative = ""
+    face_style = ""
+    try:
+        from supercooked.config import IDENTITIES_DIR as _ID_DIR
+        import yaml as _yaml
+        _fc_path = _ID_DIR / slug / "face" / "config.yaml"
+        if _fc_path.exists():
+            with open(_fc_path) as _f:
+                _fc = _yaml.safe_load(_f) or {}
+            face_negative = _fc.get("negative_prompt", "")
+            face_style = _fc.get("style", "")
+    except Exception:
+        pass
+
     if content_type == "image":
         from supercooked.create.image import generate_image
 
-        path = await generate_image(slug, visual_prompt)
-        dest = draft_dir / f"image.png"
+        prompt = (media_prompts.image_prompts[0] if media_prompts and media_prompts.image_prompts else visual_prompt)
+        path = await generate_image(
+            slug, prompt, style=face_style or None, negative_prompt=face_negative or None
+        )
+        dest = draft_dir / "image.png"
         _copy_file(path, dest)
         return {"type": "image", "file": "image.png", "path": str(dest)}
 
     elif content_type == "video":
         from supercooked.create.video import generate_video
 
-        # Build a rich video prompt from the full script and persona
-        video_prompt = _build_video_prompt(slug, idea, script_data)
-        dur = max(duration, 30)  # minimum 30s
-        path = await generate_video(slug, video_prompt, duration_seconds=dur)
-        dest = draft_dir / f"video.mp4"
+        prompt = (media_prompts.video_prompt if media_prompts and media_prompts.video_prompt else visual_prompt)
+        dur = max(duration, 30)
+        path = await generate_video(
+            slug, prompt, duration_seconds=dur, negative_prompt=face_negative or None
+        )
+        dest = draft_dir / "video.mp4"
         _copy_file(path, dest)
         return {"type": "video", "file": "video.mp4", "path": str(dest)}
 
@@ -484,10 +452,13 @@ async def _generate_for_type(
         from supercooked.create.image import generate_image
         from supercooked.create.compose import compose_image_post
 
-        img_path = await generate_image(slug, visual_prompt)
+        prompt = (media_prompts.post_prompt if media_prompts and media_prompts.post_prompt else visual_prompt)
+        img_path = await generate_image(
+            slug, prompt, style=face_style or None, negative_prompt=face_negative or None
+        )
         caption = captions_text or hook
         path = await compose_image_post(slug, img_path, caption)
-        dest = draft_dir / f"post.png"
+        dest = draft_dir / "post.png"
         _copy_file(path, dest)
         return {"type": "post", "file": "post.png", "path": str(dest)}
 
@@ -495,7 +466,7 @@ async def _generate_for_type(
         from supercooked.create.selfie import take_selfie
 
         path = await take_selfie(slug)
-        dest = draft_dir / f"selfie.png"
+        dest = draft_dir / "selfie.png"
         _copy_file(path, dest)
         return {"type": "selfie", "file": "selfie.png", "path": str(dest)}
 
@@ -514,11 +485,41 @@ async def _generate_for_type(
 
     elif content_type == "story":
         from supercooked.create.image import generate_image
+        from supercooked.create.compose import compose_story_image
 
-        path = await generate_image(slug, visual_prompt, size="1080x1920")
-        dest = draft_dir / f"story.png"
+        prompt = (media_prompts.story_prompt if media_prompts and media_prompts.story_prompt else visual_prompt)
+        img_path = await generate_image(
+            slug, prompt, size="1080x1920",
+            style=face_style or None, negative_prompt=face_negative or None,
+        )
+        # Add text overlay from hook or captions
+        overlay_text = hook or captions_text
+        if overlay_text:
+            path = await compose_story_image(slug, img_path, overlay_text)
+        else:
+            path = img_path
+        dest = draft_dir / "story.png"
         _copy_file(path, dest)
         return {"type": "story", "file": "story.png", "path": str(dest)}
+
+    elif content_type == "carousel":
+        from supercooked.create.image import generate_images
+
+        prompts = (
+            media_prompts.carousel_prompts
+            if media_prompts and media_prompts.carousel_prompts
+            else visual_cues or [visual_prompt]
+        )
+        paths = await generate_images(
+            slug, prompts, style=face_style or None, negative_prompt=face_negative or None,
+        )
+        results = []
+        for i, path in enumerate(paths, 1):
+            filename = f"carousel_{i}.png"
+            dest = draft_dir / filename
+            _copy_file(path, dest)
+            results.append({"type": "carousel", "file": filename, "path": str(dest)})
+        return results
 
     elif content_type == "audio":
         from supercooked.create.voice import synthesize_speech
@@ -539,8 +540,15 @@ async def _generate_for_type(
     elif content_type == "thumbnail":
         from supercooked.create.thumbnail import generate_thumbnail
 
-        path = await generate_thumbnail(slug, idea.title)
-        dest = draft_dir / f"thumbnail.png"
+        concept_prompt = (media_prompts.thumbnail_prompt if media_prompts and media_prompts.thumbnail_prompt else None)
+        path = await generate_thumbnail(
+            slug, idea.title,
+            concept_prompt=concept_prompt,
+            template=idea.template,
+            visual_cues=visual_cues,
+            concept=idea.concept,
+        )
+        dest = draft_dir / "thumbnail.png"
         _copy_file(path, dest)
         return {"type": "thumbnail", "file": "thumbnail.png", "path": str(dest)}
 
