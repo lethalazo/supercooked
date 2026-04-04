@@ -508,5 +508,412 @@ def stream_start(slug: str):
     run_async(start_stream(slug))
 
 
+# ── Video Editing Engine ─────────────────────────────────────────
+
+
+@cli.group("edit")
+def edit_group():
+    """Video editing engine — ingest, understand, and assemble footage."""
+    pass
+
+
+@edit_group.command("init")
+@click.argument("name")
+@click.argument("video", type=click.Path(exists=True))
+@click.option("--audio", default=None, type=click.Path(exists=True), help="Background music file")
+@click.option("--sfx", default=None, type=click.Path(exists=True), help="SFX directory")
+def edit_init(name: str, video: str, audio: str | None, sfx: str | None):
+    """Initialize a new edit project from a video file."""
+    from datetime import datetime
+
+    from supercooked.edit.briefing import save_project
+    from supercooked.edit.models import Project
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    if project_dir.exists():
+        console.print(f"[red]Project already exists: {name}[/red]")
+        console.print(f"[dim]Dir: {project_dir}[/dim]")
+        return
+
+    # Create directory structure
+    sources_dir = project_dir / "sources"
+    analysis_dir = project_dir / "analysis" / "frames"
+    segments_dir = project_dir / "segments"
+    overlays_dir = project_dir / "overlays"
+    for d in [sources_dir, analysis_dir, segments_dir, overlays_dir]:
+        d.mkdir(parents=True, exist_ok=True)
+
+    # Symlink source files
+    video_path = Path(video).resolve()
+    video_link = sources_dir / video_path.name
+    video_link.symlink_to(video_path)
+
+    audio_link_name = None
+    if audio:
+        audio_path = Path(audio).resolve()
+        audio_link = sources_dir / audio_path.name
+        audio_link.symlink_to(audio_path)
+        audio_link_name = f"sources/{audio_path.name}"
+
+    sfx_link_name = None
+    if sfx:
+        sfx_path = Path(sfx).resolve()
+        sfx_link = sources_dir / "sfx"
+        sfx_link.symlink_to(sfx_path)
+        sfx_link_name = "sources/sfx"
+
+    # Create project manifest
+    project = Project(
+        name=name,
+        source_video=f"sources/{video_path.name}",
+        source_audio=audio_link_name,
+        sfx_dir=sfx_link_name,
+        created=datetime.now().isoformat(timespec="seconds"),
+    )
+    save_project(project, project_dir)
+
+    console.print(Panel(
+        f"[bold cyan]{name}[/bold cyan]\n\n"
+        f"Video: [green]{video_path.name}[/green]\n"
+        f"Audio: [green]{Path(audio).name if audio else '—'}[/green]\n"
+        f"SFX:   [green]{Path(sfx).name if sfx else '—'}[/green]\n\n"
+        f"Dir:   [dim]{project_dir}[/dim]",
+        title="Edit Project Created",
+        border_style="green",
+    ))
+    console.print("[dim]Next: supercooked edit ingest " + name + "[/dim]")
+
+
+@edit_group.command("ingest")
+@click.argument("name")
+@click.option("--language", default=None, help="Language code (e.g. en, ar). Auto-detect if omitted")
+@click.option("--scene-threshold", default=0.3, help="Scene detection sensitivity (0-1)")
+def edit_ingest(name: str, language: str | None, scene_threshold: float):
+    """Ingest footage: transcribe, detect scenes, extract frames, analyze audio."""
+    from supercooked.edit.briefing import (
+        assemble_briefing,
+        load_project,
+        save_audio_analysis,
+        save_briefing,
+        save_frames_index,
+        save_project,
+        save_scenes,
+        save_transcript,
+    )
+    from supercooked.edit.ffmpeg import extract_audio, probe_source_info
+    from supercooked.edit.models import ProjectState
+    from supercooked.edit.transcribe import transcribe
+    from supercooked.edit.understand import (
+        analyze_audio,
+        detect_scene_boundaries,
+        extract_smart_frames,
+    )
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    project = load_project(project_dir)
+    video_path = project_dir / project.source_video
+
+    async def _ingest():
+        with console.status("[cyan]Probing source...[/cyan]"):
+            source_info = await probe_source_info(video_path)
+        console.print(
+            f"  Source: {source_info.resolution} @ {source_info.fps}fps, "
+            f"{source_info.duration} ({source_info.file_size_mb} MB)"
+        )
+
+        # Extract audio for Whisper
+        audio_wav = project_dir / "analysis" / "audio.wav"
+        with console.status("[cyan]Extracting audio...[/cyan]"):
+            await extract_audio(video_path, audio_wav)
+        console.print("  [green]Audio extracted[/green]")
+
+        # Transcribe
+        with console.status("[cyan]Transcribing (this may take a while)...[/cyan]"):
+            transcript = await transcribe(audio_wav, language=language)
+        console.print(
+            f"  [green]Transcript:[/green] {transcript.word_count} words, "
+            f"{len(transcript.segments)} segments ({transcript.language})"
+        )
+        save_transcript(transcript, project_dir / "analysis" / "transcript.json")
+
+        # Scene detection
+        with console.status("[cyan]Detecting scenes...[/cyan]"):
+            scenes = await detect_scene_boundaries(video_path, threshold=scene_threshold)
+        console.print(f"  [green]Scenes:[/green] {len(scenes)} detected")
+        save_scenes(scenes, project_dir / "analysis" / "scenes.json")
+
+        # Smart frame extraction
+        frames_dir = project_dir / "analysis" / "frames"
+        with console.status("[cyan]Extracting keyframes...[/cyan]"):
+            frames = await extract_smart_frames(
+                video_path, frames_dir, scenes, transcript.segments,
+            )
+        console.print(f"  [green]Frames:[/green] {len(frames)} keyframes extracted")
+        save_frames_index(frames, project_dir / "analysis" / "frames_index.json")
+
+        # Audio analysis
+        with console.status("[cyan]Analyzing audio...[/cyan]"):
+            audio_analysis = await analyze_audio(audio_wav, transcript.segments)
+        console.print(
+            f"  [green]Audio:[/green] {len(audio_analysis.speech_regions)} speech, "
+            f"{len(audio_analysis.silence_regions)} silence regions, "
+            f"{audio_analysis.loudness_integrated} LUFS"
+        )
+        save_audio_analysis(audio_analysis, project_dir / "analysis" / "audio_analysis.json")
+
+        # Assemble and save briefing
+        briefing = assemble_briefing(source_info, transcript, scenes, audio_analysis, frames)
+        save_briefing(briefing, project_dir / "analysis" / "briefing.yaml")
+
+        # Update project state
+        project.state = ProjectState.INGESTED
+        save_project(project, project_dir)
+
+        console.print(
+            Panel(
+                f"[bold green]Ingest complete[/bold green]\n\n"
+                f"Transcript: {transcript.word_count} words\n"
+                f"Scenes: {len(scenes)}\n"
+                f"Frames: {len(frames)}\n"
+                f"Briefing: analysis/briefing.yaml",
+                title=f"Edit: {name}",
+                border_style="green",
+            )
+        )
+        console.print("[dim]Next: supercooked edit briefing " + name + "[/dim]")
+
+    run_async(_ingest())
+
+
+@edit_group.command("briefing")
+@click.argument("name")
+@click.option("--export", "export_path", default=None, help="Export briefing to file")
+def edit_briefing(name: str, export_path: str | None):
+    """Display the structured briefing for a project."""
+    from supercooked.edit.briefing import format_briefing_summary, load_briefing
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    briefing_path = project_dir / "analysis" / "briefing.yaml"
+
+    if not briefing_path.exists():
+        console.print(f"[red]No briefing found. Run: supercooked edit ingest {name}[/red]")
+        return
+
+    briefing = load_briefing(briefing_path)
+    summary = format_briefing_summary(briefing)
+
+    console.print(Panel(summary, title=f"Briefing: {name}", border_style="cyan"))
+
+    if export_path:
+        Path(export_path).write_text(summary)
+        console.print(f"[green]Exported to:[/green] {export_path}")
+
+
+@edit_group.command("run")
+@click.argument("name")
+@click.option("--edl", "edl_path", default=None, help="Path to EDL file (defaults to project edl.yaml)")
+def edit_run(name: str, edl_path: str | None):
+    """Execute an EDL to assemble the video."""
+    from supercooked.edit.assemble import execute_edl, load_edl
+    from supercooked.edit.briefing import load_project, save_project
+    from supercooked.edit.models import ProjectState
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    project = load_project(project_dir)
+
+    edl_file = Path(edl_path) if edl_path else project_dir / "edl.yaml"
+    if not edl_file.exists():
+        console.print(f"[red]EDL not found: {edl_file}[/red]")
+        console.print("[dim]Write an edl.yaml in the project directory first.[/dim]")
+        return
+
+    edl = load_edl(edl_file)
+    console.print(f"[cyan]Assembling {len(edl.segments)} segments...[/cyan]")
+
+    async def _run():
+        output = await execute_edl(edl, project_dir)
+        project.state = ProjectState.ASSEMBLED
+        save_project(project, project_dir)
+        console.print(f"[green]Assembled:[/green] {output}")
+        console.print(f"[dim]Duration: ~{edl.total_duration:.1f}s from {len(edl.segments)} segments[/dim]")
+
+    run_async(_run())
+
+
+@edit_group.command("preview")
+@click.argument("name")
+@click.option("--seg", "segment", required=True, type=int, help="Segment index (0-based)")
+def edit_preview(name: str, segment: int):
+    """Quick preview of a single segment."""
+    from supercooked.edit.assemble import load_edl, preview_segment
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    edl = load_edl(project_dir / "edl.yaml")
+
+    console.print(f"[cyan]Rendering preview for segment {segment}...[/cyan]")
+
+    async def _preview():
+        output = await preview_segment(edl, project_dir, segment)
+        console.print(f"[green]Preview:[/green] {output}")
+
+    run_async(_preview())
+
+
+@edit_group.command("render")
+@click.argument("name")
+@click.option("--profile", default="youtube", help="Export profile (youtube, ig-reel, tiktok, draft)")
+@click.option("--output", "output_path", default=None, help="Output file path")
+def edit_render(name: str, profile: str, output_path: str | None):
+    """Final quality render with export profile."""
+    from supercooked.edit.render import render_final
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    out = Path(output_path) if output_path else None
+
+    console.print(f"[cyan]Rendering with profile '{profile}'...[/cyan]")
+
+    async def _render():
+        final = await render_final(project_dir, profile_name=profile, output_path=out)
+        console.print(f"[bold green]Final render:[/bold green] {final}")
+
+    run_async(_render())
+
+
+@edit_group.command("status")
+@click.argument("name")
+def edit_status(name: str):
+    """Show project state and files."""
+    from supercooked.edit.briefing import load_project
+
+    project_dir = OUTPUT_DIR / "edit" / name
+
+    if not project_dir.exists():
+        console.print(f"[red]Project not found: {name}[/red]")
+        return
+
+    project = load_project(project_dir)
+
+    # Check what exists
+    has_briefing = (project_dir / "analysis" / "briefing.yaml").exists()
+    has_edl = (project_dir / "edl.yaml").exists()
+    has_assembled = (project_dir / "assembled.mp4").exists()
+    has_final = (project_dir / "final.mp4").exists()
+
+    state_colors = {
+        "init": "yellow",
+        "ingested": "cyan",
+        "edl_ready": "blue",
+        "assembled": "magenta",
+        "rendered": "green",
+    }
+    color = state_colors.get(project.state.value, "white")
+
+    table = Table(title=f"Edit Project: {name}", show_header=True)
+    table.add_column("Component", style="white")
+    table.add_column("Status", style="white")
+
+    table.add_row("State", f"[{color}]{project.state.value}[/{color}]")
+    table.add_row("Source", project.source_video)
+    table.add_row("Audio", project.source_audio or "—")
+    table.add_row("Briefing", "[green]ready[/green]" if has_briefing else "[dim]not yet[/dim]")
+    table.add_row("EDL", "[green]ready[/green]" if has_edl else "[dim]not yet[/dim]")
+    table.add_row("Assembled", "[green]ready[/green]" if has_assembled else "[dim]not yet[/dim]")
+    table.add_row("Final", "[green]ready[/green]" if has_final else "[dim]not yet[/dim]")
+    table.add_row("Directory", str(project_dir))
+
+    console.print(table)
+
+
+@edit_group.command("compose")
+@click.argument("name")
+@click.argument("sources", nargs=-1, required=True, type=click.Path(exists=True))
+@click.option("--audio", default=None, type=click.Path(exists=True), help="Background audio track")
+@click.option("--sfx", default=None, type=click.Path(exists=True), help="SFX directory")
+def edit_compose(name: str, sources: tuple[str, ...], audio: str | None, sfx: str | None):
+    """Initialize a compose project from images, clips, and audio.
+
+    Unlike `edit init` (single video source), compose takes multiple
+    source files (images + videos) that you'll arrange via edl.yaml.
+    No ingest step needed — go straight to writing the EDL.
+
+    Usage:
+        supercooked edit compose my-reel bg1.jpg clip1.mp4 bg2.png --audio music.mp3
+    """
+    from datetime import datetime
+
+    from supercooked.edit.briefing import save_project
+    from supercooked.edit.models import Project
+
+    project_dir = OUTPUT_DIR / "edit" / name
+    if project_dir.exists():
+        console.print(f"[red]Project already exists: {name}[/red]")
+        return
+
+    # Create directory structure
+    sources_dir = project_dir / "sources"
+    segments_dir = project_dir / "segments"
+    overlays_dir = project_dir / "overlays"
+    for d in [sources_dir, segments_dir, overlays_dir]:
+        d.mkdir(parents=True, exist_ok=True)
+
+    # Symlink all source files
+    source_names = []
+    for src in sources:
+        src_path = Path(src).resolve()
+        link = sources_dir / src_path.name
+        if link.exists():
+            # Handle duplicate filenames by prefixing
+            link = sources_dir / f"{len(source_names)}_{src_path.name}"
+        link.symlink_to(src_path)
+        source_names.append(f"sources/{link.name}")
+
+    audio_link_name = None
+    if audio:
+        audio_path = Path(audio).resolve()
+        audio_link = sources_dir / audio_path.name
+        audio_link.symlink_to(audio_path)
+        audio_link_name = f"sources/{audio_path.name}"
+
+    sfx_link_name = None
+    if sfx:
+        sfx_path = Path(sfx).resolve()
+        sfx_link = sources_dir / "sfx"
+        sfx_link.symlink_to(sfx_path)
+        sfx_link_name = "sources/sfx"
+
+    project = Project(
+        name=name,
+        source_video="",  # no single source — each segment has its own
+        source_audio=audio_link_name,
+        sfx_dir=sfx_link_name,
+        created=datetime.now().isoformat(timespec="seconds"),
+    )
+    save_project(project, project_dir)
+
+    # Print sources table
+    source_table = Table(show_header=True, title="Sources")
+    source_table.add_column("#", style="dim")
+    source_table.add_column("File", style="cyan")
+    source_table.add_column("Type", style="green")
+
+    img_exts = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff"}
+    for i, sname in enumerate(source_names):
+        fname = sname.split("/", 1)[1]
+        ftype = "image" if Path(fname).suffix.lower() in img_exts else "video"
+        source_table.add_row(str(i), fname, ftype)
+
+    console.print(Panel(
+        f"[bold cyan]{name}[/bold cyan]\n\n"
+        f"Audio: [green]{Path(audio).name if audio else '—'}[/green]\n"
+        f"Dir:   [dim]{project_dir}[/dim]",
+        title="Compose Project Created",
+        border_style="green",
+    ))
+    console.print(source_table)
+    console.print()
+    console.print("[dim]Next: write edl.yaml then run: supercooked edit run " + name + "[/dim]")
+    console.print("[dim]For images, use type: image and hold: <seconds> in your EDL segments[/dim]")
+
+
 if __name__ == "__main__":
     cli()

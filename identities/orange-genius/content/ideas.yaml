@@ -5,7 +5,7 @@ ideas:
     - gravity, momentum, chaos theory - while actively demonstrating by pushing various
     objects off a desk. Peak educational chaos.
   template: video_short
-  status: drafted
+  status: generated
   created: '2026-03-12T19:54:06.373608'
   tags:
   - science
@@ -54,7 +54,7 @@ ideas:
     instead of napping, not sitting in boxes, ignoring sunbeams, using alarm clocks,
     and not meowing for attention. Each entry gets increasingly absurd.'
   template: carousel
-  status: backlog
+  status: generated
   created: '2026-03-12T19:54:06.373673'
   tags:
   - comedy
@@ -102,7 +102,7 @@ ideas:
     shaped like scratching posts, missions timed around nap schedules, the moon declared
     a giant laser pointer target. Surprisingly efficient.'
   template: story
-  status: backlog
+  status: generated
   created: '2026-03-12T19:54:06.373689'
   tags:
   - satire
@@ -119,7 +119,7 @@ ideas:
     quantum mechanics and honestly? it's working. *purrrr* anyway time to knock over
     a plant.'
   template: tweet
-  status: backlog
+  status: generated
   created: '2026-03-12T19:54:06.373694'
   tags:
   - philosophy
@@ -128,3 +128,90 @@ ideas:
   - relatable
   content_types:
   - tweet
+- id: f38e2402
+  title: Quantum Cat Paradox
+  concept: "Mochi explains Schr\xF6dinger's cat but from the perspective of being\
+    \ the cat in the box. Opens with Mochi literally in a cardboard box, delivers\
+    \ a mind-bending explanation of quantum superposition, closes with the revelation\
+    \ that she's been napping the whole time and doesn't care about the paradox. *purrrr*"
+  template: video_short
+  status: backlog
+  created: '2026-03-21T00:45:53.077248'
+  tags:
+  - physics
+  - quantum
+  - big_brain_small_cat
+  - cat_logic
+  content_types:
+  - video
+  - thumbnail
+- id: 7df88fa8
+  title: Orange Brain Cell Inventory
+  concept: 'Mochi ranks the activities that consume the shared orange cat brain cell:
+    napping (tier S), chaos (tier A), meowsic (tier A), knocking things over (tier
+    B), remembering physics (tier C). Absurdist tier list with increasingly unhinged
+    reasoning. Ends with her forgetting what she was doing mid-sentence.'
+  template: image_post
+  status: backlog
+  created: '2026-03-21T00:45:53.077339'
+  tags:
+  - orange_cat_humor
+  - tier_list
+  - relatable
+  - funny
+  content_types:
+  - image
+  - post
+- id: eaa1298f
+  title: Meowsic Theory But Make It Cute
+  concept: Thread breaking down why major keys feel happy and minor keys feel sad,
+    but every explanation uses cat behavior analogies. Major = stretching in sunlight.
+    Minor = plotting in shadows. Includes a purr-fect TikTok audio recommendation
+    and demands head scratches between tweets.
+  template: thread
+  status: backlog
+  created: '2026-03-21T00:45:53.077353'
+  tags:
+  - meowsic_theory
+  - educational
+  - cute
+  - nerdy
+  content_types:
+  - tweet
+  - thread
+- id: 20ab8e8c
+  title: If Cats Ran Big Tech
+  concept: 'Satirical story imagining Apple, Google, and Meta under cat CEO leadership.
+    Apple''s new innovation: keyboards without keys (just a big warm surface). Google''s
+    algorithm: if it''s not a cat video, it doesn''t exist. Meta''s metaverse: just
+    infinite boxes. Absurd but weirdly logical.'
+  template: story
+  status: backlog
+  created: '2026-03-21T00:45:53.077369'
+  tags:
+  - satire
+  - tech_humor
+  - cat_logic
+  - if_cats_ran_the_world
+  content_types:
+  - post
+  - thread
+- id: 4f8d4d93
+  title: 'Mochi Covers: Bohemian Rhapsody (But Make It Feline)'
+  concept: Full cover of Bohemian Rhapsody with Mochi delivering operatic vocals from
+    increasingly ridiculous locations (on a piano, inside a guitar, on top of a amplifier).
+    No editing tricks, just pure meowsical talent. Opens with arrogant attitude, closes
+    with her demanding treats. Credits Queen in the description. nyano this should
+    slap this hard.
+  template: video_short
+  status: generated
+  created: '2026-03-21T00:45:53.077378'
+  tags:
+  - mochi_covers
+  - meowsic
+  - vocal_talent
+  - iconic_song
+  content_types:
+  - video
+  - thumbnail
+  - audio

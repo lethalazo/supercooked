@@ -13,10 +13,11 @@ PROJECT_ROOT = Path(__file__).parent.parent
 CONFIG_PATH = PROJECT_ROOT / "supercooked.yaml"
 IDENTITIES_DIR = PROJECT_ROOT / "identities"
 OUTPUT_DIR = PROJECT_ROOT / "output"
+EDIT_DIR = OUTPUT_DIR / "edit"
 ASSETS_DIR = PROJECT_ROOT / "assets"
 
-# Claude model — Opus 6
-CLAUDE_MODEL = "claude-opus-4-20250514"
+# Claude model — Haiku (OAuth tokens only support Haiku currently)
+CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
 # Env var → config key mapping (env vars take precedence over supercooked.yaml)
 _ENV_MAP = {

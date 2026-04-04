@@ -1,0 +1,165 @@
+date: '2026-03-13'
+entries:
+- timestamp: '2026-03-13T01:28:48.615032'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/orange-genius/content/drafts/da93dfe1
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-13T01:28:48.630339'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: da93dfe1
+    title: 5 Human Behaviors That Make Zero Sense
+    template: carousel
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/orange-genius/content/drafts/da93dfe1
+  result: Drafted script for '5 Human Behaviors That Make Zero Sense'
+  error: null
+- timestamp: '2026-03-13T01:29:17.067531'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Mochi wearing tiny glasses, sitting with a clipboard looking judgmental
+    size: 1080x1080
+    aspect_ratio: '1:1'
+    output_path: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_072d632553fd.png
+  result: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_072d632553fd.png
+  error: null
+- timestamp: '2026-03-13T01:29:24.176906'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Mochi wearing tiny glasses, sitting with a clipboard looking judgmental
+    size: 1080x1080
+    aspect_ratio: '1:1'
+    output_path: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_1e85f5bb3bd5.png
+  result: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_1e85f5bb3bd5.png
+  error: null
+- timestamp: '2026-03-13T01:29:24.335002'
+  action: compose_image_post
+  platform: pillow
+  details:
+    image_path: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_1e85f5bb3bd5.png
+    caption_length: 65
+    output_path: /Users/arsalan/Workspace/supercooked/output/orange-genius/post_762915c32a68.png
+  result: /Users/arsalan/Workspace/supercooked/output/orange-genius/post_762915c32a68.png
+  error: null
+- timestamp: '2026-03-13T01:29:24.342930'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: da93dfe1
+    title: 5 Human Behaviors That Make Zero Sense
+    content_types:
+    - image
+    - post
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for '5 Human Behaviors That Make Zero Sense'
+  error: null
+- timestamp: '2026-03-13T01:29:48.919681'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/orange-genius/content/drafts/65af8a25
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-13T01:29:48.940673'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: 65af8a25
+    title: Existential Crisis at 3am
+    template: tweet
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/orange-genius/content/drafts/65af8a25
+  result: Drafted script for 'Existential Crisis at 3am'
+  error: null
+- timestamp: '2026-03-13T01:29:50.964317'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: 65af8a25
+    title: Existential Crisis at 3am
+    content_types:
+    - tweet
+    files_generated: 1
+    errors: 0
+  result: Generated 1 files for 'Existential Crisis at 3am'
+  error: null
+- timestamp: '2026-03-13T02:17:16.815173'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/orange-genius/content/drafts/43e6fef1
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-13T02:17:16.837193'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: 43e6fef1
+    title: If Cats Ran NASA
+    template: story
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/orange-genius/content/drafts/43e6fef1
+  result: Drafted script for 'If Cats Ran NASA'
+  error: null
+- timestamp: '2026-03-13T02:30:02.075785'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Mochi wearing tiny NASA badge sitting at mission control desk
+    size: 1080x1920
+    aspect_ratio: '9:16'
+    output_path: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_115fbc15db76.png
+  result: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_115fbc15db76.png
+  error: null
+- timestamp: '2026-03-13T02:30:16.787277'
+  action: generate_image
+  platform: gemini
+  details:
+    prompt: Mochi wearing tiny NASA badge sitting at mission control desk
+    size: 1080x1080
+    aspect_ratio: '1:1'
+    output_path: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_08b11335d5f9.png
+  result: /Users/arsalan/Workspace/supercooked/output/orange-genius/image_08b11335d5f9.png
+  error: null
+- timestamp: '2026-03-13T02:30:16.805776'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: 43e6fef1
+    title: If Cats Ran NASA
+    content_types:
+    - story
+    - image
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'If Cats Ran NASA'
+  error: null
+- timestamp: '2026-03-13T03:53:52.533659'
+  action: generate_face
+  platform: gemini
+  details:
+    expression: neutral
+    prompt: 'An adorable chubby orange tabby cat with big expressive green eyes, round
+      face, fluffy cheeks, slightly smug knowing expression, wearing tiny round glasses
+      perched on nose, warm orange fur with classic tabby stripes, sitting upright
+      like a tiny professor, soft studio lighting, clean colorful background, Pixar-quality
+      3D render style, incredibly cute and charismatic, slightly oversized head for
+      extra cuteness, whiskers perfectly groomed, radiating intelligence and sass
+      simultaneously, 4K detail, style: pixar-quality 3D render, hyper-detailed cartoon
+      realism, avoid: blurry, low quality, scary, aggressive, realistic photograph,
+      skinny cat, dark moody atmosphere, horror, ugly, deformed, extra limbs, human
+      body, text overlay, watermark, flat 2D cartoon'
+    model: gemini-3.1-flash-image-preview
+    output_path: /Users/arsalan/Workspace/supercooked/identities/orange-genius/face/generated/neutral_20260313_035352_2cbae6.png
+  result: Generated face image at /Users/arsalan/Workspace/supercooked/identities/orange-genius/face/generated/neutral_20260313_035352_2cbae6.png
+  error: null

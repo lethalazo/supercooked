@@ -1,0 +1,132 @@
+date: '2026-03-21'
+entries:
+- timestamp: '2026-03-21T00:23:48.380448'
+  action: generate_face
+  platform: gemini
+  details:
+    expression: neutral
+    prompt: 'An adorable chubby orange tabby cat with big expressive green eyes, round
+      face, fluffy cheeks, slightly smug knowing expression, wearing tiny round glasses
+      perched on nose, warm orange fur with classic tabby stripes, sitting upright
+      like a tiny professor, soft studio lighting, clean colorful background, Pixar-quality
+      3D render style, incredibly cute and charismatic, slightly oversized head for
+      extra cuteness, whiskers perfectly groomed, radiating intelligence and sass
+      simultaneously, 4K detail, style: pixar-quality 3D render, hyper-detailed cartoon
+      realism, avoid: blurry, low quality, scary, aggressive, realistic photograph,
+      skinny cat, dark moody atmosphere, horror, ugly, deformed, extra limbs, human
+      body, text overlay, watermark, flat 2D cartoon'
+    model: gemini-3.1-flash-image-preview
+    output_path: /Users/arsalan/Workspace/moonshot/supercooked/identities/orange-genius/face/generated/neutral_20260321_002348_3af963.png
+  result: Generated face image at /Users/arsalan/Workspace/moonshot/supercooked/identities/orange-genius/face/generated/neutral_20260321_002348_3af963.png
+  error: null
+- timestamp: '2026-03-21T00:45:53.079470'
+  action: generate_ideas
+  platform: claude
+  details:
+    count: 5
+    focus: null
+    generated: 5
+    model: claude-haiku-4-5-20251001
+  result: Generated 5 content ideas
+  error: null
+- timestamp: '2026-03-21T00:46:46.717228'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/moonshot/supercooked/identities/orange-genius/content/drafts/4f8d4d93
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-21T00:46:46.740648'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: 4f8d4d93
+    title: 'Mochi Covers: Bohemian Rhapsody (But Make It Feline)'
+    template: video_short
+    draft_dir: /Users/arsalan/Workspace/moonshot/supercooked/identities/orange-genius/content/drafts/4f8d4d93
+  result: 'Drafted script for ''Mochi Covers: Bohemian Rhapsody (But Make It Feline)'''
+  error: null
+- timestamp: '2026-03-21T00:57:29.326047'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 180-second cinematic music video of Bohemian Rhapsody performed by\
+      \ Mochi, an adorable chubby orange tabby cat with expressive green eyes and\
+      \ tiny round glasses. OPENING: Mochi perched majestically on a grand piano,\
+      \ dramatic side-lighting casting elegant shadows, her whiskers twitching with\
+      \ arrogant confidence as she delivers the opening lines with operatic precision.\
+      \ Camera slowly circles the piano. TRANSITION: Sharp cut to extreme close-up\
+      \ of Mochi nestled impossibly inside an acoustic guitar body, perfectly framed\
+      \ in the sound hole with theatrical spotlight illumination, her face filling\
+      \ the frame as she hits impossible vocal runs. Pull back reveal shot showing\
+      \ the full guitar setup. TRANSITION: Camera pans up to Mochi standing tall and\
+      \ powerful on top of a towering amplifier stack, paws planted, delivering unhinged\
+      \ operatic belting with her entire body engaged in the performance. Dynamic\
+      \ upward camera movement emphasizes her power pose. TRANSITION: Quick cuts to\
+      \ Mochi somehow simultaneously playing a keyboard while singing during the instrumental\
+      \ solo section\u2014camera focuses on her paws on keys with focus pulls. TRANSITION:\
+      \ Wide establishing shot revealing all three performance locations in one frame,\
+      \ showing the full bohemian setup. CLIMAX: Rapid montage of Mochi's most dramatic\
+      \ moments from each location during the rhapsody section, fast cuts synced to\
+      \ music crescendos. OUTRO: Slow pan to Mochi sitting in a cardboard box, completely\
+      \ unbothered, delivering final vocals with a slow blink at camera. She knocks\
+      \ over a treat bowl\u2014camera captures the movement and her demanding expression.\
+      \ Throughout: Consistent warm studio lighting, vibrant colors, smooth camera\
+      \ movements, professional music video pacing with visual rhythm matching the\
+      \ song's iconic structure.. Avoid: blurry, low quality, scary, aggressive, realistic\
+      \ photograph, skinny cat, dark moody atmosphere, horror, ugly, deformed, extra\
+      \ limbs, human body, text overlay, watermark, flat 2D cartoon"
+    duration_seconds: 180
+    actual_duration: 57
+    extensions: 20
+    aspect_ratio: '16:9'
+    model: veo-3.1-generate-preview
+    output_path: /Users/arsalan/Workspace/moonshot/supercooked/output/orange-genius/video_a824f6c4e3ec.mp4
+  result: /Users/arsalan/Workspace/moonshot/supercooked/output/orange-genius/video_a824f6c4e3ec.mp4
+  error: null
+- timestamp: '2026-03-21T00:57:50.048232'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: 'Mochi Covers: Bohemian Rhapsody (But Make It Feline)'
+    style: bold
+    prompt: 'An adorable chubby orange tabby cat with big expressive green eyes, round
+      face, fluffy cheeks, slightly smug knowing expression, wearing tiny round glasses
+      perched on nose, warm orange fur with classic tabby stripes, sitting upright
+      like a tiny professor, soft studio lighting, clean colorful background, Pixar-quality
+      3D render style, incredibly cute and charismatic, slightly oversized head for
+      extra cuteness, whiskers perfectly groomed, radiating intelligence and sass
+      simultaneously, 4K detail. Eye-catching thumbnail for ''Mochi Covers: Bohemian
+      Rhapsody''. Feature an adorable chubby orange tabby cat with big expressive
+      green eyes and tiny round glasses, mid-operatic performance with mouth open
+      in dramatic singing pose, paw raised majestically. Split the thumbnail composition:
+      left side shows Mochi in a sparkly concert outfit performing at a grand piano
+      (high contrast gold/purple lighting), right side shows her standing triumphantly
+      on an amplifier stack in a power pose. Bold, vibrant color palette with electric
+      purples, golds, and oranges. High contrast between Mochi and background to make
+      her pop. Add subtle musical notes and star sparkles around her. The overall
+      vibe should be: ''iconic musician cat delivering the performance of a lifetime.''
+      Pixar-quality 3D render style, incredibly cute but undeniably impressive.. Avoid:
+      blurry, low quality, scary, aggressive, realistic photograph, skinny cat, dark
+      moody atmosphere, horror, ugly, deformed, extra limbs, human body, text overlay,
+      watermark, flat 2D cartoon'
+    model: gemini-3.1-flash-image-preview
+    output_path: /Users/arsalan/Workspace/moonshot/supercooked/output/orange-genius/thumb_193e72e927f9.png
+  result: /Users/arsalan/Workspace/moonshot/supercooked/output/orange-genius/thumb_193e72e927f9.png
+  error: null
+- timestamp: '2026-03-21T00:57:50.084904'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: 4f8d4d93
+    title: 'Mochi Covers: Bohemian Rhapsody (But Make It Feline)'
+    content_types:
+    - video
+    - thumbnail
+    - audio
+    files_generated: 2
+    errors: 1
+  result: 'Generated 2 files for ''Mochi Covers: Bohemian Rhapsody (But Make It Feline)'''
+  error: null

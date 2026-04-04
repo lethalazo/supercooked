@@ -1,0 +1,63 @@
+exports:
+  youtube:
+    description: "YouTube 1080p"
+    resolution: "1920x1080"
+    fps: 30
+    codec: libx264
+    crf: 18
+    audio_codec: aac
+    audio_bitrate: "192k"
+    pixel_format: yuv420p
+
+  youtube-4k:
+    description: "YouTube 4K"
+    resolution: "3840x2160"
+    fps: 30
+    codec: libx264
+    crf: 16
+    audio_codec: aac
+    audio_bitrate: "256k"
+    pixel_format: yuv420p
+    max_bitrate: "40M"
+
+  ig-reel:
+    description: "Instagram Reel (9:16)"
+    resolution: "1080x1920"
+    fps: 30
+    codec: libx264
+    crf: 20
+    audio_codec: aac
+    audio_bitrate: "128k"
+    pixel_format: yuv420p
+    max_bitrate: "10M"
+
+  ig-story:
+    description: "Instagram Story (9:16)"
+    resolution: "1080x1920"
+    fps: 30
+    codec: libx264
+    crf: 22
+    audio_codec: aac
+    audio_bitrate: "128k"
+    pixel_format: yuv420p
+
+  tiktok:
+    description: "TikTok (9:16)"
+    resolution: "1080x1920"
+    fps: 30
+    codec: libx264
+    crf: 20
+    audio_codec: aac
+    audio_bitrate: "128k"
+    pixel_format: yuv420p
+    max_bitrate: "10M"
+
+  draft:
+    description: "Quick draft preview (720p, fast encode)"
+    resolution: "1280x720"
+    fps: 30
+    codec: libx264
+    crf: 28
+    audio_codec: aac
+    audio_bitrate: "96k"
+    pixel_format: yuv420p

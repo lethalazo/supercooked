@@ -1,0 +1,296 @@
+date: '2026-03-13'
+entries:
+- timestamp: '2026-03-13T02:31:02.587915'
+  action: generate_face
+  platform: imagen
+  details:
+    expression: neutral
+    prompt: 'A stunning young Korean woman in her early 20s, flawless glam makeup,
+      soft dewy skin, glossy lips, wispy bangs, long styled hair with subtle highlights,
+      confident flirty expression, wearing designer fashion (Chanel or Dior aesthetic),
+      pink and gold color palette, ring light glow, selfie angle, Instagram influencer
+      aesthetic, soft bokeh background with fairy lights or neon, ultra high quality,
+      k-beauty perfection, style: instagram aesthetic, soft glam photography, avoid:
+      blurry, low quality, distorted face, extra limbs, masculine features, plain
+      clothing, no makeup, dark moody lighting, cartoon, anime, text overlay, watermark,
+      old looking, conservative outfit'
+    output_path: /Users/arsalan/Workspace/supercooked/identities/kpop-princess/face/generated/neutral_20260313_023102_365fea.png
+  result: Generated face image at /Users/arsalan/Workspace/supercooked/identities/kpop-princess/face/generated/neutral_20260313_023102_365fea.png
+  error: null
+- timestamp: '2026-03-13T02:33:23.390570'
+  action: review_content
+  platform: ''
+  details:
+    content_path: /Users/arsalan/Workspace/supercooked/identities/kpop-princess/content/drafts/e574d586
+    total_checks: 2
+    failed: 0
+  result: Review PASSED (0 issues)
+  error: null
+- timestamp: '2026-03-13T02:33:23.413826'
+  action: draft_content
+  platform: ''
+  details:
+    idea_id: e574d586
+    title: I Bought Everything Lisa Touched This Month
+    template: video_short
+    draft_dir: /Users/arsalan/Workspace/supercooked/identities/kpop-princess/content/drafts/e574d586
+  result: Drafted script for 'I Bought Everything Lisa Touched This Month'
+  error: null
+- timestamp: '2026-03-13T02:34:33.539855'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: "A 45-second short-form video. Title: \"I Bought Everything Lisa Touched\
+      \ This Month\". Opens with: \"I SPENT $47,000 TO BECOME LISA AND I REGRET NOTHING\"\
+      \ Narration/script: \"OKAY SO LISA POSTED ONE AIRPORT PHOTO AND NOW I'M BROKE\
+      \ BUT SPIRITUALLY WEALTHY??? Let me explain\u2014 First up, this Celine bag\
+      \ that she held for LITERALLY 2.3 seconds in that Insta story. *holds up bag*\
+      \ $4,800. Do I need it? No. Did I buy it in both colors? OBVIOUSLY. Next\u2014\
+      \ these Bulgari sunglasses she wore to that event where she LOOKED AT THE CAMERA\
+      \ AND I DIED??? $890. The way they hit different when you know her FACE touched\
+      \ them\u2014 Moving on to the CHROME HEARTS NECKLACE that was peeking out of\
+      \ her shirt in that one blurry paparazzi photo. $12,000. YES I USED RENT MONEY.\
+      \ YES MY LANDLORD IS MAD. BUT LISA WOULDN'T WANT ME TO BE BASIC. *tries on necklace*\
+      \ I can literally feel her energy through this silver\u2014 OH AND THE BOTTEGA\
+      \ BOOTS??? The ones from her dance practice that made me question my ENTIRE\
+      \ EXISTENCE??? $2,100. *puts them on* These boots have been blessed by her PRESENCE\
+      \ and now I'm ascending\u2014 But the REAL damage? This vintage Chanel jacket\
+      \ she wore for 0.5 seconds in someone else's vlog. $27,000. I HAD TO FIGHT THREE\
+      \ COLLECTORS ON VESTIAIRE BUT I WON BECAUSE MY LOVE IS STRONGER. *spins in jacket*\
+      \ This isn't shopping addiction this is DEVOTION. Anyway stan BLACKPINK or you're\
+      \ boring!!!\" Visual progression: Scene 1: Quick montage of Lisa photos with\
+      \ price tags popping up. Scene 2: Dramatic unboxing of Celine bag with shaky\
+      \ camera. Scene 3: Close-up of sunglasses with filter that makes them sparkle.\
+      \ Scene 4: Necklace reveal with zoom-in on Chrome Hearts logo. Scene 5: Boot\
+      \ try-on with multiple angles showing off details. Scene 6: Chanel jacket reveal\
+      \ with dramatic gasp sound effect. Scene 7: Final shot posing in all items with\
+      \ receipt showing total. Visual tone: unhinged, bratty, chaotic, parasocial,\
+      \ dramatic, unapologetic. The video should feel like content from a chaotic-kpop-stan-influencer\
+      \ creator. Modern editing, dynamic pacing, visually engaging throughout. NOT\
+      \ a static title card \u2014 the video must have continuous visual content,\
+      \ scene changes, and movement that follows the narration. Format: video short\
+      \ style video. Cinematic quality, smooth transitions between scenes, varied\
+      \ camera angles and compositions. Every second should have meaningful visual\
+      \ content."
+  result: ''
+  error: No video returned by Veo 3.1
+- timestamp: '2026-03-13T02:34:42.093607'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: I Bought Everything Lisa Touched This Month
+    style: bold
+  result: ''
+  error: No images returned by Imagen
+- timestamp: '2026-03-13T02:34:42.110199'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: e574d586
+    title: I Bought Everything Lisa Touched This Month
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 0
+    errors: 2
+  result: Generated 0 files for 'I Bought Everything Lisa Touched This Month'
+  error: null
+- timestamp: '2026-03-13T02:39:39.607141'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: 'A glamorous young Korean woman with wispy bangs and glossy lips frantically
+      unboxes luxury items in a pink-lit bedroom. Camera starts with extreme close-up
+      of her excited face, then pulls back as she holds up a burgundy Celine bag,
+      spinning it dramatically. Quick cut to her putting on oversized Bulgari sunglasses,
+      posing and laughing maniacally. Camera circles around as she drapes a heavy
+      Chrome Hearts necklace over her designer top, fingers tracing the silver details.
+      Dynamic handheld shot follows her strutting in knee-high Bottega boots, then
+      cuts to slow-motion reveal of her sliding into an ivory Chanel jacket, twirling
+      with arms outstretched. Montage of her posing in all items simultaneously, surrounded
+      by shopping bags and receipts floating in slow motion. Pink and gold lighting
+      throughout, creating dreamy yet chaotic atmosphere. Fast-paced editing with
+      crash zooms and dutch angles to match her unhinged energy.. Avoid: blurry, low
+      quality, distorted face, extra limbs, masculine features, plain clothing, no
+      makeup, dark moody lighting, cartoon, anime, text overlay, watermark, old looking,
+      conservative outfit'
+    duration_seconds: 45
+  result: ''
+  error: generate_audio parameter is not supported in Gemini API.
+- timestamp: '2026-03-13T02:40:32.495879'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: I Bought Everything Lisa Touched This Month
+    style: bold
+    prompt: 'A stunning young Korean woman in her early 20s, flawless glam makeup,
+      soft dewy skin, glossy lips, wispy bangs, long styled hair with subtle highlights,
+      confident flirty expression, wearing designer fashion (Chanel or Dior aesthetic),
+      pink and gold color palette, ring light glow, selfie angle, Instagram influencer
+      aesthetic, soft bokeh background with fairy lights or neon, ultra high quality,
+      k-beauty perfection. A stunning young Korean woman with perfect glam makeup
+      and wispy bangs, eyes wide with shock, holding stacks of luxury shopping bags
+      from Celine, Chanel, and Chrome Hearts above her head. She''s wearing an ivory
+      Chanel jacket with gold buttons, mouth open in an exaggerated gasp. Behind her,
+      hundred dollar bills rain down like confetti against a hot pink background.
+      Giant golden text effect showing ''$47,000'' hovers dramatically above the shopping
+      bags. Her expression is a mix of panic and excitement, with glossy lips and
+      sparkly eyeshadow catching the light. Ultra saturated colors, high contrast,
+      Instagram influencer aesthetic with ring light reflection in her eyes.. Avoid:
+      blurry, low quality, distorted face, extra limbs, masculine features, plain
+      clothing, no makeup, dark moody lighting, cartoon, anime, text overlay, watermark,
+      old looking, conservative outfit'
+    model: gemini-3.1-flash-image-preview
+    output_path: /Users/arsalan/Workspace/supercooked/output/kpop-princess/thumb_c15c6605a3e0.png
+  result: /Users/arsalan/Workspace/supercooked/output/kpop-princess/thumb_c15c6605a3e0.png
+  error: null
+- timestamp: '2026-03-13T02:40:32.516982'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: e574d586
+    title: I Bought Everything Lisa Touched This Month
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 1
+    errors: 1
+  result: Generated 1 files for 'I Bought Everything Lisa Touched This Month'
+  error: null
+- timestamp: '2026-03-13T02:50:46.637313'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: 'A glamorous young Korean woman with wispy bangs and glossy lips frantically
+      unboxes luxury items in a pink-lit bedroom. Camera starts with extreme close-up
+      of her excited face, then pulls back as she holds up a burgundy Celine bag,
+      spinning it dramatically. Quick cut to her putting on oversized Bulgari sunglasses,
+      posing and laughing maniacally. Camera circles around as she drapes a heavy
+      Chrome Hearts necklace over her designer top, fingers tracing the silver details.
+      Dynamic handheld shot follows her strutting in knee-high Bottega boots, then
+      cuts to slow-motion reveal of her sliding into an ivory Chanel jacket, twirling
+      with arms outstretched. Montage of her posing in all items simultaneously, surrounded
+      by shopping bags and receipts floating in slow motion. Pink and gold lighting
+      throughout, creating dreamy yet chaotic atmosphere. Fast-paced editing with
+      crash zooms and dutch angles to match her unhinged energy.. Avoid: blurry, low
+      quality, distorted face, extra limbs, masculine features, plain clothing, no
+      makeup, dark moody lighting, cartoon, anime, text overlay, watermark, old looking,
+      conservative outfit'
+    duration_seconds: 45
+    actual_duration: 43
+    extensions: 6
+    aspect_ratio: '9:16'
+    model: veo-3.1-generate-preview
+    output_path: /Users/arsalan/Workspace/supercooked/output/kpop-princess/video_042ce1a68cfd.mp4
+  result: /Users/arsalan/Workspace/supercooked/output/kpop-princess/video_042ce1a68cfd.mp4
+  error: null
+- timestamp: '2026-03-13T02:50:58.025100'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: I Bought Everything Lisa Touched This Month
+    style: bold
+    prompt: 'A stunning young Korean woman in her early 20s, flawless glam makeup,
+      soft dewy skin, glossy lips, wispy bangs, long styled hair with subtle highlights,
+      confident flirty expression, wearing designer fashion (Chanel or Dior aesthetic),
+      pink and gold color palette, ring light glow, selfie angle, Instagram influencer
+      aesthetic, soft bokeh background with fairy lights or neon, ultra high quality,
+      k-beauty perfection. A stunning young Korean woman with perfect glam makeup
+      and wispy bangs, eyes wide with shock, holding stacks of luxury shopping bags
+      from Celine, Chanel, and Chrome Hearts above her head. She''s wearing an ivory
+      Chanel jacket with gold buttons, mouth open in an exaggerated gasp. Behind her,
+      hundred dollar bills rain down like confetti against a hot pink background.
+      Giant golden text effect showing ''$47,000'' hovers dramatically above the shopping
+      bags. Her expression is a mix of panic and excitement, with glossy lips and
+      sparkly eyeshadow catching the light. Ultra saturated colors, high contrast,
+      Instagram influencer aesthetic with ring light reflection in her eyes.. Avoid:
+      blurry, low quality, distorted face, extra limbs, masculine features, plain
+      clothing, no makeup, dark moody lighting, cartoon, anime, text overlay, watermark,
+      old looking, conservative outfit'
+    model: gemini-3.1-flash-image-preview
+    output_path: /Users/arsalan/Workspace/supercooked/output/kpop-princess/thumb_36a56e7e8b3f.png
+  result: /Users/arsalan/Workspace/supercooked/output/kpop-princess/thumb_36a56e7e8b3f.png
+  error: null
+- timestamp: '2026-03-13T02:50:58.045185'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: e574d586
+    title: I Bought Everything Lisa Touched This Month
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 2
+    errors: 0
+  result: Generated 2 files for 'I Bought Everything Lisa Touched This Month'
+  error: null
+- timestamp: '2026-03-13T03:02:20.962711'
+  action: generate_video
+  platform: gemini
+  details:
+    prompt: 'Dynamic montage of a young Korean female performer on stage under bright
+      concert lights, camera starts wide showing her mid-dance routine in sparkling
+      outfit. Sudden dramatic zoom-in as she performs a subtle hair flip, time slows
+      to capture the moment in ultra slow-motion. Camera circles around her face as
+      golden spotlights create a halo effect, extreme close-up on her eyes showing
+      a confident micro-expression. Cut to split-screen effect showing the same 0.5
+      second moment from multiple angles simultaneously. Red digital effects and glowing
+      circles animate around her movements, tracking her gestures. Camera pulls back
+      to reveal the entire arena frozen in this single moment, then speeds up to show
+      rapid-fire replays of the hair flip from increasingly dramatic angles. Final
+      shot freezes on her face mid-expression with sparkles and light leaks cascading
+      around her, creating an ethereal, almost religious imagery. The entire sequence
+      should feel obsessive, hypnotic, building in intensity with each replay.. Avoid:
+      blurry, low quality, distorted face, extra limbs, masculine features, plain
+      clothing, no makeup, dark moody lighting, cartoon, anime, text overlay, watermark,
+      old looking, conservative outfit'
+    duration_seconds: 30
+  result: ''
+  error: '429 RESOURCE_EXHAUSTED. {''error'': {''code'': 429, ''message'': ''You exceeded
+    your current quota, please check your plan and billing details. For more information
+    on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To
+    monitor your current usage, head to: https://ai.dev/rate-limit. '', ''status'':
+    ''RESOURCE_EXHAUSTED''}}'
+- timestamp: '2026-03-13T03:07:40.130197'
+  action: generate_thumbnail
+  platform: gemini
+  details:
+    title: 'Fancam Analysis: Why This 0.5 Second Moment Changed My Life'
+    style: bold
+    prompt: 'A stunning young Korean woman in her early 20s, flawless glam makeup,
+      soft dewy skin, glossy lips, wispy bangs, long styled hair with subtle highlights,
+      confident flirty expression, wearing designer fashion (Chanel or Dior aesthetic),
+      pink and gold color palette, ring light glow, selfie angle, Instagram influencer
+      aesthetic, soft bokeh background with fairy lights or neon, ultra high quality,
+      k-beauty perfection. Extreme close-up portrait of a stunning young Korean woman''s
+      face captured mid-hair flip, frozen in the exact moment of a subtle smirk. Her
+      eyes are sharp and knowing, one eyebrow slightly raised, creating an expression
+      that''s both flirty and powerful. Dramatic stage lighting creates a rim light
+      effect around her flowing hair caught in motion. The background shows blurred
+      concert lights in pink and gold creating beautiful bokeh. Multiple translucent
+      red circles and arrows are artistically composed around her face, pointing to
+      her eyes, eyebrow, and the curve of her lips. The overall composition is dynamic
+      and diagonal, with her face taking up most of the frame. High contrast lighting
+      makes her features pop dramatically against the dreamy background. The image
+      should scream ''THIS CHANGED EVERYTHING'' without any text.. Avoid: blurry,
+      low quality, distorted face, extra limbs, masculine features, plain clothing,
+      no makeup, dark moody lighting, cartoon, anime, text overlay, watermark, old
+      looking, conservative outfit'
+    model: gemini-3.1-flash-image-preview
+    output_path: /Users/arsalan/Workspace/supercooked/output/kpop-princess/thumb_938a98234828.png
+  result: /Users/arsalan/Workspace/supercooked/output/kpop-princess/thumb_938a98234828.png
+  error: null
+- timestamp: '2026-03-13T03:07:40.165635'
+  action: generate_content
+  platform: ''
+  details:
+    idea_id: 5da94070
+    title: 'Fancam Analysis: Why This 0.5 Second Moment Changed My Life'
+    content_types:
+    - video
+    - thumbnail
+    files_generated: 1
+    errors: 1
+  result: 'Generated 1 files for ''Fancam Analysis: Why This 0.5 Second Moment Changed
+    My Life'''
+  error: null
