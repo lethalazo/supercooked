@@ -1,6 +1,6 @@
 """Assemble all analysis into a structured AI-readable briefing.
 
-The briefing is THE protocol — a single YAML document that gives any AI
+The briefing is THE protocol - a single YAML document that gives any AI
 complete understanding of the footage: what's being said, what it looks
 like, how the audio flows.
 """
@@ -32,7 +32,7 @@ def assemble_briefing(
 ) -> Briefing:
     """Assemble a Briefing from all analysis components.
 
-    Cross-references transcript segments with scenes — each transcript
+    Cross-references transcript segments with scenes - each transcript
     segment gets tagged with its corresponding scene ID.
     """
     # Tag transcript segments with scene IDs

@@ -1,4 +1,4 @@
-"""Content intelligence — trends, ideation, analytics, strategy."""
+"""Content intelligence - trends, ideation, analytics, strategy."""
 
 from supercooked.intel.analytics import (
     get_platform_stats,

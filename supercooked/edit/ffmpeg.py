@@ -1,6 +1,6 @@
 """FFmpeg command builder and probe utility.
 
-Typed, safe interface to FFmpeg — no raw shell strings. Every command
+Typed, safe interface to FFmpeg - no raw shell strings. Every command
 is built as a list of arguments and run via asyncio subprocess.
 """
 
@@ -433,7 +433,7 @@ async def cut_segment(
         if vfilters:
             args += ["-vf", ",".join(vfilters)]
 
-        # Audio handling — always keep an audio track (even if silent)
+        # Audio handling - always keep an audio track (even if silent)
         # so that concat doesn't fail on mixed muted/unmuted segments
         afilters = []
         if mute:
@@ -450,7 +450,7 @@ async def cut_segment(
         args += ["-c:v", "libx264", "-crf", "18", "-preset", "medium"]
         args += ["-c:a", "aac", "-b:a", "192k"]
     else:
-        # Stream copy — fast, no re-encode
+        # Stream copy - fast, no re-encode
         args += ["-c", "copy"]
 
     args += ["-y", str(output_path)]
@@ -493,7 +493,7 @@ async def concat_segments(
         finally:
             concat_file.unlink(missing_ok=True)
     else:
-        # xfade transitions — requires re-encoding
+        # xfade transitions - requires re-encoding
         # Build complex filter graph
         n = len(segment_paths)
         inputs = []

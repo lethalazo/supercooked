@@ -1,4 +1,4 @@
-"""Thread template — X thread format."""
+"""Thread template - X thread format."""
 
 from __future__ import annotations
 

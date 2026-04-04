@@ -23,7 +23,7 @@ class ChatService:
             f"You are {identity.being.name}. {identity.being.tagline}\n\n"
             f"PERSONALITY AND VOICE GUIDE:\n{voice_md}\n\n"
             f"Stay in character at all times. You ARE this being. "
-            f"Respond as {identity.being.name} would — with the tone, perspective, "
+            f"Respond as {identity.being.name} would - with the tone, perspective, "
             f"and voice traits defined above. Never break character."
         )
 

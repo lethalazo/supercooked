@@ -55,7 +55,7 @@ def _check_video_duration(video_path: Path, min_seconds: float = 3.0) -> dict[st
             "duration_seconds": round(duration, 2),
             "min_required": min_seconds,
             "message": (
-                f"Duration: {duration:.1f}s (min: {min_seconds}s) — "
+                f"Duration: {duration:.1f}s (min: {min_seconds}s) - "
                 f"{'PASS' if passed else 'FAIL: too short'}"
             ),
         }
@@ -107,7 +107,7 @@ def _check_video_resolution(
             "min_width": min_width,
             "min_height": min_height,
             "message": (
-                f"Resolution: {width}x{height} (min: {min_width}x{min_height}) — "
+                f"Resolution: {width}x{height} (min: {min_width}x{min_height}) - "
                 f"{'PASS' if passed else 'FAIL: resolution too low'}"
             ),
         }
@@ -134,7 +134,7 @@ def _check_file_size(path: Path, max_mb: float = 500.0) -> dict[str, Any]:
         "size_mb": round(size_mb, 2),
         "max_mb": max_mb,
         "message": (
-            f"Size: {size_mb:.1f}MB (max: {max_mb}MB) — "
+            f"Size: {size_mb:.1f}MB (max: {max_mb}MB) - "
             f"{'PASS' if passed else 'FAIL: file too large'}"
         ),
     }
@@ -169,7 +169,7 @@ def _check_metadata_completeness(draft_dir: Path) -> dict[str, Any]:
         "missing_required": missing_required,
         "missing_optional": missing_optional,
         "message": (
-            "All required metadata present — PASS"
+            "All required metadata present - PASS"
             if passed
             else f"FAIL: {'; '.join(parts)}"
         ),

@@ -1,8 +1,8 @@
 """3-stage content production pipeline.
 
-Stage 1 (Draft):    backlog → drafted     — generate script via Claude
-Stage 2 (Generate): drafted → generated   — create media files
-Stage 3 (Publish):  generated → published — push to platforms
+Stage 1 (Draft):    backlog → drafted     - generate script via Claude
+Stage 2 (Generate): drafted → generated   - create media files
+Stage 3 (Publish):  generated → published - push to platforms
 """
 
 from __future__ import annotations
@@ -142,7 +142,7 @@ async def produce_content(
     slug: str,
     idea_id: str,
 ) -> dict[str, Any]:
-    """Stage 1 — Draft: generate a script from a backlog idea.
+    """Stage 1 - Draft: generate a script from a backlog idea.
 
     Args:
         slug: Identity slug.
@@ -364,7 +364,7 @@ async def generate_content(
         _update_idea_status(slug, idea_id, IdeaStatus.GENERATED)
         final_status = "generated"
     else:
-        # All types failed — stay in drafted so user can retry
+        # All types failed - stay in drafted so user can retry
         metadata["status"] = "drafted"
         with open(meta_path, "w") as f:
             yaml.dump(metadata, f, default_flow_style=False, sort_keys=False)
@@ -569,7 +569,7 @@ async def publish_content(
     slug: str,
     idea_id: str,
 ) -> dict[str, Any]:
-    """Stage 3 — Publish: copy generated content to published dir.
+    """Stage 3 - Publish: copy generated content to published dir.
 
     Args:
         slug: Identity slug.

@@ -1,4 +1,4 @@
-"""Multi-platform content publishing — APIs, browser automation, scheduling."""
+"""Multi-platform content publishing - APIs, browser automation, scheduling."""
 
 from supercooked.publish.browser import browser_publish
 from supercooked.publish.late import publish_to_late

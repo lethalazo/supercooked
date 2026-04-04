@@ -1,13 +1,13 @@
 grades:
   neutral:
-    description: "No grading — pass through"
+    description: "No grading - pass through"
     brightness: 0.0
     contrast: 1.0
     saturation: 1.0
     gamma: 1.0
 
   moody:
-    description: "Dark, crushed blacks, desaturated — brooding cinematic feel"
+    description: "Dark, crushed blacks, desaturated - brooding cinematic feel"
     filter_chain: >-
       eq=brightness=-0.15:gamma=0.75:saturation=0.85,
       curves=master='0/0 0.25/0.15 0.5/0.4 0.75/0.65 1/0.85',
@@ -15,14 +15,14 @@ grades:
       vignette=angle=PI/3
 
   warm:
-    description: "Warm tones, lifted blacks — cozy golden hour"
+    description: "Warm tones, lifted blacks - cozy golden hour"
     filter_chain: >-
       eq=brightness=0.02:saturation=1.1,
       colorbalance=rs=0.06:gs=0.02:bs=-0.04,
       curves=master='0/0.05 0.5/0.52 1/1'
 
   cinematic:
-    description: "High contrast, teal-orange split — film look"
+    description: "High contrast, teal-orange split - film look"
     filter_chain: >-
       eq=contrast=1.2:saturation=0.9,
       colorbalance=rs=0.05:gs=-0.02:bs=-0.05:rh=-0.03:gh=0.01:bh=0.04,
@@ -30,7 +30,7 @@ grades:
       vignette=angle=PI/4
 
   clean:
-    description: "Bright, natural, slightly lifted — fresh and airy"
+    description: "Bright, natural, slightly lifted - fresh and airy"
     filter_chain: >-
       eq=brightness=0.05:saturation=1.05:gamma=1.05,
       curves=master='0/0.03 0.5/0.52 1/1'

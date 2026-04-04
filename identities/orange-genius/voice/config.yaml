@@ -1,4 +1,4 @@
-# Mochi — Voice Config
+# Mochi - Voice Config
 # Warm, slightly raspy, surprisingly melodic for a cat
 provider: elevenlabs
 voice_id: ""

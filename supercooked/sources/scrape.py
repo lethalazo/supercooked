@@ -1,7 +1,7 @@
 """Web scraping via requests + BeautifulSoup.
 
 Provides simple web scraping utilities for extracting content
-from web pages — used for research and content sourcing.
+from web pages - used for research and content sourcing.
 """
 
 from __future__ import annotations

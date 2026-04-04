@@ -1,4 +1,4 @@
-"""Story template — IG/X story format."""
+"""Story template - IG/X story format."""
 
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ class StoryTemplate(BaseTemplate):
                         f"Title: {idea_title}\n"
                         f"Concept: {idea_concept}\n\n"
                         "Requirements:\n"
-                        "- A short overlay text (max 30 words) — what appears ON the story\n"
+                        "- A short overlay text (max 30 words) - what appears ON the story\n"
                         "- The text should feel casual, in-the-moment\n"
                         "- Include a question or poll prompt if it fits naturally\n"
                         "- Keep it shareable and engaging\n\n"

@@ -2,7 +2,7 @@
 
 Wraps google.genai to generate short-form videos from text prompts.
 Supports video extension to produce 15-20s clips (base 8s + extensions).
-No fallback — if the Gemini API is unreachable or the key is missing, we raise.
+No fallback - if the Gemini API is unreachable or the key is missing, we raise.
 """
 
 from __future__ import annotations
@@ -31,7 +31,7 @@ def _output_dir(slug: str) -> Path:
 
 
 def _aspect_ratio_for_duration(duration_seconds: int) -> str:
-    """Pick a sensible default aspect ratio — vertical for shorts."""
+    """Pick a sensible default aspect ratio - vertical for shorts."""
     # Vertical (9:16) for anything 60s or under, landscape otherwise
     if duration_seconds <= 60:
         return "9:16"
@@ -99,14 +99,14 @@ async def generate_video(
     Parameters
     ----------
     slug:
-        Identity slug — used for output path and action logging.
+        Identity slug - used for output path and action logging.
     prompt:
         Creative text prompt describing the desired video.
     duration_seconds:
         Target duration in seconds. The base clip is 8s, then extended
         in 7s increments (8s, 15s, 22s, 29s, ...). Default 30s.
     negative_prompt:
-        Optional things to avoid — appended as "Avoid: ..." to the prompt.
+        Optional things to avoid - appended as "Avoid: ..." to the prompt.
 
     Returns
     -------
@@ -190,7 +190,7 @@ async def generate_video(
             )
         except Exception as exc:
             logger.warning(
-                "Video extension %d failed for %s: %s — using %ds clip",
+                "Video extension %d failed for %s: %s - using %ds clip",
                 ext_num, slug, exc, total_duration,
             )
             break  # Use what we have so far
@@ -199,7 +199,7 @@ async def generate_video(
             ext_operation = await _poll_operation(client, ext_operation, slug, prompt)
         except Exception as exc:
             logger.warning(
-                "Video extension %d polling failed for %s: %s — using %ds clip",
+                "Video extension %d polling failed for %s: %s - using %ds clip",
                 ext_num, slug, exc, total_duration,
             )
             break
@@ -209,7 +209,7 @@ async def generate_video(
             total_duration += 7
         else:
             logger.warning(
-                "Video extension %d returned no video for %s — using %ds clip",
+                "Video extension %d returned no video for %s - using %ds clip",
                 ext_num, slug, total_duration,
             )
             break

@@ -1,7 +1,7 @@
 """Caption generation via OpenAI Whisper and styled SRT overlay.
 
 Wraps openai-whisper for transcription and MoviePy/FFmpeg for burning
-captions onto video. No fallback — raises on any failure.
+captions onto video. No fallback - raises on any failure.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ def _format_srt_timestamp(seconds: float) -> str:
 
 
 def _style_text_capcut(text: str) -> str:
-    """Apply CapCut-style formatting — uppercase, one or two words per line.
+    """Apply CapCut-style formatting - uppercase, one or two words per line.
 
     CapCut-style captions typically show 1-3 words at a time in bold uppercase
     for maximum readability on mobile.
@@ -44,7 +44,7 @@ def _style_text_capcut(text: str) -> str:
 
 
 def _style_text_default(text: str) -> str:
-    """Default styling — clean text, no transformation."""
+    """Default styling - clean text, no transformation."""
     return text.strip()
 
 
@@ -127,7 +127,7 @@ async def generate_captions(
     output_path:
         Optional explicit output path for the .srt file.
     style:
-        Caption style — "capcut" (word-by-word uppercase) or "default".
+        Caption style - "capcut" (word-by-word uppercase) or "default".
 
     Returns
     -------
@@ -147,7 +147,7 @@ async def generate_captions(
     config = load_config()
     whisper_model_name = config.tools.whisper_model
 
-    # Import whisper at call time — it's heavy and optional
+    # Import whisper at call time - it's heavy and optional
     try:
         import whisper
     except ImportError as exc:

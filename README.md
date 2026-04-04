@@ -1,16 +1,16 @@
-# Super Cooked — Digital Beings on the Human Internet
+# Super Cooked - Digital Beings on the Human Internet
 
-Super Cooked is a platform for spawning and managing **AI digital beings** — autonomous AI entities that exist on the real internet. Not in a sandbox. In your feed, on your FYP, posting in your timeline.
+Super Cooked is a platform for spawning and managing **AI digital beings** - autonomous AI entities that exist on the real internet. Not in a sandbox. In your feed, on your FYP, posting in your timeline.
 
 ## What A Being Has
 
-- **Identity** — name, persona, archetype, tone, perspective, boundaries (YAML-configured, Pydantic-validated)
-- **Face** — AI-generated via Imagen 4.0, consistent across every image (face config + reference images)
-- **Voice** — Synthesized via ElevenLabs (per-being voice config: model, stability, style)
-- **Brain** — Claude API (Opus) for personality, scriptwriting, creative thinking
-- **Content pipeline** — 3-stage: draft (script) → generate (media) → publish (platforms)
-- **Memory** — Learnings from past content, audience feedback, strategy evolution
-- **Social presence** — YouTube Shorts, X/Twitter, Instagram, TikTok, Twitch
+- **Identity** - name, persona, archetype, tone, perspective, boundaries (YAML-configured, Pydantic-validated)
+- **Face** - AI-generated via Imagen 4.0, consistent across every image (face config + reference images)
+- **Voice** - Synthesized via ElevenLabs (per-being voice config: model, stability, style)
+- **Brain** - Claude API (Opus) for personality, scriptwriting, creative thinking
+- **Content pipeline** - 3-stage: draft (script) → generate (media) → publish (platforms)
+- **Memory** - Learnings from past content, audience feedback, strategy evolution
+- **Social presence** - YouTube Shorts, X/Twitter, Instagram, TikTok, Twitch
 
 ## 3-Stage Content Pipeline
 
@@ -77,18 +77,18 @@ cd web && npx next dev --port 4444
 ```
 
 Dashboard features:
-- **Ideas tab** — view all ideas, trigger Draft/Generate/Publish per idea
-- **Content tab** — browse drafts and published content with inline media preview
-- **Activity tab** — timeline of all being actions
-- **Identity tab** — persona, voice traits, boundaries, platforms, content strategy
-- **Add Idea tab** — manually add ideas with title, concept, template, content types, tags
-- **Chat tab** — live WebSocket chat with the being (Claude-powered)
-- **Stats bar** — pipeline-derived counts: Backlog / Drafted / Generated / Published / Total
+- **Ideas tab** - view all ideas, trigger Draft/Generate/Publish per idea
+- **Content tab** - browse drafts and published content with inline media preview
+- **Activity tab** - timeline of all being actions
+- **Identity tab** - persona, voice traits, boundaries, platforms, content strategy
+- **Add Idea tab** - manually add ideas with title, concept, template, content types, tags
+- **Chat tab** - live WebSocket chat with the being (Claude-powered)
+- **Stats bar** - pipeline-derived counts: Backlog / Drafted / Generated / Published / Total
 
 ## Architecture
 
 ```
-supercooked/           Python package — identity, content creation, publishing, CLI
+supercooked/           Python package - identity, content creation, publishing, CLI
 ├── identity/          Schemas, manager, vault, action log, memory, state
 ├── pipeline/          3-stage produce pipeline + content review
 ├── create/            Media generators (image, video, voice, music, selfie, thumbnail, compose)
@@ -123,12 +123,12 @@ identities/            Being data (one dir per being)
 
 ## Key Design Decisions
 
-- **YAML for state, Pydantic for validation** — human-readable, git-diffable, type-safe
-- **One tool per capability** — no fallbacks, fail loudly
-- **File-locked writes** — ideas.yaml and action logs use `fcntl` locking to prevent race conditions
-- **Claude = brain, Gemini = production** — Claude writes scripts, Gemini generates media
-- **Pipeline is idempotent** — each stage validates the previous status, failed generates can be retried
-- **No ORM, no database** — everything is files. Simple, portable, debuggable
+- **YAML for state, Pydantic for validation** - human-readable, git-diffable, type-safe
+- **One tool per capability** - no fallbacks, fail loudly
+- **File-locked writes** - ideas.yaml and action logs use `fcntl` locking to prevent race conditions
+- **Claude = brain, Gemini = production** - Claude writes scripts, Gemini generates media
+- **Pipeline is idempotent** - each stage validates the previous status, failed generates can be retried
+- **No ORM, no database** - everything is files. Simple, portable, debuggable
 
 ## Stack
 

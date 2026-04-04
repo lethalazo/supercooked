@@ -2,7 +2,7 @@
 
 Generates "selfie" images of a digital being's character using their
 face config for visual consistency. Wraps google.genai Nano Banana 2.
-No fallback — raises on any failure.
+No fallback - raises on any failure.
 """
 
 from __future__ import annotations
@@ -135,7 +135,7 @@ async def take_selfie(
 
     client = genai.Client(api_key=api_key)
 
-    # Portrait orientation — natural selfie ratio
+    # Portrait orientation - natural selfie ratio
     config = types.GenerateContentConfig(
         response_modalities=["IMAGE"],
         image_config=types.ImageConfig(
@@ -183,7 +183,7 @@ async def take_selfie(
         import shutil
         await asyncio.to_thread(shutil.copy2, str(out_path), str(gen_copy_path))
     except Exception:
-        pass  # Non-critical — output copy is authoritative
+        pass  # Non-critical - output copy is authoritative
 
     log_action(
         slug,

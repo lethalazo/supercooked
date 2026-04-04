@@ -40,7 +40,7 @@ def render_character(
 
     Args:
         slug: Identity slug.
-        pose: Pose name — "default" (standing), "wave", "sit", "point".
+        pose: Pose name - "default" (standing), "wave", "sit", "point".
         output_path: Optional custom output path. Defaults to output/<slug>/3d/<timestamp>.png.
         resolution: Render resolution as (width, height). Defaults to 1080x1920.
 

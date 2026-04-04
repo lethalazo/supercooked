@@ -1,4 +1,4 @@
-"""Audience engagement — reply generation, live streaming, social interaction."""
+"""Audience engagement - reply generation, live streaming, social interaction."""
 
 from supercooked.engage.interact import comment_on_post, follow_user, like_post
 from supercooked.engage.respond import generate_reply

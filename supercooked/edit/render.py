@@ -1,4 +1,4 @@
-"""Final render pipeline — orchestrates the complete edit.
+"""Final render pipeline - orchestrates the complete edit.
 
 Takes an assembled video through grading, audio mixing, text overlays,
 and watermark to produce the final deliverable. Supports multiple

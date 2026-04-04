@@ -1,4 +1,4 @@
-"""List Countdown template — 'Top N things...' (Shorts)."""
+"""List Countdown template - 'Top N things...' (Shorts)."""
 
 from __future__ import annotations
 

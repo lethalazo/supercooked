@@ -1,4 +1,4 @@
-"""Talking Head template — character monologue (Shorts)."""
+"""Talking Head template - character monologue (Shorts)."""
 
 from __future__ import annotations
 

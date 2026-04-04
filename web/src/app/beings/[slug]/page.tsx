@@ -561,7 +561,7 @@ export default function BeingManagementPage() {
                           sx={{ textTransform: 'capitalize' }}
                         />
                       ) : (
-                        <Typography variant="caption" color="text.disabled">—</Typography>
+                        <Typography variant="caption" color="text.disabled">-</Typography>
                       )}
                     </TableCell>
                     <TableCell>
@@ -583,7 +583,7 @@ export default function BeingManagementPage() {
                     <TableCell align="right">
                       <Stack direction="row" spacing={0.5} justifyContent="flex-end">
                         {idea.status === 'backlog' && (
-                          <Tooltip title="Draft — generate script">
+                          <Tooltip title="Draft - generate script">
                             <IconButton
                               size="small"
                               color="primary"
@@ -605,7 +605,7 @@ export default function BeingManagementPage() {
                                 <VisibilityIcon />
                               </IconButton>
                             </Tooltip>
-                            <Tooltip title="Generate — create media files">
+                            <Tooltip title="Generate - create media files">
                               <IconButton
                                 size="small"
                                 color="secondary"
@@ -735,7 +735,7 @@ export default function BeingManagementPage() {
                               </Typography>
                             )}
                           </Stack>
-                          {/* Generated files — inline media */}
+                          {/* Generated files - inline media */}
                           {draft.media_files && draft.media_files.length > 0 && (
                             <Box sx={{ mt: 2, p: 1.5, bgcolor: 'rgba(0,0,0,0.02)', borderRadius: 1 }}>
                               <Typography variant="overline" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
@@ -1029,14 +1029,14 @@ export default function BeingManagementPage() {
           {previewScript?.duration_estimate > 0 && (
             <Chip label={`${previewScript.duration_estimate}s estimated`} size="small" sx={{ mb: 2 }} />
           )}
-          {/* Generated files — inline media */}
+          {/* Generated files - inline media */}
           {previewScript?.files && previewScript.files.length > 0 && previewIdea && (
             <Box sx={{ mt: 2 }}>
               <Typography variant="overline" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
                 Generated Files ({previewScript.files.length})
               </Typography>
               <Stack spacing={2}>
-                {/* Carousel slides — horizontal scrollable gallery */}
+                {/* Carousel slides - horizontal scrollable gallery */}
                 {(() => {
                   const carouselFiles = previewScript.files.filter((f: any) => f.type === 'carousel');
                   if (carouselFiles.length > 0) {
@@ -1149,7 +1149,7 @@ export default function BeingManagementPage() {
               ))}
             </Box>
           )}
-          {/* Media files from disk — inline rendering */}
+          {/* Media files from disk - inline rendering */}
           {previewScript?.media_files && previewScript.media_files.length > 0 && previewIdea && (
             <Box sx={{ mt: 2 }}>
               <Typography variant="overline" color="text.secondary" sx={{ display: 'block', mb: 1 }}>

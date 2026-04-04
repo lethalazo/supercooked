@@ -1,4 +1,4 @@
-"""Content templates — format blueprints for the content pipeline."""
+"""Content templates - format blueprints for the content pipeline."""
 
 from __future__ import annotations
 

@@ -2,7 +2,7 @@
 
 Assembles final content by layering video, audio, captions, and music
 into deliverable MP4 files. Also composes image posts with text overlays.
-No fallback — raises on any failure.
+No fallback - raises on any failure.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ def _compose_with_moviepy(
     output_path: Path,
     config_defaults: dict,
 ) -> None:
-    """Synchronous MoviePy composition — runs in a thread.
+    """Synchronous MoviePy composition - runs in a thread.
 
     Layers the following onto a base video clip:
     1. Voice-over audio (replaces or mixes with original)
@@ -268,7 +268,7 @@ async def compose_short(
     Parameters
     ----------
     slug:
-        Identity slug — used for output path and action logging.
+        Identity slug - used for output path and action logging.
     video_path:
         Path to the base video file.
     audio_path:
@@ -408,7 +408,7 @@ async def compose_image_post(
     Parameters
     ----------
     slug:
-        Identity slug — used for output path and action logging.
+        Identity slug - used for output path and action logging.
     image_path:
         Path to the base image.
     caption_text:

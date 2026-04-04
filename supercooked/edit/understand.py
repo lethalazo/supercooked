@@ -1,6 +1,6 @@
 """Scene detection, smart frame extraction, and audio analysis.
 
-Gives the AI "eyes and ears" — extracts the minimum set of keyframes
+Gives the AI "eyes and ears" - extracts the minimum set of keyframes
 needed to visually understand the footage, detects scene boundaries,
 and maps speech/silence regions.
 """
@@ -234,7 +234,7 @@ async def analyze_audio(
                 end=round(seg.end, 3),
             ))
     else:
-        # Invert silence to get speech — rough approximation
+        # Invert silence to get speech - rough approximation
         from .ffmpeg import probe_source_info
 
         info = await probe_source_info(audio_path)

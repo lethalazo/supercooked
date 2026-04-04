@@ -16,7 +16,7 @@ OUTPUT_DIR = PROJECT_ROOT / "output"
 EDIT_DIR = OUTPUT_DIR / "edit"
 ASSETS_DIR = PROJECT_ROOT / "assets"
 
-# Claude model — Haiku (OAuth tokens only support Haiku currently)
+# Claude model - Haiku (OAuth tokens only support Haiku currently)
 CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
 # Env var → config key mapping (env vars take precedence over supercooked.yaml)
@@ -89,7 +89,7 @@ def get_anthropic_client():
     """Get an AsyncAnthropic client using OAuth token.
 
     Uses ANTHROPIC_AUTH_TOKEN env var (OAuth from Claude Max).
-    Same auth pattern as payproof and openclaw — pure OAuth with beta header.
+    Same auth pattern as payproof and openclaw - pure OAuth with beta header.
     """
     import anthropic
 
@@ -101,7 +101,7 @@ def get_anthropic_client():
             default_headers={"anthropic-beta": "oauth-2025-04-20"},
         )
 
-    # Fall back to supercooked.yaml (also OAuth — same header needed)
+    # Fall back to supercooked.yaml (also OAuth - same header needed)
     config = load_config()
     if config.api_keys.anthropic:
         return anthropic.AsyncAnthropic(

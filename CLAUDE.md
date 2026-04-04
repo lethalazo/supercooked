@@ -1,4 +1,4 @@
-# Super Cooked — Project Conventions
+# Super Cooked - Project Conventions
 
 ## What This Is
 Platform for spawning and managing AI digital beings that live on the human internet.
@@ -13,13 +13,13 @@ Platform for spawning and managing AI digital beings that live on the human inte
 - Pydantic v2 for all data models
 - YAML for config/state files, Pydantic for validation
 - Click for CLI, Rich for terminal output
-- One external tool per capability — no fallbacks, fail loudly
+- One external tool per capability - no fallbacks, fail loudly
 - `httpx` for all HTTP calls (async)
 
 ## Content Pipeline (3-stage)
-- `supercooked draft <slug> <idea-id>` — Claude writes script from backlog idea → DRAFTED
-- `supercooked generate <slug> <idea-id>` — Creates media per content_type → GENERATED
-- `supercooked publish <slug> <idea-id>` — Pushes to platforms → PUBLISHED
+- `supercooked draft <slug> <idea-id>` - Claude writes script from backlog idea → DRAFTED
+- `supercooked generate <slug> <idea-id>` - Creates media per content_type → GENERATED
+- `supercooked publish <slug> <idea-id>` - Pushes to platforms → PUBLISHED
 - Pipeline files: `identities/<slug>/content/drafts/<id>/` (script.yaml, metadata.yaml, media files)
 - Ideas stored in: `identities/<slug>/content/ideas.yaml` (file-locked reads/writes)
 
@@ -54,7 +54,7 @@ Platform for spawning and managing AI digital beings that live on the human inte
 
 ## Video Editing Engine (`supercooked/edit/`)
 
-AI-assisted video editing — ingest raw footage, produce a structured briefing, write an EDL, render a polished video.
+AI-assisted video editing - ingest raw footage, produce a structured briefing, write an EDL, render a polished video.
 
 ### Edit Commands
 ```bash
@@ -96,7 +96,7 @@ output/edit/<project-name>/
     audio_analysis.json          # Speech/silence/loudness map
     frames/                      # Keyframes (960x540 JPEG)
     frames_index.json            # Frame metadata
-    briefing.yaml                # THE BRIEFING — everything AI needs
+    briefing.yaml                # THE BRIEFING - everything AI needs
   edl.yaml                       # Edit Decision List (AI or hand-written)
   segments/                      # Intermediate rendered segments
   overlays/                      # Generated text overlay PNGs
@@ -106,15 +106,15 @@ output/edit/<project-name>/
 
 ### Key Concepts
 - **Briefing**: Structured YAML giving AI complete understanding of footage (transcript, scenes, frames, audio map)
-- **EDL**: Edit Decision List — validated YAML specifying cuts, speed, transitions, text, audio, grade
-- **Image Segments**: `type: image` with `hold: <seconds>` — static image becomes video clip. Optional `zoom: 0.03` for Ken Burns effect
+- **EDL**: Edit Decision List - validated YAML specifying cuts, speed, transitions, text, audio, grade
+- **Image Segments**: `type: image` with `hold: <seconds>` - static image becomes video clip. Optional `zoom: 0.03` for Ken Burns effect
 - **Text Overlays**: Titles, lower thirds, captions with per-overlay `fade_in`/`fade_out` control
-- **Music Fade**: `fade_in`/`fade_out` on `MusicTrack` — music fades in/out smoothly
+- **Music Fade**: `fade_in`/`fade_out` on `MusicTrack` - music fades in/out smoothly
 - **Smart Frames**: Three-tier extraction (scene changes → interval → speech starts), capped at ~150 frames
 - **Grade Presets**: moody, warm, cinematic, clean, neutral (in `edit/presets/grades.yaml`)
 - **Export Profiles**: youtube, youtube-4k, ig-reel, ig-story, tiktok, draft (in `edit/presets/exports.yaml`)
 
-### EDL Example (Compose — typography video)
+### EDL Example (Compose - typography video)
 ```yaml
 project: my-reel
 output:
@@ -178,10 +178,10 @@ watermark:
   opacity: 0.4
 ```
 
-### Workflow (POC — Claude Code as agent)
-1. `edit init` or `edit compose` — create project, symlink sources
-2. `edit ingest` — (vlog only) Whisper transcription, scene detection, frame extraction
+### Workflow (POC - Claude Code as agent)
+1. `edit init` or `edit compose` - create project, symlink sources
+2. `edit ingest` - (vlog only) Whisper transcription, scene detection, frame extraction
 3. Read the briefing + look at keyframes to understand the footage
-4. Write `edl.yaml` — select segments, set transitions, text, grade
-5. `edit run` — execute the EDL
-6. `edit render` — final encode with export profile
+4. Write `edl.yaml` - select segments, set transitions, text, grade
+5. `edit run` - execute the EDL
+6. `edit render` - final encode with export profile

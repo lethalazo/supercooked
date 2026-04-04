@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "supercooked"
 version = "0.1.0"
-description = "Digital beings on the human internet — spawn and manage AI entities that live in your feed"
+description = "Digital beings on the human internet - spawn and manage AI entities that live in your feed"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"

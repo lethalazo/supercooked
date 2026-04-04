@@ -1,7 +1,7 @@
 """Claude-powered media prompt generation.
 
 Instead of naive template concatenation, uses Claude to generate
-specialized, optimized prompts for each media type — video (Veo),
+specialized, optimized prompts for each media type - video (Veo),
 image/thumbnail/story/carousel (Nano Banana 2), and post overlays.
 """
 
@@ -54,7 +54,7 @@ generate specialized prompts optimized for each AI media generation model.
 **Thumbnail (Nano Banana 2):**
 - Eye-catching, high contrast, vibrant
 - Describe a creative visual concept that represents the content
-- NOT just "person with title" — think about visual metaphors, dramatic compositions
+- NOT just "person with title" - think about visual metaphors, dramatic compositions
 - Should make someone want to click
 
 **Story (Nano Banana 2, vertical 9:16):**
@@ -100,7 +100,7 @@ async def generate_media_prompts(
     Parameters
     ----------
     slug:
-        Identity slug — used to load persona and face config.
+        Identity slug - used to load persona and face config.
     idea:
         ContentIdea with title, concept, template, tags.
     script_data:

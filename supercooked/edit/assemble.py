@@ -1,4 +1,4 @@
-"""EDL execution — parse an EDL and assemble segments into a video.
+"""EDL execution - parse an EDL and assemble segments into a video.
 
 Reads the Edit Decision List, cuts each segment from the source,
 applies per-segment adjustments (speed, audio, grade), then

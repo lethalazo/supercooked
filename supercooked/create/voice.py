@@ -2,7 +2,7 @@
 
 Wraps the elevenlabs Python package for text-to-speech synthesis.
 Loads voice configuration (voice_id, model, stability, etc.) from the
-identity's voice/config.yaml. No fallback — raises on any failure.
+identity's voice/config.yaml. No fallback - raises on any failure.
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ async def synthesize_speech(
     Parameters
     ----------
     slug:
-        Identity slug — used to load voice config and for action logging.
+        Identity slug - used to load voice config and for action logging.
     text:
         The text to convert to speech.
     output_path:

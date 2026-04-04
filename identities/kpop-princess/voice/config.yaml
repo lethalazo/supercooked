@@ -1,4 +1,4 @@
-# Yuna Kim — Voice Config
+# Yuna Kim - Voice Config
 provider: elevenlabs
 voice_id: ""
 model: eleven_multilingual_v2

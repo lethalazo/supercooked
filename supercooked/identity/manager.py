@@ -35,7 +35,7 @@ def _validate_slug(slug: str) -> None:
         )
 
 
-VOICE_MD_TEMPLATE = """# {name} — Voice & Personality Guide
+VOICE_MD_TEMPLATE = """# {name} - Voice & Personality Guide
 
 ## Who I Am
 {tagline}

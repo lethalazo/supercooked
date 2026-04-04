@@ -1,4 +1,4 @@
-"""Timestamped action logging — everything the being does."""
+"""Timestamped action logging - everything the being does."""
 
 from __future__ import annotations
 

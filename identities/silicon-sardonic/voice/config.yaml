@@ -1,4 +1,4 @@
-# Silicon Sardonic — Voice Config
+# Silicon Sardonic - Voice Config
 provider: elevenlabs
 voice_id: ""
 model: eleven_multilingual_v2

@@ -2,10 +2,10 @@
 # API keys and defaults for all digital beings
 #
 # Auth priority: env vars take precedence over this file.
-#   ANTHROPIC_AUTH_TOKEN  — Claude API (OAuth token from Claude Max)
-#   GEMINI_API_KEY        — Gemini API (Veo 3.1 + Imagen)
-#   ELEVENLABS_API_KEY    — ElevenLabs voice synthesis
-#   LATE_API_KEY          — LATE multi-platform publishing
+#   ANTHROPIC_AUTH_TOKEN  - Claude API (OAuth token from Claude Max)
+#   GEMINI_API_KEY        - Gemini API (Veo 3.1 + Imagen)
+#   ELEVENLABS_API_KEY    - ElevenLabs voice synthesis
+#   LATE_API_KEY          - LATE multi-platform publishing
 #
 # Model: Claude Opus 4 (claude-opus-4-20250514)
 

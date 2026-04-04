@@ -2,7 +2,7 @@
 
 Wraps google.genai to generate images from text prompts using Nano Banana 2
 (Gemini 3.1 Flash Image). Also provides character-consistent image generation
-using face config. No fallback — if the Gemini API is unreachable or the key
+using face config. No fallback - if the Gemini API is unreachable or the key
 is missing, we raise.
 """
 
@@ -95,7 +95,7 @@ async def generate_image(
     Parameters
     ----------
     slug:
-        Identity slug — used for output path and action logging.
+        Identity slug - used for output path and action logging.
     prompt:
         Creative text prompt describing the desired image.
     size:
@@ -105,7 +105,7 @@ async def generate_image(
         Optional style descriptor appended to prompt (e.g. "photorealistic",
         "digital illustration").
     negative_prompt:
-        Optional things to avoid — appended as "Avoid: ..." to prompt.
+        Optional things to avoid - appended as "Avoid: ..." to prompt.
 
     Returns
     -------
@@ -274,7 +274,7 @@ async def generate_character_image(
         import shutil
         await asyncio.to_thread(shutil.copy2, str(out_path), str(gen_copy_path))
     except Exception:
-        pass  # Non-critical — output copy is the authoritative one
+        pass  # Non-critical - output copy is the authoritative one
 
     log_action(
         slug,
@@ -306,7 +306,7 @@ async def generate_images(
     slug:
         Identity slug.
     prompts:
-        List of prompts — one image generated per prompt.
+        List of prompts - one image generated per prompt.
     size:
         Target resolution for all images.
     style:

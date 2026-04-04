@@ -149,7 +149,7 @@ class SourceInfo(BaseModel):
 
 
 class Briefing(BaseModel):
-    """The complete AI-readable briefing — everything about the footage."""
+    """The complete AI-readable briefing - everything about the footage."""
 
     source: SourceInfo = Field(default_factory=SourceInfo)
     transcript: Transcript = Field(default_factory=Transcript)
@@ -190,7 +190,7 @@ class SegmentAudio(BaseModel):
 
 
 class Segment(BaseModel):
-    """A single edit segment — a clip from the source.
+    """A single edit segment - a clip from the source.
 
     For video sources: uses in/out points to cut a time range.
     For image sources: set type="image" and hold=<seconds> for how
@@ -287,7 +287,7 @@ class OutputConfig(BaseModel):
 
 
 class EDL(BaseModel):
-    """Edit Decision List — the complete edit specification."""
+    """Edit Decision List - the complete edit specification."""
 
     project: str
     source: str = ""
@@ -307,7 +307,7 @@ class EDL(BaseModel):
 
 
 class Project(BaseModel):
-    """Project manifest — tracks state and source files."""
+    """Project manifest - tracks state and source files."""
 
     name: str
     state: ProjectState = ProjectState.INIT

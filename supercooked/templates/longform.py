@@ -1,4 +1,4 @@
-"""Longform template — YouTube long-form video (5-20 min)."""
+"""Longform template - YouTube long-form video (5-20 min)."""
 
 from __future__ import annotations
 

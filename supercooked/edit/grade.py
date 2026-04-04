@@ -76,7 +76,7 @@ def _builtin_presets() -> dict[str, GradePreset]:
     return {
         "neutral": GradePreset(
             name="neutral",
-            description="No grading — pass through",
+            description="No grading - pass through",
         ),
         "moody": GradePreset(
             name="moody",

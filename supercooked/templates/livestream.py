@@ -1,4 +1,4 @@
-"""Livestream template — Twitch stream blueprint."""
+"""Livestream template - Twitch stream blueprint."""
 
 from __future__ import annotations
 

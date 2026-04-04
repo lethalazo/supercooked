@@ -1,4 +1,4 @@
-"""Hot Take template — bold text + reaction (Shorts)."""
+"""Hot Take template - bold text + reaction (Shorts)."""
 
 from __future__ import annotations
 

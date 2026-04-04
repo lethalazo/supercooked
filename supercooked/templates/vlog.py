@@ -1,4 +1,4 @@
-"""Vlog template — AI 'vlog' with selfies + narration."""
+"""Vlog template - AI 'vlog' with selfies + narration."""
 
 from __future__ import annotations
 

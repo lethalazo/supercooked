@@ -1,7 +1,7 @@
-"""Content creation modules — one external tool per capability.
+"""Content creation modules - one external tool per capability.
 
 Each sub-module wraps exactly one external API or tool:
-- video:     Veo 3.1 via Gemini API (google-genai) — with extension for 15-20s clips
+- video:     Veo 3.1 via Gemini API (google-genai) - with extension for 15-20s clips
 - image:     Nano Banana 2 via Gemini API (google-genai)
 - voice:     ElevenLabs TTS (elevenlabs)
 - caption:   OpenAI Whisper transcription + FFmpeg overlay

@@ -1,4 +1,4 @@
-"""Reaction template — PiP reaction to another video."""
+"""Reaction template - PiP reaction to another video."""
 
 from __future__ import annotations
 

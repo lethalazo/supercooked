@@ -1,4 +1,4 @@
-"""Super Cooked CLI — manage digital beings on the human internet."""
+"""Super Cooked CLI - manage digital beings on the human internet."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ def run_async(coro):
 
 @click.group()
 def cli():
-    """Super Cooked — Digital beings on the human internet."""
+    """Super Cooked - Digital beings on the human internet."""
     pass
 
 
@@ -134,7 +134,7 @@ def being_status(slug: str):
         ("Twitch", platforms.twitch),
     ]:
         status = "[green]Yes[/green]" if config.enabled else "[dim]No[/dim]"
-        platform_table.add_row(name, status, config.handle or "[dim]—[/dim]")
+        platform_table.add_row(name, status, config.handle or "[dim]-[/dim]")
 
     console.print(platform_table)
 
@@ -161,8 +161,8 @@ def being_status(slug: str):
             action_table.add_row(
                 a.timestamp.strftime("%m/%d %H:%M"),
                 a.action,
-                a.platform or "—",
-                a.result or "—",
+                a.platform or "-",
+                a.result or "-",
             )
         console.print(action_table)
 
@@ -204,7 +204,7 @@ def create_post(slug: str, caption: str):
 
     console.print(f"[cyan]Creating post for {slug}...[/cyan]")
     identity = load_identity(slug)
-    prompt = f"{identity.being.name} — {caption}"
+    prompt = f"{identity.being.name} - {caption}"
     path = run_async(generate_image(slug, prompt))
     console.print(f"[green]Image saved:[/green] {path}")
     console.print(f"[dim]Caption:[/dim] {caption}")
@@ -306,7 +306,7 @@ def idea_add(slug: str, title: str, concept: str, tmpl: str, types: str):
         finally:
             fcntl.flock(lock_f.fileno(), fcntl.LOCK_UN)
 
-    console.print(f"[green]Added:[/green] {new_id} — {title}")
+    console.print(f"[green]Added:[/green] {new_id} - {title}")
     if content_types:
         console.print(f"  [dim]Types: {', '.join(content_types)}[/dim]")
 
@@ -330,7 +330,7 @@ def idea_list(slug: str):
         console.print("[dim]No ideas yet. Add one with: supercooked idea add <slug> <title> <concept>[/dim]")
         return
 
-    table = Table(title=f"Content Ideas — {slug}", show_header=True)
+    table = Table(title=f"Content Ideas - {slug}", show_header=True)
     table.add_column("ID", style="cyan")
     table.add_column("Title", style="white")
     table.add_column("Template", style="dim")
@@ -349,11 +349,11 @@ def idea_list(slug: str):
     for idea in ideas:
         status = idea.get("status", "backlog")
         color = status_colors.get(status, "white")
-        ctypes = ", ".join(idea.get("content_types", [])) or "—"
+        ctypes = ", ".join(idea.get("content_types", [])) or "-"
         table.add_row(
             idea["id"],
             idea["title"],
-            idea.get("template", "—"),
+            idea.get("template", "-"),
             ctypes,
             f"[{color}]{status}[/{color}]",
         )
@@ -513,7 +513,7 @@ def stream_start(slug: str):
 
 @cli.group("edit")
 def edit_group():
-    """Video editing engine — ingest, understand, and assemble footage."""
+    """Video editing engine - ingest, understand, and assemble footage."""
     pass
 
 
@@ -575,8 +575,8 @@ def edit_init(name: str, video: str, audio: str | None, sfx: str | None):
     console.print(Panel(
         f"[bold cyan]{name}[/bold cyan]\n\n"
         f"Video: [green]{video_path.name}[/green]\n"
-        f"Audio: [green]{Path(audio).name if audio else '—'}[/green]\n"
-        f"SFX:   [green]{Path(sfx).name if sfx else '—'}[/green]\n\n"
+        f"Audio: [green]{Path(audio).name if audio else '-'}[/green]\n"
+        f"SFX:   [green]{Path(sfx).name if sfx else '-'}[/green]\n\n"
         f"Dir:   [dim]{project_dir}[/dim]",
         title="Edit Project Created",
         border_style="green",
@@ -814,7 +814,7 @@ def edit_status(name: str):
 
     table.add_row("State", f"[{color}]{project.state.value}[/{color}]")
     table.add_row("Source", project.source_video)
-    table.add_row("Audio", project.source_audio or "—")
+    table.add_row("Audio", project.source_audio or "-")
     table.add_row("Briefing", "[green]ready[/green]" if has_briefing else "[dim]not yet[/dim]")
     table.add_row("EDL", "[green]ready[/green]" if has_edl else "[dim]not yet[/dim]")
     table.add_row("Assembled", "[green]ready[/green]" if has_assembled else "[dim]not yet[/dim]")
@@ -834,7 +834,7 @@ def edit_compose(name: str, sources: tuple[str, ...], audio: str | None, sfx: st
 
     Unlike `edit init` (single video source), compose takes multiple
     source files (images + videos) that you'll arrange via edl.yaml.
-    No ingest step needed — go straight to writing the EDL.
+    No ingest step needed - go straight to writing the EDL.
 
     Usage:
         supercooked edit compose my-reel bg1.jpg clip1.mp4 bg2.png --audio music.mp3
@@ -883,7 +883,7 @@ def edit_compose(name: str, sources: tuple[str, ...], audio: str | None, sfx: st
 
     project = Project(
         name=name,
-        source_video="",  # no single source — each segment has its own
+        source_video="",  # no single source - each segment has its own
         source_audio=audio_link_name,
         sfx_dir=sfx_link_name,
         created=datetime.now().isoformat(timespec="seconds"),
@@ -904,7 +904,7 @@ def edit_compose(name: str, sources: tuple[str, ...], audio: str | None, sfx: st
 
     console.print(Panel(
         f"[bold cyan]{name}[/bold cyan]\n\n"
-        f"Audio: [green]{Path(audio).name if audio else '—'}[/green]\n"
+        f"Audio: [green]{Path(audio).name if audio else '-'}[/green]\n"
         f"Dir:   [dim]{project_dir}[/dim]",
         title="Compose Project Created",
         border_style="green",

@@ -1,4 +1,4 @@
-"""Carousel template — multi-image post (IG carousel)."""
+"""Carousel template - multi-image post (IG carousel)."""
 
 from __future__ import annotations
 

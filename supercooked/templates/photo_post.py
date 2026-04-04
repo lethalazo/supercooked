@@ -1,4 +1,4 @@
-"""Photo Post template — single image + caption (IG/X)."""
+"""Photo Post template - single image + caption (IG/X)."""
 
 from __future__ import annotations
 

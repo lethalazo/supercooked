@@ -2,7 +2,7 @@
 
 Generates eye-catching thumbnails for video content using Nano Banana 2.
 Combines identity face config with title text styling for platform-ready
-thumbnails. No fallback — raises on any failure.
+thumbnails. No fallback - raises on any failure.
 """
 
 from __future__ import annotations
@@ -93,7 +93,7 @@ def _build_thumbnail_prompt(
 ) -> str:
     """Build a thumbnail prompt combining character, title, and style.
 
-    The title is embedded as a conceptual guide — the model generates the
+    The title is embedded as a conceptual guide - the model generates the
     visual concept, not literal text rendering (text is overlaid separately
     via compose if needed).
     """
@@ -151,16 +151,16 @@ async def generate_thumbnail(
     Parameters
     ----------
     slug:
-        Identity slug — used for face config, output path, and action logging.
+        Identity slug - used for face config, output path, and action logging.
     title:
-        The video/content title — used as a conceptual guide for the image.
+        The video/content title - used as a conceptual guide for the image.
     style:
-        Thumbnail style — "bold", "minimal", "gaming", "vlog", or "educational".
+        Thumbnail style - "bold", "minimal", "gaming", "vlog", or "educational".
     concept_prompt:
         When provided, used directly as the thumbnail prompt instead of
         building one from face config + title + style.
     template:
-        Content template name — used to auto-select style if style is "bold".
+        Content template name - used to auto-select style if style is "bold".
     visual_cues:
         Optional visual cue descriptions for richer fallback prompts.
     concept:

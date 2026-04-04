@@ -1,4 +1,4 @@
-"""WebSocket handler for real-time chat — re-exports from routes."""
+"""WebSocket handler for real-time chat - re-exports from routes."""
 
 # WebSocket handling is in api/routes/chat.py
 # This module exists for organizational clarity

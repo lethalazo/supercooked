@@ -1,4 +1,4 @@
-"""Audio mixing — dialogue extraction, music ducking, SFX insertion.
+"""Audio mixing - dialogue extraction, music ducking, SFX insertion.
 
 Handles the complete audio pipeline: extract original dialogue,
 mix in background music with intelligent ducking under speech,
@@ -41,7 +41,7 @@ async def build_audio_mix(
 
     tracks = []
 
-    # Track 1: Original dialogue (skip if source is "none" — compose workflow)
+    # Track 1: Original dialogue (skip if source is "none" - compose workflow)
     if audio_spec.dialogue.source == "original":
         dialogue_path = project_dir / "analysis" / "dialogue.wav"
         await extract_audio(video_path, dialogue_path, sample_rate=44100, mono=False)
@@ -86,7 +86,7 @@ async def build_audio_mix(
         return None
 
     if len(tracks) == 1:
-        # Single track — just encode it directly with fades, no mixing needed
+        # Single track - just encode it directly with fades, no mixing needed
         track = tracks[0]
         afilters = []
         vol = track.get("volume", 1.0)

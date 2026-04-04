@@ -2,7 +2,7 @@
 
 Generates simple synthesized background music tracks using numpy signal
 processing. Produces WAV files suitable for layering under voice-over
-and video content. No external API — pure numpy synthesis.
+and video content. No external API - pure numpy synthesis.
 """
 
 from __future__ import annotations
@@ -238,7 +238,7 @@ async def generate_background_music(
     duration_seconds:
         Length of the music track in seconds.
     style:
-        Music style — "chill", "lofi", "upbeat", or "dramatic".
+        Music style - "chill", "lofi", "upbeat", or "dramatic".
     output_path:
         Optional explicit output path. If None, auto-generates under output/_music/.
 
@@ -262,7 +262,7 @@ async def generate_background_music(
 
     style_config = _STYLE_MAP[style]
 
-    # Run synthesis in a thread — it's CPU-bound
+    # Run synthesis in a thread - it's CPU-bound
     import asyncio
 
     try:

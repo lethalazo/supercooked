@@ -1,4 +1,4 @@
-"""Character visual consistency — face generation, 3D rendering, reference management."""
+"""Character visual consistency - face generation, 3D rendering, reference management."""
 
 from supercooked.character.face import generate_face
 from supercooked.character.reference import add_reference, get_references, list_references, remove_reference
